@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">seamlessShopping</string>
+    <string name="createAccount">
+
+<b>ii</b>   </string>
+    <string name="title_activity_categories">Categories</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_search">Search</string>
 </resources>

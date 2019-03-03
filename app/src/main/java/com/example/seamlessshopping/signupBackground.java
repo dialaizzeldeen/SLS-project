@@ -1,11 +1,8 @@
 package com.example.seamlessshopping;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,32 +16,41 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class loginBackground extends AsyncTask<String,Void,String> {
+public class signupBackground extends AsyncTask<Object,Void,String> {
+
     Context context;
     AlertDialog alertDialog1;
-    loginBackground(Context ctx){
-        context=ctx;
-    }
-
+    signupBackground(Context ctx){ context=ctx; }
+    String val="";
 
     @Override
-    protected String doInBackground(String... voids) {
-        String type =voids[0]; // gave you the type that you send which is login
-        String login_url="http://192.168.1.8/loginPage.php"; //to conect with local host
-        if(type.equals("login")){
-            try {
-                String username =voids[1]; //get the username value from the edittext
-                String password =voids[2]; //get the password value from the edittext
 
-                URL url =new URL(login_url);
+    protected String doInBackground(Object... strings) {
+        Object type = (String) strings[0].toString(); // gave you the type that you send which is login
+        val=(String) type;
+        String signup_url="http://192.168.1.113/loginPage.php";
+        if(type.equals("signup")){
+            try {
+                String fname= strings[1].toString();
+                String lname=strings[2].toString();
+                String username=strings[3].toString();
+                String email=strings[4].toString();
+                String password=strings[5].toString();
+                String phone=strings[6].toString();
+                URL url =new URL(signup_url);
+
                 HttpURLConnection httpURLConnection1= (HttpURLConnection) url.openConnection();
                 httpURLConnection1.setRequestMethod("POST");
                 httpURLConnection1.setDoInput(true);
                 httpURLConnection1.setDoOutput(true);
                 OutputStream outputStream1=httpURLConnection1.getOutputStream();
                 BufferedWriter bufferedWriter1=new BufferedWriter(new OutputStreamWriter(outputStream1,"UTF-8"));
-                String post_data= URLEncoder.encode("usernamekey","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"
-                        +URLEncoder.encode("passwordkey","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                String post_data= URLEncoder.encode("fnameKey","UTF-8")+"="+URLEncoder.encode(fname,"UTF-8")+"&"
+                        +URLEncoder.encode("lnameKey","UTF-8")+"="+URLEncoder.encode(lname,"UTF-8")+"&"+
+                URLEncoder.encode("usernamekey","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"+
+                URLEncoder.encode("emailKey","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")+"&"+
+                URLEncoder.encode("passwordKey","UTF-8")+"="+URLEncoder.encode(password,"UTF-8")+"&"+
+                URLEncoder.encode("phoneKey","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8");
                 bufferedWriter1.write(post_data);
                 bufferedWriter1.flush();
                 bufferedWriter1.close();
@@ -70,6 +76,7 @@ public class loginBackground extends AsyncTask<String,Void,String> {
             }
 
         }
+
         return null;
     }
 
@@ -77,26 +84,16 @@ public class loginBackground extends AsyncTask<String,Void,String> {
     // after finish the job we use this method to show the result
     protected void onPreExecute() {
 
+        alertDialog1= new AlertDialog.Builder(context).create();
+        alertDialog1.setTitle( "HII");
         super.onPreExecute();
     }
 
     @Override
     // to show the dialog on screen
     protected void onPostExecute(String aVoid) {
-        //alertDialog1.setMessage(aVoid);
-        if(aVoid.contentEquals("true"))
-        {
-            Toast.makeText(context, aVoid, Toast.LENGTH_SHORT).show();
-           /* Intent i =new Intent(context,signupPage.class);
-            context.startActivity(i);*/
-
-        }
-        else
-        {
-
-            Toast.makeText(context, aVoid, Toast.LENGTH_SHORT).show();
-        }
-
+        alertDialog1.setMessage(aVoid);
+        alertDialog1.show();
     }
 
     @Override
@@ -104,3 +101,5 @@ public class loginBackground extends AsyncTask<String,Void,String> {
         super.onProgressUpdate(values);
     }
 }
+
+
