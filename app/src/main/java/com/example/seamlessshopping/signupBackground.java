@@ -2,7 +2,9 @@ package com.example.seamlessshopping;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +30,7 @@ public class signupBackground extends AsyncTask<Object,Void,String> {
     protected String doInBackground(Object... strings) {
         Object type = (String) strings[0].toString(); // gave you the type that you send which is login
         val=(String) type;
-        String signup_url="http://192.168.1.113/loginPage.php";
+        String signup_url="http://192.168.1.8/signup.php";
         if(type.equals("signup")){
             try {
                 String fname= strings[1].toString();
@@ -84,16 +86,24 @@ public class signupBackground extends AsyncTask<Object,Void,String> {
     // after finish the job we use this method to show the result
     protected void onPreExecute() {
 
-        alertDialog1= new AlertDialog.Builder(context).create();
-        alertDialog1.setTitle( "HII");
+       /* alertDialog1= new AlertDialog.Builder(context).create();
+        alertDialog1.setTitle( " signUp status");*/
         super.onPreExecute();
     }
 
     @Override
     // to show the dialog on screen
     protected void onPostExecute(String aVoid) {
-        alertDialog1.setMessage(aVoid);
-        alertDialog1.show();
+        /*alertDialog1.setMessage(aVoid);
+        alertDialog1.show();*/
+
+        if(aVoid.contentEquals("successfully signUp")){
+            Intent i= new Intent(context,loginPage.class);
+            context.startActivity(i);
+        }
+        else {
+            Toast.makeText(context, aVoid, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
