@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +34,7 @@ public class productMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.productActivity_layout);
+        setContentView(R.layout.productactivity_layout);
 
         gridView = (GridView) findViewById(R.id.gridView);
         // textView = (TextView)findViewById(R.id.text);
