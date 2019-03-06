@@ -18,11 +18,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 public class productMain extends AppCompatActivity {
     GridView gridView;
@@ -36,7 +39,7 @@ public class productMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.productActivity_layout);
+        setContentView(R.layout.productactivity_layout);
 
         gridView = (GridView) findViewById(R.id.gridView);
         // textView = (TextView)findViewById(R.id.text);
@@ -92,10 +95,7 @@ public class productMain extends AppCompatActivity {
 
 
 
-
-
-
-                             //   productsObjectArrayList.add(productObject);
+                                //   productsObjectArrayList.add(productObject);
                                 productObject = new productsObject(name,quantity,price,imageurl);
 
                                 productsObjectArrayList.add(productObject);
@@ -107,7 +107,7 @@ public class productMain extends AppCompatActivity {
                                 productObject = new productsObject(name,quantity,imageurl,price);
                                 ;
                                 productsObjectArrayList.add(productObject);
-                              productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
+                                productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
                                 productAdapter.notifyDataSetChanged();
                                 gridView.setAdapter(productAdapter);
 
