@@ -4,28 +4,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <ImageView
         android:id="@+id/imageurl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:textStyle="bold"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:padding="4dp"
         android:textColor="#000000"
         />
-<TextView
-    android:id="@+id/Name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textStyle="bold"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="5dp"
-    android:padding="4dp"
-    android:textColor="#000000"
-    />
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:padding="4dp"
+        android:textColor="#000000"
+        />
     <TextView
         android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
         android:textStyle="bold"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
@@ -38,6 +41,8 @@
     android:textStyle="bold"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="5dp"
+    android:layout_gravity="center"
+
     android:padding="4dp"
     android:textColor="#000000"
     />
