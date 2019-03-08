@@ -17,7 +17,8 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".signupPage"></activity>
         <activity android:name=".loginPage" >
-          ></activity>
+
+        </activity>
         <activity android:name=".productMain">  <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -27,9 +28,5 @@
 
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
 
 </manifest>

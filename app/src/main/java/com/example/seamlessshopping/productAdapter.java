@@ -70,8 +70,10 @@ public class productAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        productsObject productsObj = productsObjectsArrayList.get(position);
+        final productsObject productsObj = productsObjectsArrayList.get(position);
         convertView = LayoutInflater.from(mContext).inflate(R.layout.product_rows, null);
+        ImageButton addQuantity = (ImageButton)convertView.findViewById(R.id.addQuantity);
+        ImageButton minusQuantity = (ImageButton)convertView.findViewById(R.id.minusQuantity);
 
         TextView price = (TextView) convertView.findViewById(R.id.price);
         TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
@@ -80,8 +82,33 @@ public class productAdapter extends BaseAdapter {
 
 
 
+
+
+
+
+
+        addQuantity.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                productsObj.setQuantity( productsObj.getQuantity()+1);
+                notifyDataSetChanged();     }});
+
+
+
+
+
+
+        minusQuantity.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(productsObj.getQuantity()>1){
+                    productsObj.setQuantity( productsObj.getQuantity()-1);}
+                notifyDataSetChanged();     }});
+
+
+
+
+
         quantity.setText(productsObj.getQuantity().toString());
-        price.setText(productsObj.getPrice());
+        price.setText(productsObj.getPrice()+" NIS");
         name.setText(productsObj.getName());
 
         String productImage = productsObj.getImageurl();

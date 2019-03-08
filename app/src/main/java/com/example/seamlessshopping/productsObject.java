@@ -9,11 +9,11 @@ public class productsObject {
     private String price;
     private String imageurl;
     public productsObject(String name , int quantity,String imageurl,String price){
-    //    int id ,this.id=id;
+        //    int id ,this.id=id;
         this.name=name;this.quantity=quantity;this.imageurl=imageurl;this.price=price;}
 
     public productsObject(){
-       this.name=name;}
+        this.name=name;}
     public  Integer getQuantity() {
         return quantity;
     }
