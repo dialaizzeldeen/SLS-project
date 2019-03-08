@@ -41,17 +41,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.categorymenu, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==R.id.pagesignup) {
             Intent i = new Intent(this, signupPage.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.loginpage) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.searchpage) {
+            Intent i = new Intent(this, productMain.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.profile) {
+            Intent i = new Intent(this, loginPage.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

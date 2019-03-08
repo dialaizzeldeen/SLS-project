@@ -4,5 +4,15 @@
     <item
         android:id="@+id/pagesignup"
         android:title="signup page"></item>
+    <item android:id="@+id/searchpage"
+        android:title="searchpage"></item>
+    <item android:title="login"
+        android:id="@+id/loginpage">
+
+    </item>
+    <item android:id="@+id/profile"
+        android:title="profilrpage"
+
+        ></item>
 
 </menu>
