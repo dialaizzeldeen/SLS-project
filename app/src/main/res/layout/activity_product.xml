@@ -10,7 +10,7 @@
 
     <EditText
         android:layout_width="316dp"
-        android:layout_height="40dp"
+        android:layout_height="47dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="5dp"
         android:drawableLeft="@mipmap/search_launcher_round"
@@ -19,7 +19,7 @@
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="554dp"
         android:layout_marginTop="10dp"
         android:horizontalSpacing="10dp"
         android:numColumns="2"
@@ -31,7 +31,7 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />

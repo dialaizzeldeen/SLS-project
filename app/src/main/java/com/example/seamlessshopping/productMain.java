@@ -32,34 +32,20 @@ public class productMain extends AppCompatActivity {
     TextView textView;
     productsObject productObject;
     productAdapter productAdapter;
-    ArrayList<productsObject> productsObjectArrayList;
+    ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.productactivity_layout);
-
+        setContentView(R.layout.activity_product);
         gridView = (GridView) findViewById(R.id.gridView);
-        // textView = (TextView)findViewById(R.id.text);
-
-
-        productsObjectArrayList = new ArrayList<productsObject>();
         dataSaving();
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         gridView.setAdapter(productAdapter);
 
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // TODO Auto-generated method stub
 
-                /* appending I Love with car brand names */
-                String value = "I Love " + adapterView.getItemAtPosition(position);
-                /* Display the Toast */
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
@@ -74,6 +60,7 @@ public class productMain extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         try {
+
                             JSONArray responseArray= jsonObject.getJSONArray("products");
                             Log.i("Response",responseArray+"");
                             Log.i("Response",jsonObject+"");
@@ -91,12 +78,6 @@ public class productMain extends AppCompatActivity {
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-
-
-                                //   productsObjectArrayList.add(productObject);
-                                productObject = new productsObject(name,quantity,price,imageurl);
-
-                                productsObjectArrayList.add(productObject);
 
 
 
@@ -144,3 +125,18 @@ public class productMain extends AppCompatActivity {
 }
 
 
+/**
+ *
+ *
+ *
+ *     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+ *             @Override
+ *             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+ *                 // TODO Auto-generated method stub
+ *
+ *                 /* appending I Love with car brand names */
+/** *String value="I Love "+adapterView.getItemAtPosition(position);
+ *                 /* Display the Toast */
+       /*  Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+         }
+         });**/
