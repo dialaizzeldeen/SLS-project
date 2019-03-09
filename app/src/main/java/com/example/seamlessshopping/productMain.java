@@ -1,8 +1,12 @@
 package com.example.seamlessshopping;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -39,6 +43,37 @@ public class productMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+
+
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+
+
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        break;
+                    case R.id.navigation_Categories:
+                        Intent categorie=new Intent(getBaseContext(),Categories_Activity.class);
+                        startActivity(categorie);
+
+case R.id.navigation_notifications:break;
+                    case R.id.navigation_profile:
+break;                    case R.id.navigation_search:
+                    break;
+                }
+                return false;
+            }
+        };
+
+
+
         gridView = (GridView) findViewById(R.id.gridView);
         dataSaving();
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
