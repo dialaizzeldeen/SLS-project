@@ -113,13 +113,7 @@ break;                    case R.id.navigation_search:
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-
-
-
-
-
                                 productObject = new productsObject(name,quantity,imageurl,price);
-                                ;
                                 productsObjectArrayList.add(productObject);
                                 productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
                                 productAdapter.notifyDataSetChanged();
