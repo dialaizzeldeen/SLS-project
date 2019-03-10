@@ -9,4 +9,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_categories">Categories</string>
     <string name="title_search">Search</string>
+    <string name="title_activity_bank_info">bankInfo</string>
+    <string name="title_activity_rest_page">restPage</string>
 </resources>
