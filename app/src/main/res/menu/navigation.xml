@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="always|withText"
+
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_notifications"
-        app:showAsAction="withText"
+        app:showAsAction="always|withText"
 
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_profile" />
     <item
         android:id="@+id/navigation_Categories"
-        app:showAsAction="withText"
+        app:showAsAction="always|withText"
 
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_categories" />
 
     <item
         android:id="@+id/navigation_profile"
-        app:showAsAction="withText"
+        android:icon="@drawable/prof"
+        app:showAsAction="always|withText"
 
         android:title="@string/title_notifications" />
 
     <item
         android:id="@+id/navigation_search"
-        app:showAsAction="withText"
-        android:title="@string/title_search"/>
+        android:icon="@drawable/search"
+        app:showAsAction="always|withText"
 
+        android:title="@string/title_search"/>
 
 </menu>

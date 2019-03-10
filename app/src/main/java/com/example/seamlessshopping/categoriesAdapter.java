@@ -32,8 +32,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class productAdapter extends BaseAdapter {
-    ArrayList<productsObject> productsObjectsArrayList;
+public class categoriesAdapter extends BaseAdapter {
+    ArrayList<categoriesObject> categoriesObjectsArrayList;
     productsObject productsObj;
 
     Context mContext;
@@ -44,23 +44,23 @@ public class productAdapter extends BaseAdapter {
     //ImageButton btnEdit;
     TextView text;
 
-    public productAdapter(Context context, ArrayList<productsObject> productsObjectsArrayList) {
+    public categoriesAdapter(Context context, ArrayList<categoriesObject> categoriesObjectsArrayList) {
         this.mContext = context;
-        this.productsObjectsArrayList = productsObjectsArrayList;
+        this.categoriesObjectsArrayList=categoriesObjectsArrayList;
 
     }
 
 
     @Override
     public int getCount() {
-        return productsObjectsArrayList.size();
+        return categoriesObjectsArrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
         positionitem = position;
         Log.d("hey", "i clicked you" + position);
-        return productsObjectsArrayList.get(position);
+        return categoriesObjectsArrayList.get(position);
     }
 
     @Override
@@ -70,14 +70,9 @@ public class productAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final productsObject productsObj = productsObjectsArrayList.get(position);
-        convertView = LayoutInflater.from(mContext).inflate(R.layout.product_rows, null);
-        ImageButton addQuantity = (ImageButton)convertView.findViewById(R.id.addQuantity);
-        ImageButton minusQuantity = (ImageButton)convertView.findViewById(R.id.minusQuantity);
+        final categoriesObject productsObj = categoriesObjectsArrayList.get(position);
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.categories_rows, null);
 
-        TextView price = (TextView) convertView.findViewById(R.id.price);
-        TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
-        TextView name = (TextView) convertView.findViewById(R.id.Name);
         ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
 
 
@@ -85,31 +80,6 @@ public class productAdapter extends BaseAdapter {
 
 
 
-
-
-        addQuantity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                productsObj.setQuantity( productsObj.getQuantity()+1);
-                notifyDataSetChanged();     }});
-
-
-
-
-
-
-        minusQuantity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(productsObj.getQuantity()>1){
-                    productsObj.setQuantity( productsObj.getQuantity()-1);}
-                notifyDataSetChanged();     }});
-
-
-
-
-
-        quantity.setText(productsObj.getQuantity().toString());
-        price.setText(productsObj.getPrice()+" NIS");
-        name.setText(productsObj.getName());
 
         String productImage = productsObj.getImageurl();
 

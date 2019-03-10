@@ -1,8 +1,12 @@
 package com.example.seamlessshopping;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -32,40 +36,57 @@ public class productMain extends AppCompatActivity {
     TextView textView;
     productsObject productObject;
     productAdapter productAdapter;
-    ArrayList<productsObject> productsObjectArrayList;
+    ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.productactivity_layout);
+        setContentView(R.layout.activity_product);
+
+
+
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+
+
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        break;
+                    case R.id.navigation_Categories:
+                        Intent categorie=new Intent(getBaseContext(),Categories_Activity.class);
+                        startActivity(categorie);
+
+case R.id.navigation_notifications:break;
+                    case R.id.navigation_profile:
+break;                    case R.id.navigation_search:
+                    break;
+                }
+                return false;
+            }
+        };
+
+
 
         gridView = (GridView) findViewById(R.id.gridView);
-        // textView = (TextView)findViewById(R.id.text);
-
-
-        productsObjectArrayList = new ArrayList<productsObject>();
         dataSaving();
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         gridView.setAdapter(productAdapter);
 
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // TODO Auto-generated method stub
 
-                /* appending I Love with car brand names */
-                String value = "I Love " + adapterView.getItemAtPosition(position);
-                /* Display the Toast */
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
     private void dataSaving() {
 
-        final String url = "http://192.168.1.12/product.php";
+        final String url = "http://192.168.1.4/product.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -74,6 +95,7 @@ public class productMain extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         try {
+
                             JSONArray responseArray= jsonObject.getJSONArray("products");
                             Log.i("Response",responseArray+"");
                             Log.i("Response",jsonObject+"");
@@ -91,12 +113,6 @@ public class productMain extends AppCompatActivity {
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-
-
-                                //   productsObjectArrayList.add(productObject);
-                                productObject = new productsObject(name,quantity,price,imageurl);
-
-                                productsObjectArrayList.add(productObject);
 
 
 
@@ -144,3 +160,18 @@ public class productMain extends AppCompatActivity {
 }
 
 
+/**
+ *
+ *
+ *
+ *     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+ *             @Override
+ *             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+ *                 // TODO Auto-generated method stub
+ *
+ *                 /* appending I Love with car brand names */
+/** *String value="I Love "+adapterView.getItemAtPosition(position);
+ *                 /* Display the Toast */
+       /*  Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+         }
+         });**/

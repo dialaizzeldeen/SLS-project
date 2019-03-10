@@ -11,4 +11,8 @@
     <string name="title_search">Search</string>
     <string name="title_activity_bank_info">bankInfo</string>
     <string name="title_activity_rest_page">restPage</string>
+    <string name="title_activity_categoires">CategoiresActivity</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_activity_product">productActivity</string>
+    <string name="url">192.168.1.4</string>
 </resources>
