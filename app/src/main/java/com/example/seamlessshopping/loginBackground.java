@@ -30,7 +30,7 @@ public class loginBackground extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... voids) {
         String type =voids[0]; // gave you the type that you send which is login
-        String login_url="http://192.168.1.4/loginPage.php"; //to conect with local host
+        String login_url="http://192.168.1.12/loginPage.php"; //to conect with local host
         if(type.equals("login")){
             try {
                 String username =voids[1]; //get the username value from the edittext
@@ -87,8 +87,8 @@ public class loginBackground extends AsyncTask<String,Void,String> {
         if(aVoid.contentEquals("true"))
         {
             Toast.makeText(context, aVoid, Toast.LENGTH_SHORT).show();
-           /* Intent i =new Intent(context,signupPage.class);
-            context.startActivity(i);*/
+            Intent i =new Intent(context,Categories_Activity.class);
+            context.startActivity(i);
 
         }
         else
