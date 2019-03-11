@@ -86,7 +86,7 @@ break;                    case R.id.navigation_search:
 
     private void dataSaving() {
 
-        final String url = "http://192.168.1.4/product.php";
+        final String url = "http://192.168.1.12/product.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -113,13 +113,7 @@ break;                    case R.id.navigation_search:
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-
-
-
-
-
                                 productObject = new productsObject(name,quantity,imageurl,price);
-                                ;
                                 productsObjectArrayList.add(productObject);
                                 productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
                                 productAdapter.notifyDataSetChanged();
