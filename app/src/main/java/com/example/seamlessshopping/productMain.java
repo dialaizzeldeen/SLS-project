@@ -8,32 +8,34 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class productMain extends AppCompatActivity {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
-
+    EditText searchtext;
     TextView textView;
+    String urllink = "http://192.168.137.1/search.php";
     productsObject productObject;
     productAdapter productAdapter;
     ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
@@ -43,7 +45,7 @@ public class productMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-
+        searchtext=findViewById(R.id.searchtext);
 
 
 
@@ -63,10 +65,10 @@ public class productMain extends AppCompatActivity {
                         Intent categorie=new Intent(getBaseContext(),Categories_Activity.class);
                         startActivity(categorie);
 
-case R.id.navigation_notifications:break;
+                    case R.id.navigation_notifications:break;
                     case R.id.navigation_profile:
-break;                    case R.id.navigation_search:
-                    break;
+                        break;                    case R.id.navigation_search:
+                        break;
                 }
                 return false;
             }
@@ -86,11 +88,11 @@ break;                    case R.id.navigation_search:
 
     private void dataSaving() {
 
-        final String url = "http://192.168.1.4/product.php";
+
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, urllink, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -145,12 +147,55 @@ break;                    case R.id.navigation_search:
                         Log.e("Error",  error.getMessage());
 
                     }
-                });
+                })
+        {
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String,String> params=new HashMap<String, String>();
+                String searchname=searchtext.getText().toString();
+                params.put("key",searchname);
+
+                return params;
+            }
+        }
+                ;
 
         // Access the RequestQueue through your singleton class.
         queue.add(jsObjRequest);
     }
+    private void onrequest(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urllink, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(productMain.this, response, Toast.LENGTH_SHORT).show();
 
+            }
+        },new Response.ErrorListener(){
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String,String> params=new HashMap<String, String>();
+                String searchname=searchtext.getText().toString();
+                params.put("namesearch",searchname);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+
+    public void onsearch(View v){
+        dataSaving();
+
+
+
+
+    }
 
 
 
