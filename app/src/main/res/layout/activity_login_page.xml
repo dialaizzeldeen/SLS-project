@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:text="   Sign in"
         android:textColor="#000"
         android:textSize="45sp"
@@ -74,7 +74,7 @@
 
         <EditText
             android:id="@+id/usernameID"
-            android:layout_width="230dp"
+            android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter your name "
@@ -91,7 +91,7 @@
 
         <TextView
             android:id="@+id/password"
-            android:layout_width="121dp"
+            android:layout_width="116dp"
             android:layout_height="wrap_content"
             android:text=" Password"
             android:textColor="#000"
@@ -99,7 +99,7 @@
 
         <EditText
             android:id="@+id/passwordID"
-            android:layout_width="223dp"
+            android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:hint="Enter your password"
             android:inputType="textPassword" />

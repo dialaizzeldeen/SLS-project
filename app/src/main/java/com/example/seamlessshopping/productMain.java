@@ -1,43 +1,48 @@
 package com.example.seamlessshopping;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class productMain extends AppCompatActivity {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
-    EditText searchtext;
+
     TextView textView;
-    String urllink = "http://192.168.137.1/search.php";
     productsObject productObject;
+    String url;
     productAdapter productAdapter;
+    String search;
     ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
 
 
@@ -45,7 +50,7 @@ public class productMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        searchtext=findViewById(R.id.searchtext);
+
 
 
 
@@ -62,8 +67,6 @@ public class productMain extends AppCompatActivity {
                     case R.id.navigation_home:
                         break;
                     case R.id.navigation_Categories:
-                        Intent categorie=new Intent(getBaseContext(),Categories_Activity.class);
-                        startActivity(categorie);
 
                     case R.id.navigation_notifications:break;
                     case R.id.navigation_profile:
@@ -77,22 +80,55 @@ public class productMain extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        dataSaving();
+        dataSaving(url = "http://192.168.1.12/product.php");
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
+        productAdapter.notifyDataSetChanged();
         gridView.setAdapter(productAdapter);
+
+
+
+        final EditText text = findViewById(R.id.search);
+        text.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(s.length() != 0)
+                {  productsObjectArrayList.clear();
+
+
+                    search=text.getText().toString();
+                    url = "http://192.168.1.12/search.php?namesearch=" + search;
+                    Log.d("hhh","j"+url);
+                    dataSaving(url);
+
+                }
+                else {              dataSaving("http://192.168.1.12/product.php");
+                }
+
+            }
+        });
+
 
 
 
     }
 
 
-    private void dataSaving() {
-
+    private void dataSaving(String url) {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, urllink, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -103,6 +139,8 @@ public class productMain extends AppCompatActivity {
                             Log.i("Response",jsonObject+"");
                             StringBuilder textViewData = new StringBuilder();
                             //Parse the JSON response array by iterating over it
+                            productsObjectArrayList.clear();
+
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
                                 String name = response.getString("name");
@@ -115,13 +153,7 @@ public class productMain extends AppCompatActivity {
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-
-
-
-
-
                                 productObject = new productsObject(name,quantity,imageurl,price);
-                                ;
                                 productsObjectArrayList.add(productObject);
                                 productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
                                 productAdapter.notifyDataSetChanged();
@@ -147,58 +179,23 @@ public class productMain extends AppCompatActivity {
                         Log.e("Error",  error.getMessage());
 
                     }
-                })
-        {
-            protected Map<String,String> getParams() throws AuthFailureError{
-                Map<String,String> params=new HashMap<String, String>();
-                String searchname=searchtext.getText().toString();
-                params.put("key",searchname);
-
-                return params;
-            }
-        }
-                ;
+                });
 
         // Access the RequestQueue through your singleton class.
         queue.add(jsObjRequest);
     }
-    private void onrequest(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST,urllink, new Response.Listener<String>() {
+
+    public void refresh()
+    {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
-            public void onResponse(String response) {
-                Toast.makeText(productMain.this, response, Toast.LENGTH_SHORT).show();
-
+            public void run() {
+                productAdapter.notifyDataSetChanged();
+                gridView.invalidate();
             }
-        },new Response.ErrorListener(){
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            protected Map<String,String> getParams() throws AuthFailureError{
-                Map<String,String> params=new HashMap<String, String>();
-                String searchname=searchtext.getText().toString();
-                params.put("namesearch",searchname);
-
-                return params;
-            }
-        };
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-
-
-    public void onsearch(View v){
-        dataSaving();
-
-
-
+        });
 
     }
-
-
-
 
 
 
