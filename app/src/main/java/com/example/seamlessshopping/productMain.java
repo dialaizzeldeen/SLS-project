@@ -1,14 +1,19 @@
 package com.example.seamlessshopping;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +40,9 @@ public class productMain extends AppCompatActivity {
 
     TextView textView;
     productsObject productObject;
+    String url;
     productAdapter productAdapter;
+    String search;
     ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
 
 
@@ -60,13 +67,11 @@ public class productMain extends AppCompatActivity {
                     case R.id.navigation_home:
                         break;
                     case R.id.navigation_Categories:
-                        Intent categorie=new Intent(getBaseContext(),Categories_Activity.class);
-                        startActivity(categorie);
 
-case R.id.navigation_notifications:break;
+                    case R.id.navigation_notifications:break;
                     case R.id.navigation_profile:
-break;                    case R.id.navigation_search:
-                    break;
+                        break;                    case R.id.navigation_search:
+                        break;
                 }
                 return false;
             }
@@ -75,18 +80,51 @@ break;                    case R.id.navigation_search:
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        dataSaving();
+        dataSaving(url = "http://192.168.1.12/product.php");
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
+        productAdapter.notifyDataSetChanged();
         gridView.setAdapter(productAdapter);
+
+
+
+        final EditText text = findViewById(R.id.search);
+        text.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(s.length() != 0)
+                {  productsObjectArrayList.clear();
+
+
+                    search=text.getText().toString();
+                    url = "http://192.168.1.12/search.php?namesearch=" + search;
+                    Log.d("hhh","j"+url);
+                    dataSaving(url);
+
+                }
+                else {              dataSaving("http://192.168.1.12/product.php");
+                }
+
+            }
+        });
+
 
 
 
     }
 
 
-    private void dataSaving() {
+    private void dataSaving(String url) {
 
-        final String url = "http://192.168.1.12/product.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -101,6 +139,8 @@ break;                    case R.id.navigation_search:
                             Log.i("Response",jsonObject+"");
                             StringBuilder textViewData = new StringBuilder();
                             //Parse the JSON response array by iterating over it
+                            productsObjectArrayList.clear();
+
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
                                 String name = response.getString("name");
@@ -145,9 +185,17 @@ break;                    case R.id.navigation_search:
         queue.add(jsObjRequest);
     }
 
+    public void refresh()
+    {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                productAdapter.notifyDataSetChanged();
+                gridView.invalidate();
+            }
+        });
 
-
-
+    }
 
 
 

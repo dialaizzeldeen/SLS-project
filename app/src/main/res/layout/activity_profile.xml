@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="700dp"
     android:layout_gravity="center_vertical"
+    android:layout_marginLeft="20dp"
     android:background="#00000000"
     android:orientation="vertical"
     tools:context=".profile">
@@ -73,8 +74,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="76dp"
+            android:layout_height="match_parent"
             android:background="@drawable/genderr" />
 
         <EditText
@@ -96,8 +97,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="76dp"
+            android:layout_height="57dp"
             android:background="@drawable/location" />
 
         <EditText
@@ -119,18 +120,18 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="72dp"
             android:background="@drawable/bday" />
 
         <EditText
             android:id="@+id/bday"
-            android:layout_width="230dp"
+            android:layout_width="227dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint=" dd/mm/yy"
-            android:orientation="horizontal"
-            android:inputType="text" />
+            android:inputType="text"
+            android:orientation="horizontal" />
 
 
 
@@ -142,8 +143,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="76dp"
+            android:layout_height="82dp"
             android:background="@drawable/phonee" />
 
         <EditText
@@ -165,18 +166,18 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="72dp"
+            android:layout_height="61dp"
             android:background="@drawable/mail" />
 
         <EditText
             android:id="@+id/personalemail"
-            android:layout_width="230dp"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="contant_name@sample.com"
-            android:orientation="horizontal"
-            android:inputType="text" />
+            android:inputType="text"
+            android:orientation="horizontal" />
 
 
 
