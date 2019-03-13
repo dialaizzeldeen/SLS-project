@@ -48,7 +48,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/usernameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" UserName  "
@@ -56,7 +56,7 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/usernameP"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -79,7 +79,7 @@
             android:background="@drawable/genderr" />
 
         <EditText
-            android:id="@+id/gender"
+            android:id="@+id/genderP"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -102,7 +102,7 @@
             android:background="@drawable/location" />
 
         <EditText
-            android:id="@+id/location"
+            android:id="@+id/locationP"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -125,7 +125,7 @@
             android:background="@drawable/bday" />
 
         <EditText
-            android:id="@+id/bday"
+            android:id="@+id/bdayP"
             android:layout_width="227dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -148,7 +148,7 @@
             android:background="@drawable/phonee" />
 
         <EditText
-            android:id="@+id/mobile"
+            android:id="@+id/mobileP"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -171,7 +171,7 @@
             android:background="@drawable/mail" />
 
         <EditText
-            android:id="@+id/personalemail"
+            android:id="@+id/personalemailP"
             android:layout_width="234dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -192,14 +192,22 @@
 
         <Button
             android:id="@+id/save"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button"
-            android:text="Save"
-            android:onClick="saveP"/>
+            android:onClick="saveP"
+            android:text="Save" />
 
 
     </LinearLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:layout_marginTop="5dp"
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/navigation" />
 </LinearLayout>

@@ -7,6 +7,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-feature android:glEsVersion="0x00020000" />
+    <uses-feature
+        android:glEsVersion="0x00010001"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,17 +21,20 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".signupPage" />
-        <activity android:name=".loginPage"   ><intent-filter>
+        <activity android:name=".timePage"></activity>
+        <activity android:name=".cart"> <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        </intent-filter></activity>
+        <activity android:name=".signupPage" />
+        <activity android:name=".loginPage" />
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".profile">
+
         </activity>
-        <activity android:name=".productMain">
-        </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".paymentHistory"></activity>
+        <activity android:name=".productMain" />
+        <activity android:name=".paymentHistory" />
     </application>
 
 </manifest>
