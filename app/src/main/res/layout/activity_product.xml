@@ -11,8 +11,10 @@
     <EditText
         android:layout_width="316dp"
         android:layout_height="47dp"
+        android:id="@+id/search"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="5dp"
+        android:background="@drawable/shape"
         android:drawableLeft="@mipmap/search_launcher_round"
         android:hint="@string/title_search" />
 
