@@ -1,12 +1,15 @@
 package com.example.seamlessshopping;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.GridView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,25 +24,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 
-public class NewllyAdded extends AppCompatActivity {
-    GridView gridView;
+import okhttp3.internal.Internal;
+
+
+public class profile extends AppCompatActivity {
+
+    String url="http://192.168.1.9/profilePage.php";
+    Button save;
+    EditText usernameP, genderP,locationP,bdayP,mobileP,personalemailP;
     private static final String NEW_LINE = "\n\n";
 
-    newllyAddedObject newllyAddedObject1;
-    String url;
-    newllyAddedAdapter newllyAddedAdapter1;
-    ArrayList<newllyAddedObject> newllyAddedObjectArrayList = new ArrayList<newllyAddedObject>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.newlly_added);
-
+        setContentView(R.layout.activity_profile);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
-
+        usernameP=findViewById(R.id.usernameP);
+        genderP=findViewById(R.id.genderP);
+        locationP=findViewById(R.id.locationP);
+        bdayP=findViewById(R.id.bdayP);
+        mobileP=findViewById(R.id.mobileP);
+        personalemailP=findViewById(R.id.personalemailP);
 
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -48,35 +58,38 @@ public class NewllyAdded extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        break;
+                        return true;
                     case R.id.navigation_Categories:
-
-                    case R.id.navigation_notifications:break;
+                        // Intent categorie=new Intent(this,Categories_Activity.class);
+                        //startActivity(categorie);
+                        return true;
+                    case R.id.navigation_notifications:
+                        return true;
                     case R.id.navigation_profile:
-                        break;                    case R.id.navigation_search:
-                        break;
+                        return true;
+                    case R.id.navigation_search:
+                        return true;
                 }
                 return false;
             }
         };
 
+        dataSaving(url);
 
-        gridView = (GridView) findViewById(R.id.gridViewNew);
-        dataSaving(url = "http://192.168.1.9/newllyAdded.php");
-        gridView.setAdapter(newllyAddedAdapter1);
+
     }
     private void dataSaving(String url) {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         try {
 
-                            JSONArray responseArray= jsonObject.getJSONArray("newllyAdded");
+                            JSONArray responseArray= jsonObject.getJSONArray("profileData");
                             Log.i("Response",responseArray+"");
                             Log.i("Response",jsonObject+"");
                             StringBuilder textViewData = new StringBuilder();
@@ -84,20 +97,18 @@ public class NewllyAdded extends AppCompatActivity {
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
-                                Integer id=response.getInt("id");
-                                String name = response.getString("name");
-                                Integer quantity = response.getInt("quantity");
-                                String imageurl = response.getString("imageurl");
-                                String price = response.getString("price");
-                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl);
-                                ;
-
-                                newllyAddedObjectArrayList.add(newllyAddedObject2);
-                                newllyAddedAdapter newllyAddedAdapter = new newllyAddedAdapter(NewllyAdded.this, newllyAddedObjectArrayList);
-                                newllyAddedAdapter.notifyDataSetChanged();
-                                gridView.setAdapter(newllyAddedAdapter);
-
-
+                                String name = response.getString("username");
+                                String personE=response.getString("personalemail");
+                                String gender = response.getString("gender");
+                                String bday = response.getString("bday");
+                                Integer mobile = response.getInt("mobile");
+                                String loc=response.getString("location");
+                                usernameP.setText(name.toString());
+                                genderP.setText(gender.toString());
+                                locationP.setText(loc.toString());
+                                bdayP.setText(bday.toString());
+                                mobileP.setText(mobile.toString());
+                                personalemailP.setText(personE.toString());
 
 
                             }
@@ -124,4 +135,8 @@ public class NewllyAdded extends AppCompatActivity {
         queue.add(jsObjRequest);
 
     }
-    }
+
+    public void saveP(View v){
+        String type ="save";
+
+    }}
