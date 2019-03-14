@@ -1,6 +1,5 @@
 package com.example.seamlessshopping;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,23 +18,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class loginBackground extends AsyncTask<String,Void,String> {
+public class addtoCart extends AsyncTask<String,Void,String> {
+
     Context context;
     AlertDialog alertDialog1;
-    loginBackground(Context ctx){
+    addtoCart(Context ctx){
         context=ctx;
     }
 
-
-
     @Override
-    protected String doInBackground(String... voids) {
-        String type =voids[0]; // gave you the type that you send which is login
-        String login_url="http://192.168.1.9/"+"loginPage.php"; //to conect with local host
-        if(type.equals("login")){
+    protected String doInBackground(String... strings) {
+        String type =strings[0]; // gave you the type that you send which is login
+        String login_url="http://192.168.1.9/"+"addToCart.php"; //to conect with local host
+        if(type.equals("addtocart")){
             try {
-                String username =voids[1]; //get the username value from the edittext
-                String password =voids[2]; //get the password value from the edittext
+                String name =strings[1]; //get the username value from the edittext
+                String price =strings[2]; //get the password value from the edittext
+                String quntity=strings[3];
+                String imgUrl=strings[4];
+                String productid=strings[5];
 
                 URL url =new URL(login_url);
                 HttpURLConnection httpURLConnection1= (HttpURLConnection) url.openConnection();
@@ -44,8 +45,11 @@ public class loginBackground extends AsyncTask<String,Void,String> {
                 httpURLConnection1.setDoOutput(true);
                 OutputStream outputStream1=httpURLConnection1.getOutputStream();
                 BufferedWriter bufferedWriter1=new BufferedWriter(new OutputStreamWriter(outputStream1,"UTF-8"));
-                String post_data= URLEncoder.encode("usernamekey","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"
-                        +URLEncoder.encode("passwordkey","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                String post_data= URLEncoder.encode("namekey","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"
+                        +URLEncoder.encode("pricekey","UTF-8")+"="+URLEncoder.encode(price,"UTF-8")+"&"+
+                URLEncoder.encode("quntitykey","UTF-8")+"="+URLEncoder.encode(quntity,"UTF-8")+"&"+
+                        URLEncoder.encode("imagekey","UTF-8")+"="+URLEncoder.encode(imgUrl,"UTF-8")+"&"+
+                        URLEncoder.encode("idkey","UTF-8")+"="+URLEncoder.encode(productid,"UTF-8");
                 bufferedWriter1.write(post_data);
                 bufferedWriter1.flush();
                 bufferedWriter1.close();
@@ -72,8 +76,8 @@ public class loginBackground extends AsyncTask<String,Void,String> {
 
         }
         return null;
-    }
 
+}
     @Override
     // after finish the job we use this method to show the result
     protected void onPreExecute() {
@@ -85,11 +89,9 @@ public class loginBackground extends AsyncTask<String,Void,String> {
     // to show the dialog on screen
     protected void onPostExecute(String aVoid) {
         //alertDialog1.setMessage(aVoid);
-        if(aVoid.contentEquals("true"))
+        if(aVoid.contentEquals("successfully added"))
         {
-
-            Intent i =new Intent(context,NewllyAdded.class);
-            context.startActivity(i);
+            Toast.makeText(context, aVoid, Toast.LENGTH_SHORT).show();
 
         }
         else

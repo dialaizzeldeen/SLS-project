@@ -32,7 +32,7 @@ import okhttp3.internal.Internal;
 
 public class profile extends AppCompatActivity {
 
-    String url="http://192.168.1.9/profilePageNew.php";
+    String url="http://192.168.1.9/profilePage.php";
     Button save;
     EditText usernameP, genderP,locationP,bdayP,mobileP,personalemailP;
     private static final String NEW_LINE = "\n\n";
