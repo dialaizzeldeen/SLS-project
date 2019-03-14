@@ -29,11 +29,11 @@
         android:layout_height="190dp"
         android:layout_gravity="center"
 
-        android:layout_marginTop="25dp">
+        android:paddingTop="25dp">
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:background="@drawable/profileicon" />
 
@@ -44,12 +44,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/usernameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" UserName  "
@@ -57,7 +56,7 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/usernameP"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -72,23 +71,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity=""
-        android:padding="5dp"
-
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="60dp"
+            android:layout_width="76dp"
             android:layout_height="match_parent"
-            android:background="@mipmap/gender_launcher" />
+            android:background="@drawable/genderr" />
 
         <EditText
-            android:id="@+id/gender"
-            android:layout_width="238dp"
+            android:id="@+id/genderP"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Choose your Gender "
-            android:inputType="text"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:inputType="text" />
 
 
 
@@ -96,24 +93,22 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-
         android:layout_gravity=""
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="@mipmap/location_launcher" />
+            android:layout_width="76dp"
+            android:layout_height="57dp"
+            android:background="@drawable/location" />
 
         <EditText
-            android:id="@+id/location"
-            android:layout_width="238dp"
+            android:id="@+id/locationP"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint=" Your Location"
-            android:inputType="text"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:inputType="text" />
 
 
 
@@ -121,19 +116,17 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-
         android:layout_gravity=""
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="58dp"
-            android:layout_height="63dp"
-            android:background="@mipmap/bday_launcher" />
+            android:layout_width="80dp"
+            android:layout_height="72dp"
+            android:background="@drawable/bday" />
 
         <EditText
-            android:id="@+id/bday"
-            android:layout_width="240dp"
+            android:id="@+id/bdayP"
+            android:layout_width="227dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint=" dd/mm/yy"
@@ -146,24 +139,22 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-
         android:layout_gravity=""
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="58dp"
-            android:layout_height="match_parent"
-            android:background="@mipmap/phone_launcher" />
+            android:layout_width="76dp"
+            android:layout_height="82dp"
+            android:background="@drawable/phonee" />
 
         <EditText
-            android:id="@+id/mobile"
-            android:layout_width="240dp"
+            android:id="@+id/mobileP"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint=" Mobile Number"
-            android:inputType="text"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:inputType="text" />
 
 
 
@@ -172,18 +163,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity=""
-        android:padding="5dp"
-
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="58dp"
-            android:layout_height="match_parent"
-            android:background="@mipmap/mail_launcher" />
+            android:layout_width="72dp"
+            android:layout_height="61dp"
+            android:background="@drawable/mail" />
 
         <EditText
-            android:id="@+id/personalemail"
-            android:layout_width="241dp"
+            android:id="@+id/personalemailP"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="contant_name@sample.com"
@@ -203,14 +192,22 @@
 
         <Button
             android:id="@+id/save"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button"
-            android:text="Save"
-            android:onClick="saveP"/>
+            android:onClick="saveP"
+            android:text="Save" />
 
 
     </LinearLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:layout_marginTop="5dp"
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/navigation" />
 </LinearLayout>

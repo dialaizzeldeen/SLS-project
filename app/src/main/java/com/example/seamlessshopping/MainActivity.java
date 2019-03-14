@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+        getActionBar().getCustomView();
         username=findViewById(R.id.usernameID);
         password=findViewById(R.id.passwordID);
         createAccount =(TextView)findViewById(R.id.createAccount);
