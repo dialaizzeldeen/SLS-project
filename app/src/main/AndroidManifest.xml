@@ -24,12 +24,12 @@
         <activity android:name=".timePage"></activity>
         <activity android:name=".cart"> </activity>
         <activity android:name=".signupPage" />
-        <activity android:name=".loginPage" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".loginPage" ><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
         </activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".profile">
@@ -43,7 +43,9 @@
         <activity android:name=".paymentHistory" />
         <activity android:name=".NewllyAdded" >
 
+
         </activity>
+        <activity android:name=".searching">       </activity>
     </application>
 
 </manifest>
