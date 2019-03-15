@@ -83,7 +83,7 @@ public class productMain extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        dataSaving(url = "http://192.168.1.9/product.php");
+        dataSaving(url = "http://192.168.1.12/product.php");
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
         gridView.setAdapter(productAdapter);
