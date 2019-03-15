@@ -2,6 +2,7 @@ package com.example.seamlessshopping;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -31,11 +32,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class categoriesAdapter extends BaseAdapter {
     ArrayList<categoriesObject> categoriesObjectsArrayList;
     productsObject productsObj;
-
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
     Context mContext;
     int positionitem;
     //Intent editIntent;
@@ -95,6 +100,11 @@ public class categoriesAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=mContext.getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 
 }

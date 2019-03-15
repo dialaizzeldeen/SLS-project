@@ -3,6 +3,7 @@ package com.example.seamlessshopping;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -36,6 +37,9 @@ public class cart extends AppCompatActivity {
     ArrayList<cartObject> cartObjectArrayList= new ArrayList<cartObject>();
     FloatingActionButton fab;
     Context context;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
 
 
     @Override
@@ -102,11 +106,15 @@ public class cart extends AppCompatActivity {
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
+                                int transactionId=response.getInt("transactionId");
+                                int productId=response.getInt("productId");
+                                int marketId=response.getInt("marketId");
+                                String marketName=response.getString("marketName");
                                 String name = response.getString("name");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
-                                cartObject cartoObject = new cartObject(imageurl, name, price, quantity);
+                                cartObject cartoObject = new cartObject(imageurl, name, price, quantity,transactionId,productId,marketId,marketName);
                                 ;
 
                             cartObjectArrayList.add(cartoObject);
@@ -139,6 +147,11 @@ public class cart extends AppCompatActivity {
         // Access the RequestQueue through your singleton class.
         queue.add(jsObjRequest);
 
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -25,7 +26,8 @@ public class loginBackground extends AsyncTask<String,Void,String> {
     loginBackground(Context ctx){
         context=ctx;
     }
-
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
 
 
     @Override
@@ -87,15 +89,19 @@ public class loginBackground extends AsyncTask<String,Void,String> {
         //alertDialog1.setMessage(aVoid);
         if(aVoid.contentEquals("true"))
         {
-
-            Intent i =new Intent(context,NewllyAdded.class);
-            context.startActivity(i);
+            Toast.makeText(context, "username or password not correct try again", Toast.LENGTH_SHORT).show();
 
         }
         else
         {
+            Intent i =new Intent(context,NewllyAdded.class);
+            String USERIDD=aVoid.toString();
+            Savedata(USERIDD);
+            context.startActivity(i);
 
-            Toast.makeText(context, aVoid, Toast.LENGTH_SHORT).show();
+
+
+
         }
 
     }
@@ -103,5 +109,11 @@ public class loginBackground extends AsyncTask<String,Void,String> {
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
+    }
+    public void Savedata(String s){
+        SharedPreferences sharedPreferences=context.getApplicationContext().getSharedPreferences(shared_pres,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString(iduser,s.toString());
+        editor.apply();
     }
 }

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
@@ -23,16 +30,25 @@ import com.bumptech.glide.RequestManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class CartAdapter extends BaseAdapter {
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
 
     Context mContext;int positionitem;
     private ArrayList<cartObject>cartObjectArrayList;
     cartObject cartObject1;
-
+    String url=R.string.url+"cartPage.php";
     public CartAdapter(Context mContext, ArrayList<cartObject> cartObjectArrayList) {
         this.mContext = mContext;
         this.cartObjectArrayList = cartObjectArrayList;
+
     }
 
     @Override
@@ -93,8 +109,37 @@ public class CartAdapter extends BaseAdapter {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        cartObjectArrayList.remove(position);
-                        notifyDataSetChanged();
+                        /*cartObjectArrayList.remove(position);
+                        notifyDataSetChanged();*/
+                        RequestQueue queue = Volley.newRequestQueue(mContext);
+                        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        // response
+                                      Log.d(response ,response);
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("Error.Response", error.toString());
+
+                            }
+                        }
+                        ) {
+                            @Override
+                            protected Map<String, String> getParams()
+                            {
+                                Map<String, String>  params = new HashMap<String, String>();
+                                params.put("actionKey","deleteItem");
+                                params.put("transactionId",cartObject1.getTransactionId().toString());
+
+
+                                return params;
+                            }
+                        };
+                        queue.add(postRequest);
+
                     }
                 });
                 builder.show();
@@ -120,6 +165,11 @@ public class CartAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=mContext.getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 
 }

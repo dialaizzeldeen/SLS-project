@@ -1,5 +1,8 @@
 package com.example.seamlessshopping;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,21 +29,25 @@ import java.util.ArrayList;
 public class NewllyAdded extends AppCompatActivity {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id;
+
+
 
     newllyAddedObject newllyAddedObject1;
     String url;
     newllyAddedAdapter newllyAddedAdapter1;
     ArrayList<newllyAddedObject> newllyAddedObjectArrayList = new ArrayList<newllyAddedObject>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newlly_added);
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
-
-
+        getData();
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -124,4 +131,10 @@ public class NewllyAdded extends AppCompatActivity {
         queue.add(jsObjRequest);
 
     }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
+    }
+
     }

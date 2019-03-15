@@ -14,5 +14,25 @@
         android:title="profilrpage"
 
         ></item>
+    <item android:id="@+id/cp"
+        android:title="cart page"
+
+        ></item>
+    <item android:id="@+id/nap"
+        android:title="newlly added"
+
+        ></item>
+    <item android:id="@+id/php"
+        android:title="payment history"
+
+        ></item>
+    <item android:id="@+id/catep"
+        android:title="category page"
+
+        ></item>
+    <item android:id="@+id/payp"
+        android:title="payment page"
+
+        ></item>
 
 </menu>
