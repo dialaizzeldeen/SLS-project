@@ -1,5 +1,6 @@
 package com.example.seamlessshopping;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -27,6 +28,9 @@ import java.util.ArrayList;
 public class paymentHistory extends AppCompatActivity {
    ListView paymentHistoryListView;
     paymentHistoryAdapter paymentHistoryAdapters;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
 
     ArrayList<paymentHistoryObject> paymentHistoryObjectArrayList = new ArrayList<paymentHistoryObject>();
     @Override
@@ -102,6 +106,11 @@ paymentHistoryObject paymentHistoryObjects=new paymentHistoryObject(dateofpurcha
 
 
 
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 
 

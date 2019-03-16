@@ -1,5 +1,6 @@
 package com.example.seamlessshopping;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,20 +27,21 @@ import org.json.JSONObject;
 
 import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.internal.Internal;
 
 
 public class profile extends AppCompatActivity {
-    RequestQueue queue =Volley.newRequestQueue(this);
 
     String url="http://192.168.1.9/profilePage.php";
     Button save;
     EditText usernameP, genderP,locationP,bdayP,mobileP,personalemailP;
     private static final String NEW_LINE = "\n\n";
-  ProfileObject profileobjectt;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class profile extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         usernameP=findViewById(R.id.usernameP);
         genderP=findViewById(R.id.genderP);
+        locationP=findViewById(R.id.locationP);
         bdayP=findViewById(R.id.bdayP);
         mobileP=findViewById(R.id.mobileP);
         personalemailP=findViewById(R.id.personalemailP);
@@ -104,8 +106,10 @@ public class profile extends AppCompatActivity {
                                 String gender = response.getString("gender");
                                 String bday = response.getString("bday");
                                 Integer mobile = response.getInt("mobile");
+                                String loc=response.getString("location");
                                 usernameP.setText(name.toString());
                                 genderP.setText(gender.toString());
+                                locationP.setText(loc.toString());
                                 bdayP.setText(bday.toString());
                                 mobileP.setText(mobile.toString());
                                 personalemailP.setText(personE.toString());
@@ -137,38 +141,11 @@ public class profile extends AppCompatActivity {
     }
 
     public void saveP(View v){
-        url = "http://192.168.1.9/profilePage.php";
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.toString());
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("gender", profileobjectt.getGenderP().toString());
-                params.put("bday", profileobjectt.getBdayP().toString());
-                params.put("mobile", profileobjectt.getMobileP().toString());
-                params.put("personalemail", profileobjectt.getPersonalemailP().toString());
+        String type ="save";
 
-
-                return params;
-            }
-        };
-        queue.add(postRequest);
-
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }}

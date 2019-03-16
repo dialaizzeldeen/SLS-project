@@ -2,6 +2,7 @@ package com.example.seamlessshopping;
 public class productsObject {
 
 
+    private  Integer productId;
     private String name;
 
     private int quantity;
@@ -19,7 +20,10 @@ public class productsObject {
         this.name=name;this.quantity=quantity;this.imageurl=imageurl;this.price=price;
         this.marketfoodname = marketfoodname;}
 
-
+    public productsObject(Integer productId, String name, Integer quantity, String imageurl, String price) {
+        this.name=name;this.quantity=quantity;this.imageurl=imageurl;this.price=price;
+        this.productId = productId;
+    }
 
 
     public void setMarketfoodname(String marketfoodname) {
@@ -71,5 +75,6 @@ public class productsObject {
     public  void setImageurl(String imageurl) {
         this.imageurl = imageurl;
     }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.seamlessshopping;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -18,7 +19,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
@@ -31,14 +39,23 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class productAdapter extends BaseAdapter {
     ArrayList<productsObject> productsObjectsArrayList;
     productsObject productsObj;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
+
 
     Context mContext;
     int positionitem;
+    final String url ="http://192.168.1.9/"+"addToCart.php";
     //Intent editIntent;
     // ImageButton btnDelete;
     //ImageButton btnCall;
@@ -80,6 +97,58 @@ public class productAdapter extends BaseAdapter {
         final TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
         final TextView name = (TextView) convertView.findViewById(R.id.Name);
         final ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
+        Button addtocart=(Button) convertView.findViewById(R.id.checkboxProduct);
+
+
+
+        addtocart.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RequestQueue queue = Volley.newRequestQueue(mContext);
+                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                // response
+                                if(response=="successfully added")
+                                    Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
+                                else{
+                                    Toast.makeText(mContext, "connection problem", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.toString());
+
+                    }
+                }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String>  params = new HashMap<String, String>();
+                        params.put("namekey", productsObj.getName().toString());
+                        params.put("pricekey", productsObj.getPrice().toString());
+                        params.put("quntitykey",productsObj.getQuantity().toString());
+                        params.put("imagekey",productsObj.getImageurl().toString());
+                        params.put("idkey",productsObj.getID().toString());
+                        params.put("CustomerID",id.toString());
+
+                        return params;
+                    }
+                };
+                queue.add(postRequest);}});
+
+
+
+
+        addQuantity.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                productsObj.setQuantity( productsObj.getQuantity()+1);
+                notifyDataSetChanged();     }});
+
+
+
 
 
 
@@ -112,7 +181,11 @@ public class productAdapter extends BaseAdapter {
 
         return convertView;
     }
-
+    public void getData(){
+        SharedPreferences sharedPreferences=mContext.getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
+    }
 }
 /**
  * btnDelete.setTag(position); //important so we know which item to delete on button click

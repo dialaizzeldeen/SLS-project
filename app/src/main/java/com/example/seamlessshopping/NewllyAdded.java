@@ -1,8 +1,13 @@
 package com.example.seamlessshopping;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,25 +27,39 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class NewllyAdded extends AppCompatActivity {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id;
+
+
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static final Integer[] XMEN= {
+            R.drawable.markets,R.drawable.restuarant,R.drawable.boutiqueslide,R.drawable.banksldie};
+    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     newllyAddedObject newllyAddedObject1;
     String url;
     newllyAddedAdapter newllyAddedAdapter1;
     ArrayList<newllyAddedObject> newllyAddedObjectArrayList = new ArrayList<newllyAddedObject>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newlly_added);
-
+        init();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
-
-
+        getData();
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -62,7 +81,7 @@ public class NewllyAdded extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridViewNew);
-        dataSaving(url = "http://192.168.1.9/newllyAdded.php");
+        dataSaving(url = "http://192.168.1.12/newllyAdded.php");
         gridView.setAdapter(newllyAddedAdapter1);
     }
     private void dataSaving(String url) {
@@ -124,4 +143,38 @@ public class NewllyAdded extends AppCompatActivity {
         queue.add(jsObjRequest);
 
     }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
+    private void init() {
+        for(int i=0;i<XMEN.length;i++)
+            XMENArray.add(XMEN[i]);
+
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new slideshowAdapter(NewllyAdded.this,XMENArray));
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == XMEN.length) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 2500, 2500);
+    }
+
+
+}

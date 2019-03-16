@@ -1,6 +1,7 @@
 package com.example.seamlessshopping;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class paymentHistoryAdapter extends BaseAdapter {
     Context mContext;int positionitem;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
 ArrayList<paymentHistoryObject>paymentHistoryObjectArrayList;
     public paymentHistoryAdapter(paymentHistory paymentHistory, ArrayList<paymentHistoryObject> paymentHistoryObjectArrayList) {
 this.paymentHistoryObjectArrayList=paymentHistoryObjectArrayList;
 this.mContext=paymentHistory;
+
     }
 
     @Override
@@ -56,5 +63,10 @@ this.mContext=paymentHistory;
         marketName.setText(paymentHistoryObjects.getMarketname());
 
             return convertView;
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=mContext.getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 }

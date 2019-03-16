@@ -1,6 +1,7 @@
 package com.example.seamlessshopping;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -37,7 +38,9 @@ import java.util.ArrayList;
 public class productMain extends AppCompatActivity {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
-
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
     TextView textView;
     productsObject productObject;
     String url;
@@ -80,7 +83,7 @@ public class productMain extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        dataSaving(url = "http://192.168.1.9/product.php");
+        dataSaving(url = "http://192.168.1.12/product.php");
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
         gridView.setAdapter(productAdapter);
@@ -143,6 +146,7 @@ public class productMain extends AppCompatActivity {
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
+                                Integer productId=response.getInt("id");
                                 String name = response.getString("name");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
@@ -153,7 +157,7 @@ public class productMain extends AppCompatActivity {
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-                                productObject = new productsObject(name,quantity,imageurl,price);
+                                productObject = new productsObject(productId,name,quantity,imageurl,price);
                                 productsObjectArrayList.add(productObject);
                                 productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
                                 productAdapter.notifyDataSetChanged();
@@ -195,6 +199,11 @@ public class productMain extends AppCompatActivity {
             }
         });
 
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 
 
