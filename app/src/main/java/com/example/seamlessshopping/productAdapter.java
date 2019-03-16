@@ -80,24 +80,6 @@ public class productAdapter extends BaseAdapter {
         final TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
         final TextView name = (TextView) convertView.findViewById(R.id.Name);
         final ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
-        CheckBox checkBox=(CheckBox)convertView.findViewById(R.id.checkboxProduct);
-
-        if(checkBox.isChecked()){
-            String type="addtocart";
-            addtoCart addtoCart1= new addtoCart(mContext);
-            addtoCart1.execute(type,name.toString(),price.toString(),quantity.toString(),imageUrls.toString(),productsObj.getID().toString());
-        }
-
-
-
-
-        addQuantity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                productsObj.setQuantity( productsObj.getQuantity()+1);
-                notifyDataSetChanged();     }});
-
-
-
 
 
 
