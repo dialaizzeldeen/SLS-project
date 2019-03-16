@@ -324,6 +324,7 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
                 else if(item.getItemId()==R.id.Boutique){categories="boutieque";
                     imagecategories.setVisibility(View.VISIBLE);
                     searchObjectArrayList.clear();
+
                     searchAdapter.notifyDataSetChanged();
                     imagecategories.setImageResource(R.drawable.boutiquelogo);
                 }
