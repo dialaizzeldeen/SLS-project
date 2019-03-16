@@ -3,9 +3,11 @@ package com.example.seamlessshopping;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -44,9 +47,12 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
-public class searching extends AppCompatActivity implements View.OnClickListener {
+public class searching extends AppCompatActivity implements  View.OnClickListener
+{
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
 
@@ -56,8 +62,9 @@ public class searching extends AppCompatActivity implements View.OnClickListener
     searchAdapter searchAdapter;
     String search;
     ArrayList<productsObject> searchObjectArrayList = new ArrayList<productsObject>();
-ImageView imagecategories;
+    ImageView imagecategories;
     String categories="";
+    TextView filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +75,14 @@ ImageView imagecategories;
 
         final EditText textsearch = findViewById(R.id.search);
 
-imagecategories=findViewById(R.id.imagecate);
+        imagecategories=findViewById(R.id.imagecate);
+
+        filter=findViewById(R.id.filterprice);
 
 
 
 
-
-
-imagecategories.setVisibility(View.INVISIBLE);
+        imagecategories.setVisibility(View.INVISIBLE);
 
 
         textsearch.addTextChangedListener(new TextWatcher() {
@@ -116,7 +123,7 @@ imagecategories.setVisibility(View.INVISIBLE);
             }
         });
 
-textsearch.setOnClickListener(this);
+        textsearch.setOnClickListener(this);
 
 
 
@@ -157,7 +164,6 @@ textsearch.setOnClickListener(this);
 
     private void dataSaving(String url) {
 
-
         RequestQueue queue = Volley.newRequestQueue(this);  //
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -166,31 +172,35 @@ textsearch.setOnClickListener(this);
                     public void onResponse(JSONObject jsonObject) {
                         try {
 
+
                             JSONArray responseArray = jsonObject.getJSONArray("products");
                             Log.i("Response", responseArray + "");
                             Log.i("Response", jsonObject + "");
                             StringBuilder textViewData = new StringBuilder();
                             //Parse the JSON response array by iterating over it
                             searchObjectArrayList.clear();
-
                             for (int i = 0; i < responseArray.length(); i++) {
-                                JSONObject response = responseArray.getJSONObject(i);
+                                JSONObject   response = responseArray.getJSONObject(i);
+
                                 String name = response.getString("productname");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
                                 String marketfoodname = response.getString("marketname");
-
                                 productObject = new productsObject(name, quantity, imageurl, price, marketfoodname);
                                 searchObjectArrayList.add(productObject);
-                                searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
-                                searchAdapter.notifyDataSetChanged();
-                                gridView.setAdapter(searchAdapter);
-
 
                             }
+
+                            searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
+                            searchAdapter.notifyDataSetChanged();
+                            gridView.setAdapter(searchAdapter);
+
                             //   textView.setText(textViewData.toString());
                             Log.d("response", "j" + textViewData);
+
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -213,11 +223,72 @@ textsearch.setOnClickListener(this);
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void pricelowest(View v) {
+        Collections.sort(searchObjectArrayList, new Comparator<productsObject>() {
+            @Override
+            public int compare(productsObject t1, productsObject t2) {
+                return Double.compare(Double.valueOf(t1.getPrice()), Double.valueOf(t2.getPrice()));
+            }
+        });
+
+//         searchObjectArrayList.sort(Comparator.comparing(productsObject::getPrice).reversed());
+
+        //  searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
+        searchAdapter.notifyDataSetChanged();
+        //gridView.setAdapter(searchAdapter);
+
+
+
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void pricehighest(View v) {
+        Collections.sort(searchObjectArrayList, new Comparator<productsObject>() {
+            @Override
+            public int compare(productsObject t1, productsObject t2) {
+                return Double.compare(Double.valueOf(t2.getPrice()), Double.valueOf(t1.getPrice()));
+            }
+        });
+
+//         searchObjectArrayList.sort(Comparator.comparing(productsObject::getPrice).reversed());
+
+        //  searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
+        searchAdapter.notifyDataSetChanged();
+        //gridView.setAdapter(searchAdapter);
+
+
+
+    }
+
+
+    public void showmenu(final View view)
+    {
+        PopupMenu popup = new PopupMenu(searching.this, view);
+
+
+        popup.getMenuInflater().inflate(R.menu.filtermenu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.lowtohigh){
+                    pricelowest(view);
+                }
+                else if(item.getItemId()==R.id.hightolow){pricehighest(view);}
+
+                return true;
+            }
+        });
+        popup.show();}
+
     @Override
     public void onClick(View v) {
 
 
-showPopupWindow(v);
+        showPopupWindow(v);
 
 
     }
@@ -244,88 +315,49 @@ showPopupWindow(v);
             public boolean onMenuItemClick(MenuItem item) {
                 if(item.getItemId()==R.id.restaurant){categories="restaurants";
                     imagecategories.setVisibility(View.VISIBLE);
+                    searchObjectArrayList.clear();
+                    searchAdapter.notifyDataSetChanged();
 
                     imagecategories.setImageResource(R.drawable.restuarant);
 
                 }
                 else if(item.getItemId()==R.id.Boutique){categories="boutieque";
-                  imagecategories.setVisibility(View.VISIBLE);
-                  imagecategories.setImageResource(R.drawable.boutiquelogo);
+                    imagecategories.setVisibility(View.VISIBLE);
+                    searchObjectArrayList.clear();
+                    searchAdapter.notifyDataSetChanged();
+                    imagecategories.setImageResource(R.drawable.boutiquelogo);
                 }
                 else if (item.getItemId()==   R.id.Bank){
                     categories="bank";
-                  imagecategories.setVisibility(View.VISIBLE);
+                    searchObjectArrayList.clear();
+                    searchAdapter.notifyDataSetChanged();
+                    imagecategories.setVisibility(View.VISIBLE);
 
-                  imagecategories.setImageResource(R.drawable.bank);
+                    imagecategories.setImageResource(R.drawable.bank);
 
                 }
                 else if(item.getItemId() == R.id.marketfood) {
+                    searchObjectArrayList.clear();
+                    searchAdapter.notifyDataSetChanged();
                     categories = "market";
-                   imagecategories.setVisibility(View.VISIBLE);
+                    imagecategories.setVisibility(View.VISIBLE);
 
                     imagecategories.setImageResource(R.drawable.markets);
                 }
+                else if(item.getItemId()==R.id.allcategories){
+                    imagecategories.setVisibility(View.VISIBLE);
+                    searchObjectArrayList.clear();
+                    searchAdapter.notifyDataSetChanged();
+                    imagecategories.setImageResource(R.drawable.search);
+                    categories="";
+                    ;}
                 return true;
             }
+
         });
         popup.show();
     }
 
 
+
 }
-/**  @Override
-public void onBackPressed() {
-
-//   Toast.makeText (this,"onbackPressd",Toast.LENGTH_SHORT ).show();
-EditText t=findViewById ( R.id.editText );
-String S=t.getText ().toString ();
-Intent hh = getIntent();
-
-hh.putExtra(MainActivity.neededName,S);
-
-setResult(RESULT_OK,hh);
-super.onBackPressed ();
-}
- **/
-
-
-
-/**   @Override
-protected void onCreate(Bundle savedInstanceState) {
-
-super.onCreate ( savedInstanceState );
-setContentView ( R.layout.activity_sec );
-BottomNavigationView bar=getSupportActionBar ();
-
-bar.setDisplayHomeAsUpEnabled ( true );
-
-bar.setHomeAsUpIndicator ( R.drawable.exit );
-EditText text=findViewById ( R.id.editText );
-
-Intent i=getIntent ();
-text.setText ( i.getStringExtra ( MainActivity.neededName ) );
-int n=i.getIntExtra ( "prime" ,8);
-System.out.println("i got this value for the paaasas------->"+n);
-
-
-/**
-}
-}
-}
-
-
-/**
- *
- *
- *
- *     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
- *             @Override
- *             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
- *                 // TODO Auto-generated method stub
- *
- *                 /* appending I Love with car brand names */
-/** *String value="I Love "+adapterView.getItemAtPosition(position);
- *                 /* Display the Toast */
-       /*  Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
-         }
-         });**/

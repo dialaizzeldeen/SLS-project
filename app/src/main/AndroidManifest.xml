@@ -24,11 +24,7 @@
         <activity android:name=".timePage"></activity>
         <activity android:name=".cart"> </activity>
         <activity android:name=".signupPage" />
-        <activity android:name=".loginPage" ><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name=".loginPage" >
 
         </activity>
         <activity android:name=".MainActivity"></activity>
@@ -45,7 +41,11 @@
 
 
         </activity>
-        <activity android:name=".searching">       </activity>
+        <activity android:name=".searching">    <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>   </activity>
     </application>
 
 </manifest>

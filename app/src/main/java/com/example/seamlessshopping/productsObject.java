@@ -9,9 +9,9 @@ public class productsObject {
     private String price;
     private String imageurl;
     private String marketfoodname;
-    public productsObject(int id,String name , int quantity,String imageurl,String price){
+    public productsObject(String name , int quantity,String imageurl,String price){
         //    int id ,this.id=id;
-        this.name=name;this.quantity=quantity;this.imageurl=imageurl;this.price=price;this.id=id;
+        this.name=name;this.quantity=quantity;this.imageurl=imageurl;this.price=price;
     }
 
     public productsObject(String name , int quantity,String imageurl,String price,String marketfoodname){
@@ -71,5 +71,6 @@ public class productsObject {
     public  void setImageurl(String imageurl) {
         this.imageurl = imageurl;
     }
+
 
 }

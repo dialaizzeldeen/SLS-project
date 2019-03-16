@@ -5,9 +5,9 @@
         android:title="Market Food"
         android:icon="@drawable/markets"/>
     <item
-    android:id="@+id/restaurant"
-android:icon="@drawable/restuarant"
-    android:title="Restaurant"/>
+        android:id="@+id/restaurant"
+        android:icon="@drawable/restuarant"
+        android:title="Restaurant"/>
     <item
         android:id="@+id/Boutique"
         android:icon="@drawable/boutiquelogo"
@@ -16,6 +16,8 @@ android:icon="@drawable/restuarant"
         android:id="@+id/Bank"
         android:icon="@drawable/bank"
         android:title="Bank"/>
-
-
+    <item
+        android:id="@+id/allcategories"
+        android:icon="@drawable/allseeearch"
+        android:title="All Categories"/>
 </menu>
