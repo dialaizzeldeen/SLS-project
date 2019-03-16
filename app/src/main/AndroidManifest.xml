@@ -21,31 +21,26 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".timePage"></activity>
-        <activity android:name=".cart"> </activity>
+        <activity
+            android:name=".profilecategory"
+            android:label="@string/title_activity_profilecategory"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".timePage" />
+        <activity android:name=".cart"></activity>
         <activity android:name=".signupPage" />
-        <activity android:name=".loginPage" >
-
-        </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".profile">
-
-
-        </activity>
-        <activity android:name=".productMain" >
-
-
-       </activity>
+        <activity android:name=".loginPage"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".profile"></activity>
+        <activity android:name=".productMain"></activity>
         <activity android:name=".paymentHistory" />
-        <activity android:name=".NewllyAdded" >
+        <activity android:name=".NewllyAdded">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".searching">      </activity>
+        <activity android:name=".searching"></activity>
     </application>
 
 </manifest>
