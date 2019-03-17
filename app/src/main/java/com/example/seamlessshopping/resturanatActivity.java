@@ -5,16 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class Categories_Activity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
+public class resturanatActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
     ListView categoriesListView;
     categoriesObject categoriesObjects;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
@@ -24,12 +23,9 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        categoriesAdapter categoriesAdapters;
 
 
-        categoriesListView = (ListView) findViewById(R.id.listViewcategories);
 
- categoriesListView.setOnItemClickListener(this);
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -39,7 +35,7 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
                     case R.id.navigation_home:
                         return true;
                     case R.id.navigation_Categories:
-                       // Intent categorie=new Intent(this,Categories_Activity.class);
+                        // Intent categorie=new Intent(this,Categories_Activity.class);
                         //startActivity(categorie);
                         return true;
                     case R.id.navigation_notifications:
@@ -69,33 +65,40 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
 
 
 
-        String ImageurlBoutique = "https://i.postimg.cc/rF25vLyd/boutique-logo-1-vector-18631407.jpg";
-        String ImageurlBank =" https://i.postimg.cc/dtQV7W4H/bank.jpg";
-        String ImageurlMarket = "https://i.postimg.cc/7PGNFVgR/markets.png";
-        String ImageurlResturant = "https://i.postimg.cc/DwM03qQC/depositphotos-118355644-stock-illustration-restaurant-logo-desig.jpg";
+        categoriesListView = (ListView) findViewById(R.id.listViewcategories);
+        String ImageurlAatoutpizza= "https://i.postimg.cc/T32mZRG2/15036277-1423421534354241-3339396250817945020-n.png";
+        String ImageurlwardResturant ="https://i.postimg.cc/0NFVk620/19756324-1408085675934992-3924642961369307931-n.png";
+        String ImageurlKFc = "https://i.postimg.cc/BvB2yXPv/kfc.png";
+        String ImageurlResturantdominoz = "https://i.postimg.cc/fRZFpq8j/26195460-2068440073413878-1996396889198920258-n.jpg";
 
-        categoriesObjects = new categoriesObject(ImageurlMarket);
+        categoriesObjects = new categoriesObject(ImageurlKFc);
         categoriesObjectArrayList.add(categoriesObjects);
-        categoriesObjects = new categoriesObject(ImageurlResturant);
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(ImageurlBoutique);
-
+        categoriesObjects = new categoriesObject(ImageurlResturantdominoz);
         categoriesObjectArrayList.add(categoriesObjects);
 
-        categoriesObjects = new categoriesObject(ImageurlBank);
+        categoriesObjects = new categoriesObject(ImageurlAatoutpizza);
 
         categoriesObjectArrayList.add(categoriesObjects);
 
-    categoriesAdapters   = new categoriesAdapter(Categories_Activity.this, categoriesObjectArrayList);
+        categoriesObjects = new categoriesObject(ImageurlwardResturant);
+
+        categoriesObjectArrayList.add(categoriesObjects);
+
+        categoriesAdapter categoriesAdapters = new categoriesAdapter(resturanatActivity.this, categoriesObjectArrayList);
         categoriesAdapters.notifyDataSetChanged();
         categoriesListView.setAdapter(categoriesAdapters);
 
+
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int itemposition, long id) {
-        categoriesObject objectView = categoriesObjectArrayList.get(itemposition);
-        Log.d("hhh","hh"+itemposition);
+        Intent viewIntent = new Intent(this,productMain.class);
+       categoriesObject objectView = categoriesObjectArrayList.get(itemposition);
+        viewIntent.putExtra("viewPosition", itemposition);
+     //   viewIntent.putExtra("resturantID",objectView);
+
+        startActivity(viewIntent);
 
     }
 }
