@@ -1,8 +1,6 @@
 package com.example.seamlessshopping;
-public class ProfileObject {
 
-
-
+public class ProfileObject{
     private String bdayP;
     private String genderP;
     private String mobileP;

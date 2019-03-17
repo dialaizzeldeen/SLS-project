@@ -1,5 +1,6 @@
 package com.example.seamlessshopping;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,15 +29,16 @@ import org.json.JSONObject;
 
 import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.internal.Internal;
 
 
 public class profile extends AppCompatActivity {
 
-    String url="http://192.168.1.9/profilePage.php";
-    Button save;
-    EditText usernameP, genderP,locationP,bdayP,mobileP,personalemailP;
+    TextView usernameP;
+    EditText  genderP,locationP,bdayP,mobileP,personalemailP;
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
@@ -43,14 +46,20 @@ public class profile extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getData();
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        String url="http://192.168.1.9/profilePage.php";
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         usernameP=findViewById(R.id.usernameP);
         genderP=findViewById(R.id.genderP);
-        locationP=findViewById(R.id.locationP);
+
         bdayP=findViewById(R.id.bdayP);
         mobileP=findViewById(R.id.mobileP);
         personalemailP=findViewById(R.id.personalemailP);
@@ -62,17 +71,25 @@ public class profile extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        return true;
+                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
+                        startActivity(i);
+                        break;
                     case R.id.navigation_Categories:
-                        // Intent categorie=new Intent(this,Categories_Activity.class);
-                        //startActivity(categorie);
-                        return true;
+                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
+                        startActivity(ii);
+                        break;
+
                     case R.id.navigation_notifications:
-                        return true;
+                        break;
                     case R.id.navigation_profile:
-                        return true;
+                        Intent intent1=new Intent( getBaseContext(),profile.class);
+                        startActivity(intent1);
+
+                        break;
                     case R.id.navigation_search:
-                        return true;
+                        Intent intent=new Intent( getBaseContext(),productMain.class);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }
@@ -106,10 +123,8 @@ public class profile extends AppCompatActivity {
                                 String gender = response.getString("gender");
                                 String bday = response.getString("bday");
                                 Integer mobile = response.getInt("mobile");
-                                String loc=response.getString("location");
                                 usernameP.setText(name.toString());
                                 genderP.setText(gender.toString());
-                                locationP.setText(loc.toString());
                                 bdayP.setText(bday.toString());
                                 mobileP.setText(mobile.toString());
                                 personalemailP.setText(personE.toString());
@@ -140,12 +155,10 @@ public class profile extends AppCompatActivity {
 
     }
 
-    public void saveP(View v){
-        String type ="save";
-
-    }
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
-    }}
+    }
+
+}

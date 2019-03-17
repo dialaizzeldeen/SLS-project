@@ -15,5 +15,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_activity_product">productActivity</string>
     <string name="url">192.168.1.9</string>
+    <string name="title_activity_profilecategory">profilecategory</string>
 
 </resources>
