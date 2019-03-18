@@ -1,5 +1,6 @@
 package com.example.seamlessshopping;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -46,6 +47,8 @@ public class profile extends AppCompatActivity {
     Button saveP;
     ArrayList<ProfileObject> profileObjectArrayList;
     ProfileObject profileObject1;
+    Context mContext;
+    int positionitem;
 
 
 
@@ -56,7 +59,7 @@ public class profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String url="http://192.168.1.9/profilePage.php";
+        String url="http://192.168.137.1/profilePage.php";
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -165,12 +168,13 @@ public class profile extends AppCompatActivity {
         Log.d("response  ",id);
     }
     public void upDate(View v){
-        profileObject1= new ProfileObject(genderP.toString(),bdayP.toString(),mobileP.toString(),personalemailP.toString());
+
+        profileObject1= new ProfileObject(genderP.getText().toString(),bdayP.getText().toString(),mobileP.getText().toString(),personalemailP.getText().toString());
         String emaill=profileObject1.getPersonalemailP();
 
         Log.i("Response",emaill);
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String urll = "http://192.168.1.9/update.php";
+        String urll = "http://192.168.137.1/update.php";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, urll,

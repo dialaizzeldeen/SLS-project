@@ -55,7 +55,7 @@ public class productAdapter extends BaseAdapter {
 
     Context mContext;
     int positionitem;
-    final String url ="http://192.168.1.9/addToCart.php";
+    final String url ="http://192.168.137.1/addToCart.php";
     //Intent editIntent;
     // ImageButton btnDelete;
     //ImageButton btnCall;

@@ -45,7 +45,7 @@ public class CartAdapter extends BaseAdapter {
     int positionitem;
     private ArrayList<cartObject>cartObjectArrayList;
     cartObject cartObject1;
-    String url="http://192.168.1.9//deleteitem_cartPage.php";
+    String url="http://192.168.137.1//deleteitem_cartPage.php";
 
     public CartAdapter(Context mContext, ArrayList<cartObject> cartObjectArrayList) {
         this.mContext = mContext;

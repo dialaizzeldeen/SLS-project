@@ -95,7 +95,7 @@ public class productMain extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        url="http://192.168.1.9/product.php";
+        url="http://192.168.137.1/product.php";
         dataSaving(url);
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
@@ -122,12 +122,12 @@ public class productMain extends AppCompatActivity {
 
 
                     search=text.getText().toString();
-                    url = "http://192.168.1.9/search.php?namesearch=" + search;
+                    url = "http://192.168.137.1/search.php?namesearch=" + search;
                     Log.d("hhh","j"+url);
                     dataSaving(url);
 
                 }
-                else {              dataSaving("http://192.168.1.9/product.php");
+                else {              dataSaving("http://192.168.137.1/product.php");
                 }
 
             }

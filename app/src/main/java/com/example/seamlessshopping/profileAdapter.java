@@ -11,9 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -73,10 +79,10 @@ public class profileAdapter extends BaseAdapter {
 
 
 
-        save.setOnClickListener(new View.OnClickListener() {
+       /* save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
-                String urll = "http://192.168.1.9/update.php";
+                String urll = "http://192.168.137.1/update.php";
                 RequestQueue queue = Volley.newRequestQueue(mContext);
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urll,
@@ -116,7 +122,7 @@ public class profileAdapter extends BaseAdapter {
                         return params;
                     }
                 };
-                queue.add(postRequest);}});
+                queue.add(postRequest);}});*/
         return convertView;
 
     }
@@ -125,4 +131,7 @@ public class profileAdapter extends BaseAdapter {
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
     }
+
+
 }
+
