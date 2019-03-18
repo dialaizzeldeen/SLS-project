@@ -37,6 +37,7 @@ public class cart extends AppCompatActivity {
     ArrayList<cartObject> cartObjectArrayList= new ArrayList<cartObject>();
     FloatingActionButton fab;
     Context context;
+    CartAdapter cartAdapters;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
@@ -64,17 +65,25 @@ public class cart extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        return true;
+                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
+                        startActivity(i);
+                        break;
                     case R.id.navigation_Categories:
-                       // Intent categorie=new Intent(this,Categories_Activity.class);
-                        //startActivity(categorie);
-                        return true;
+                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
+                        startActivity(ii);
+                        break;
+
                     case R.id.navigation_notifications:
-                        return true;
+                        break;
                     case R.id.navigation_profile:
-                        return true;
+                        Intent intent1=new Intent( getBaseContext(),profile.class);
+                        startActivity(intent1);
+
+                        break;
                     case R.id.navigation_search:
-                        return true;
+                        Intent intent=new Intent( getBaseContext(),productMain.class);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }
@@ -106,19 +115,19 @@ public class cart extends AppCompatActivity {
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
+                                String marketName=response.getString("marketName");
                                 int transactionId=response.getInt("transactionId");
                                 int productId=response.getInt("productId");
                                 int marketId=response.getInt("marketId");
-                                String marketName=response.getString("marketName");
                                 String name = response.getString("name");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
-                                cartObject cartoObject = new cartObject(imageurl, name, price, quantity,transactionId,productId,marketId,marketName);
-                                ;
+                                cartObject1 = new cartObject(imageurl, name, price, quantity,marketName,transactionId,marketId,productId);
 
-                            cartObjectArrayList.add(cartoObject);
-                               CartAdapter cartAdapters = new CartAdapter(cart.this, cartObjectArrayList);
+
+                            cartObjectArrayList.add(cartObject1);
+                                cartAdapters = new CartAdapter(cart.this, cartObjectArrayList);
                                 cartAdapters.notifyDataSetChanged();
                                 listViewCart.setAdapter(cartAdapters);
 

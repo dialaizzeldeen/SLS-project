@@ -1,5 +1,6 @@
 package com.example.seamlessshopping;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,19 +29,24 @@ import org.json.JSONObject;
 
 import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.internal.Internal;
 
 
 public class profile extends AppCompatActivity {
 
-    String url="http://192.168.1.9/profilePage.php";
-    Button save;
-    EditText usernameP, genderP,locationP,bdayP,mobileP,personalemailP;
+    TextView usernameP;
+    EditText  genderP,locationP,bdayP,mobileP,personalemailP;
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
+    Button saveP;
+    ArrayList<ProfileObject> profileObjectArrayList;
+    ProfileObject profileObject1;
+
 
 
 
@@ -47,13 +54,19 @@ public class profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getData();
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        String url="http://192.168.1.9/profilePage.php";
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        usernameP=findViewById(R.id.usernameP);
-        genderP=findViewById(R.id.genderP);
-        locationP=findViewById(R.id.locationP);
-        bdayP=findViewById(R.id.bdayP);
-        mobileP=findViewById(R.id.mobileP);
-        personalemailP=findViewById(R.id.personalemailP);
+        usernameP=(TextView) findViewById(R.id.usernameP);
+        genderP=(EditText) findViewById(R.id.genderP);
+        saveP=findViewById(R.id.saveP);
+
+        bdayP=(EditText) findViewById(R.id.bdayP);
+        mobileP=(EditText)findViewById(R.id.mobileP);
+        personalemailP=(EditText)findViewById(R.id.personalemailP);
 
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -62,17 +75,25 @@ public class profile extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        return true;
+                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
+                        startActivity(i);
+                        break;
                     case R.id.navigation_Categories:
-                        // Intent categorie=new Intent(this,Categories_Activity.class);
-                        //startActivity(categorie);
-                        return true;
+                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
+                        startActivity(ii);
+                        break;
+
                     case R.id.navigation_notifications:
-                        return true;
+                        break;
                     case R.id.navigation_profile:
-                        return true;
+                        Intent intent1=new Intent( getBaseContext(),profile.class);
+                        startActivity(intent1);
+
+                        break;
                     case R.id.navigation_search:
-                        return true;
+                        Intent intent=new Intent( getBaseContext(),productMain.class);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }
@@ -106,10 +127,8 @@ public class profile extends AppCompatActivity {
                                 String gender = response.getString("gender");
                                 String bday = response.getString("bday");
                                 Integer mobile = response.getInt("mobile");
-                                String loc=response.getString("location");
                                 usernameP.setText(name.toString());
                                 genderP.setText(gender.toString());
-                                locationP.setText(loc.toString());
                                 bdayP.setText(bday.toString());
                                 mobileP.setText(mobile.toString());
                                 personalemailP.setText(personE.toString());
@@ -140,12 +159,59 @@ public class profile extends AppCompatActivity {
 
     }
 
-    public void saveP(View v){
-        String type ="save";
-
-    }
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
-    }}
+    }
+    public void upDate(View v){
+        profileObject1= new ProfileObject(genderP.toString(),bdayP.toString(),mobileP.toString(),personalemailP.toString());
+        String emaill=profileObject1.getPersonalemailP();
+
+        Log.i("Response",emaill);
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        String urll = "http://192.168.1.9/update.php";
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, urll,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        if(response=="true")
+                            Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
+                        else{
+                            Toast.makeText(getApplicationContext(), "data updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("gender",profileObject1.getGenderP().toString());
+                params.put("userid",id.toString());
+                params.put("bday", profileObject1.getBdayP().toString());
+                params.put("mobile",profileObject1.getMobileP().toString());
+                params.put("personalemail",profileObject1.getPersonalemailP().toString());
+
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+
+    }
+
+   }

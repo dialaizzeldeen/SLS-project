@@ -55,7 +55,7 @@ public class productAdapter extends BaseAdapter {
 
     Context mContext;
     int positionitem;
-    final String url ="http://192.168.1.9/"+"addToCart.php";
+    final String url ="http://192.168.1.9/addToCart.php";
     //Intent editIntent;
     // ImageButton btnDelete;
     //ImageButton btnCall;
@@ -98,21 +98,23 @@ public class productAdapter extends BaseAdapter {
         final TextView name = (TextView) convertView.findViewById(R.id.Name);
         final ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
         Button addtocart=(Button) convertView.findViewById(R.id.checkboxProduct);
+        getData();
 
 
 
         addtocart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
                 RequestQueue queue = Volley.newRequestQueue(mContext);
                 StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 // response
-                                if(response=="successfully added")
-                                    Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
-                                else{
+                                if(response=="true")
                                     Toast.makeText(mContext, "connection problem", Toast.LENGTH_SHORT).show();
+                                else{
+                                    Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, new Response.ErrorListener() {

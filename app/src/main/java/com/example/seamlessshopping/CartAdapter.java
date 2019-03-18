@@ -41,10 +41,12 @@ public class CartAdapter extends BaseAdapter {
     public static final String iduser="iduesr";
     private String id="0";
 
-    Context mContext;int positionitem;
+    Context mContext;
+    int positionitem;
     private ArrayList<cartObject>cartObjectArrayList;
     cartObject cartObject1;
-    String url=R.string.url+"cartPage.php";
+    String url="http://192.168.1.9//deleteitem_cartPage.php";
+
     public CartAdapter(Context mContext, ArrayList<cartObject> cartObjectArrayList) {
         this.mContext = mContext;
         this.cartObjectArrayList = cartObjectArrayList;
@@ -70,7 +72,7 @@ public class CartAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        cartObject1= cartObjectArrayList.get(position);
+         cartObject1=cartObjectArrayList.get(position);
         convertView= LayoutInflater.from(mContext).inflate(R.layout.cart_rows,null);
         ImageView cartImage=convertView.findViewById(R.id.cartImage);
         TextView pnameCart=convertView.findViewById(R.id.pnameCart);
@@ -101,7 +103,7 @@ public class CartAdapter extends BaseAdapter {
 
 
 
-        deleteCard.setOnClickListener(new View.OnClickListener() {
+        /*deleteCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Confirm delete");
@@ -109,8 +111,8 @@ public class CartAdapter extends BaseAdapter {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        /*cartObjectArrayList.remove(position);
-                        notifyDataSetChanged();*/
+                        cartObjectArrayList.remove(position);
+                        notifyDataSetChanged();
                         RequestQueue queue = Volley.newRequestQueue(mContext);
                         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                                 new Response.Listener<String>() {
@@ -144,7 +146,7 @@ public class CartAdapter extends BaseAdapter {
                 });
                 builder.show();
 
-                }});
+                }});*/
 
         quantityCart.setText(cartObject1.getQuantityCart().toString());
         priceCart.setText(cartObject1.getPriceCart()+"NIS");

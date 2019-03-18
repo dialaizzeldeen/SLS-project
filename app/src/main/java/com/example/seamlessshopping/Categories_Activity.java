@@ -31,17 +31,25 @@ public class Categories_Activity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        return true;
+                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
+                        startActivity(i);
+                        break;
                     case R.id.navigation_Categories:
-                       // Intent categorie=new Intent(this,Categories_Activity.class);
-                        //startActivity(categorie);
-                        return true;
+                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
+                        startActivity(ii);
+                        break;
+
                     case R.id.navigation_notifications:
-                        return true;
+                        break;
                     case R.id.navigation_profile:
-                        return true;
+                        Intent intent1=new Intent( getBaseContext(),profile.class);
+                        startActivity(intent1);
+
+                        break;
                     case R.id.navigation_search:
-                        return true;
+                        Intent intent=new Intent( getBaseContext(),productMain.class);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }

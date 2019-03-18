@@ -68,12 +68,24 @@ public class productMain extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
+                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
+                        startActivity(i);
                         break;
                     case R.id.navigation_Categories:
+                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
+                        startActivity(ii);
+                        break;
 
-                    case R.id.navigation_notifications:break;
+                    case R.id.navigation_notifications:
+                        break;
                     case R.id.navigation_profile:
-                        break;                    case R.id.navigation_search:
+                        Intent intent1=new Intent( getBaseContext(),profile.class);
+                        startActivity(intent1);
+
+                        break;
+                        case R.id.navigation_search:
+                            Intent intent=new Intent( getBaseContext(),productMain.class);
+                            startActivity(intent);
                         break;
                 }
                 return false;
@@ -83,7 +95,8 @@ public class productMain extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        dataSaving(url = "http://192.168.1.12/product.php");
+        url="http://192.168.1.9/product.php";
+        dataSaving(url);
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
         gridView.setAdapter(productAdapter);
@@ -109,12 +122,12 @@ public class productMain extends AppCompatActivity {
 
 
                     search=text.getText().toString();
-                    url = "http://192.168.1.12/search.php?namesearch=" + search;
+                    url = "http://192.168.1.9/search.php?namesearch=" + search;
                     Log.d("hhh","j"+url);
                     dataSaving(url);
 
                 }
-                else {              dataSaving("http://192.168.1.12/product.php");
+                else {              dataSaving("http://192.168.1.9/product.php");
                 }
 
             }

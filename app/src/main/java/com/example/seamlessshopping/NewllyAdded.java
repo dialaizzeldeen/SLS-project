@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class NewllyAdded extends AppCompatActivity {
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
-    private String id;
+    private String id="";
 
 
 
@@ -40,14 +42,61 @@ public class NewllyAdded extends AppCompatActivity {
     newllyAddedAdapter newllyAddedAdapter1;
     ArrayList<newllyAddedObject> newllyAddedObjectArrayList = new ArrayList<newllyAddedObject>();
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.categorymenu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==R.id.pagesignup) {
+            Intent i = new Intent(this, signupPage.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.loginpage) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.searchpage) {
+            Intent i = new Intent(this, productMain.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.profile) {
+            Intent i = new Intent(this, profile.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.catep) {
+            Intent i = new Intent(this, Categories_Activity.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.cp) {
+            Intent i = new Intent(this, cart.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.nap) {
+            Intent i = new Intent(this, NewllyAdded.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.payp) {
+            Intent i = new Intent(this, bankInfo.class);
+            startActivity(i);
+        }
+        else if (item.getItemId()==R.id.php) {
+            Intent i = new Intent(this, paymentHistory.class);
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newlly_added);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         getData();
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,12 +104,24 @@ public class NewllyAdded extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
+                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
+                        startActivity(i);
                         break;
                     case R.id.navigation_Categories:
+                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
+                        startActivity(ii);
+                        break;
 
-                    case R.id.navigation_notifications:break;
+                    case R.id.navigation_notifications:
+                        break;
                     case R.id.navigation_profile:
-                        break;                    case R.id.navigation_search:
+                        Intent intent1=new Intent( getBaseContext(),profile.class);
+                        startActivity(intent1);
+
+                        break;
+                    case R.id.navigation_search:
+                        Intent intent=new Intent( getBaseContext(),productMain.class);
+                        startActivity(intent);
                         break;
                 }
                 return false;
@@ -68,8 +129,10 @@ public class NewllyAdded extends AppCompatActivity {
         };
 
 
+
         gridView = (GridView) findViewById(R.id.gridViewNew);
-        dataSaving(url = "http://192.168.1.9/newllyAdded.php");
+        url="http://192.168.1.9/newllyAdded.php";
+        dataSaving(url);
         gridView.setAdapter(newllyAddedAdapter1);
     }
     private void dataSaving(String url) {
