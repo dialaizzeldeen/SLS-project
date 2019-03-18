@@ -70,7 +70,8 @@ public class productMain extends AppCompatActivity {
                     case R.id.navigation_home:
                         break;
                     case R.id.navigation_Categories:
-
+                      //   Intent categorie=new Intent(productMain.this,Categories_Activity.class);
+                        //startActivity(categorie);
                     case R.id.navigation_notifications:break;
                     case R.id.navigation_profile:
                         break;                    case R.id.navigation_search:

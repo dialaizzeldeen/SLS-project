@@ -31,16 +31,18 @@
         <activity android:name=".loginPage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".profile" />
-        <activity android:name=".productMain" />
+        <activity android:name=".productMain" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".paymentHistory" />
         <activity android:name=".NewllyAdded">
 
         </activity>
-        <activity android:name=".Categories_Activity">  <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        <activity android:name=".Categories_Activity"> </activity>
         <activity android:name=".searching" />
 <activity android:name=".resturanatActivity">
   </activity>
