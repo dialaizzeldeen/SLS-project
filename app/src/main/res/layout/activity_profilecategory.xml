@@ -16,43 +16,72 @@
         android:layout_alignParentTop="true">
 
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
 
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="61dp"
+        android:background="@drawable/updatepro" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
         android:text="Profile Update"
         android:textColor="#000"
-        android:textSize="40sp"
-        android:textStyle="bold"
+        android:textSize="30dp"
         android:id="@+id/profileid"
+        android:fontFamily="sans-serif-medium"
        />
 
+</LinearLayout>
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="20dp">
+
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="61dp"
+        android:background="@drawable/paymentinfo" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
         android:text="Payment Information"
         android:textColor="#000"
-        android:textSize="40sp"
-        android:textStyle="bold"
+        android:textSize="30dp"
         android:id="@+id/paymentid"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:text="Payment History"
-        android:textColor="#000"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:id="@+id/historyid"
-         />
+        android:fontFamily="sans-serif-medium"></TextView>
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="61dp"
+            android:background="@drawable/paymenthistory" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Payment History"
+            android:textColor="#000"
+            android:textSize="30dp"
+            android:id="@+id/historyid"
+            android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView

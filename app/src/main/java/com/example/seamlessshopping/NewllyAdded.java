@@ -109,7 +109,8 @@ public class NewllyAdded extends AppCompatActivity {
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
-                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl);
+                                String idmarket=response.getString("idmarket");
+                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket);
                                 ;
 
                                 newllyAddedObjectArrayList.add(newllyAddedObject2);
