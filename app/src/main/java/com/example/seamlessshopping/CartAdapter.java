@@ -103,8 +103,11 @@ public class CartAdapter extends BaseAdapter {
 
 
 
-        /*deleteCard.setOnClickListener(new View.OnClickListener() {
+        deleteCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                getData();
+                Toast.makeText(mContext, cartObject1.getTransactionId().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, id.toString(), Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Confirm delete");
                 builder.setMessage("Are you sure you want to delete this product");
@@ -133,8 +136,10 @@ public class CartAdapter extends BaseAdapter {
                             protected Map<String, String> getParams()
                             {
                                 Map<String, String>  params = new HashMap<String, String>();
-                                params.put("actionKey","deleteItem");
+                                //params.put("actionKey","deleteItem");
+                                params.put("userId",id.toString());
                                 params.put("transactionId",cartObject1.getTransactionId().toString());
+
 
 
                                 return params;
@@ -146,7 +151,7 @@ public class CartAdapter extends BaseAdapter {
                 });
                 builder.show();
 
-                }});*/
+                }});
 
         quantityCart.setText(cartObject1.getQuantityCart().toString());
         priceCart.setText(cartObject1.getPriceCart()+"NIS");
