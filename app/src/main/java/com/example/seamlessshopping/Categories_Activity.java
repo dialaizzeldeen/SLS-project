@@ -5,13 +5,16 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class Categories_Activity extends AppCompatActivity {
+public class Categories_Activity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
     ListView categoriesListView;
     categoriesObject categoriesObjects;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
@@ -21,9 +24,12 @@ public class Categories_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        categoriesAdapter categoriesAdapters;
 
 
+        categoriesListView = (ListView) findViewById(R.id.listViewcategories);
 
+ categoriesListView.setOnItemClickListener(this);
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -71,7 +77,6 @@ public class Categories_Activity extends AppCompatActivity {
 
 
 
-        categoriesListView = (ListView) findViewById(R.id.listViewcategories);
         String ImageurlBoutique = "https://i.postimg.cc/rF25vLyd/boutique-logo-1-vector-18631407.jpg";
         String ImageurlBank =" https://i.postimg.cc/dtQV7W4H/bank.jpg";
         String ImageurlMarket = "https://i.postimg.cc/7PGNFVgR/markets.png";
@@ -90,10 +95,15 @@ public class Categories_Activity extends AppCompatActivity {
 
         categoriesObjectArrayList.add(categoriesObjects);
 
-        categoriesAdapter categoriesAdapters = new categoriesAdapter(Categories_Activity.this, categoriesObjectArrayList);
+    categoriesAdapters   = new categoriesAdapter(Categories_Activity.this, categoriesObjectArrayList);
         categoriesAdapters.notifyDataSetChanged();
         categoriesListView.setAdapter(categoriesAdapters);
 
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int itemposition, long id) {
+        categoriesObject objectView = categoriesObjectArrayList.get(itemposition);
+        Log.d("hhh","hh"+itemposition);
 
     }
 }
