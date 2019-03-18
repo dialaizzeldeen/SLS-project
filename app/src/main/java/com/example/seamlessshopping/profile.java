@@ -59,7 +59,7 @@ public class profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String url="http://192.168.137.1/profilePage.php";
+        //String url=;
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -101,8 +101,8 @@ public class profile extends AppCompatActivity {
                 return false;
             }
         };
-
-        dataSaving(url);
+String url="http://192.168.137.1/profilePage.php";
+        dataSaving(url = "http://192.168.137.1/profilePage.php?userid=" + id);
 
 
     }
@@ -167,6 +167,7 @@ public class profile extends AppCompatActivity {
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
     }
+
     public void upDate(View v){
 
         profileObject1= new ProfileObject(genderP.getText().toString(),bdayP.getText().toString(),mobileP.getText().toString(),personalemailP.getText().toString());
