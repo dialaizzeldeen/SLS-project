@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,7 +82,7 @@ public class NewllyAdded extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridViewNew);
-        dataSaving(url = "http://192.168.1.12/newllyAdded.php");
+        dataSaving(url = "http://192.168.137.1/newllyAdded.php");
         gridView.setAdapter(newllyAddedAdapter1);
     }
     private void dataSaving(String url) {
@@ -154,6 +155,7 @@ public class NewllyAdded extends AppCompatActivity {
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new slideshowAdapter(NewllyAdded.this,XMENArray));
+
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 

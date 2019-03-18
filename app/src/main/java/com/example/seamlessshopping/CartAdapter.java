@@ -41,10 +41,12 @@ public class CartAdapter extends BaseAdapter {
     public static final String iduser="iduesr";
     private String id="0";
 
-    Context mContext;int positionitem;
+    Context mContext;
+    int positionitem;
     private ArrayList<cartObject>cartObjectArrayList;
     cartObject cartObject1;
-    String url=R.string.url+"cartPage.php";
+    String url="http://192.168.137.1//deleteitem_cartPage.php";
+
     public CartAdapter(Context mContext, ArrayList<cartObject> cartObjectArrayList) {
         this.mContext = mContext;
         this.cartObjectArrayList = cartObjectArrayList;
@@ -70,7 +72,7 @@ public class CartAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        cartObject1= cartObjectArrayList.get(position);
+         cartObject1=cartObjectArrayList.get(position);
         convertView= LayoutInflater.from(mContext).inflate(R.layout.cart_rows,null);
         ImageView cartImage=convertView.findViewById(R.id.cartImage);
         TextView pnameCart=convertView.findViewById(R.id.pnameCart);
@@ -103,14 +105,17 @@ public class CartAdapter extends BaseAdapter {
 
         deleteCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                getData();
+                Toast.makeText(mContext, cartObject1.getTransactionId().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, id.toString(), Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Confirm delete");
                 builder.setMessage("Are you sure you want to delete this product");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        /*cartObjectArrayList.remove(position);
-                        notifyDataSetChanged();*/
+                        cartObjectArrayList.remove(position);
+                        notifyDataSetChanged();
                         RequestQueue queue = Volley.newRequestQueue(mContext);
                         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                                 new Response.Listener<String>() {
@@ -131,8 +136,10 @@ public class CartAdapter extends BaseAdapter {
                             protected Map<String, String> getParams()
                             {
                                 Map<String, String>  params = new HashMap<String, String>();
-                                params.put("actionKey","deleteItem");
+                                //params.put("actionKey","deleteItem");
+                                params.put("userId",id.toString());
                                 params.put("transactionId",cartObject1.getTransactionId().toString());
+
 
 
                                 return params;

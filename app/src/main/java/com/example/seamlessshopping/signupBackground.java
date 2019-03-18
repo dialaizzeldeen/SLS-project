@@ -30,7 +30,7 @@ public class signupBackground extends AsyncTask<Object,Void,String> {
     protected String doInBackground(Object... strings) {
         Object type = (String) strings[0].toString(); // gave you the type that you send which is login
         val=(String) type;
-        String signup_url="http://192.168.1.12/signup.php";
+        String signup_url="http://192.168.137.1/signup.php";
         if(type.equals("signup")){
             try {
                 String fname= strings[1].toString();

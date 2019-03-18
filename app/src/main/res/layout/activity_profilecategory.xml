@@ -17,42 +17,42 @@
 
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:text="Profile Update"
-            android:textColor="#000"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:id="@+id/profileid"
-            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Profile Update"
+        android:textColor="#000"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:id="@+id/profileid"
+       />
 
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:text="Payment Information"
-            android:textColor="#000"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:id="@+id/paymentid"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:text="Payment History"
-            android:textColor="#000"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:id="@+id/historyid"
-            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Payment Information"
+        android:textColor="#000"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:id="@+id/paymentid"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Payment History"
+        android:textColor="#000"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:id="@+id/historyid"
+         />
     </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView

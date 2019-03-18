@@ -1,5 +1,6 @@
 package com.example.seamlessshopping;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -43,6 +44,11 @@ public class profile extends AppCompatActivity {
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
+    Button saveP;
+    ArrayList<ProfileObject> profileObjectArrayList;
+    ProfileObject profileObject1;
+    Context mContext;
+    int positionitem;
 
 
 
@@ -53,16 +59,17 @@ public class profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String url="http://192.168.1.9/profilePage.php";
+        String url="http://192.168.137.1/profilePage.php";
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        usernameP=findViewById(R.id.usernameP);
-        genderP=findViewById(R.id.genderP);
+        usernameP=(TextView) findViewById(R.id.usernameP);
+        genderP=(EditText) findViewById(R.id.genderP);
+        saveP=findViewById(R.id.saveP);
 
-        bdayP=findViewById(R.id.bdayP);
-        mobileP=findViewById(R.id.mobileP);
-        personalemailP=findViewById(R.id.personalemailP);
+        bdayP=(EditText) findViewById(R.id.bdayP);
+        mobileP=(EditText)findViewById(R.id.mobileP);
+        personalemailP=(EditText)findViewById(R.id.personalemailP);
 
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -160,5 +167,55 @@ public class profile extends AppCompatActivity {
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
     }
+    public void upDate(View v){
 
-}
+        profileObject1= new ProfileObject(genderP.getText().toString(),bdayP.getText().toString(),mobileP.getText().toString(),personalemailP.getText().toString());
+        String emaill=profileObject1.getPersonalemailP();
+
+        Log.i("Response",emaill);
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        String urll = "http://192.168.137.1/update.php";
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, urll,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        if(response=="true")
+                            Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
+                        else{
+                            Toast.makeText(getApplicationContext(), "data updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("gender",profileObject1.getGenderP().toString());
+                params.put("userid",id.toString());
+                params.put("bday", profileObject1.getBdayP().toString());
+                params.put("mobile",profileObject1.getMobileP().toString());
+                params.put("personalemail",profileObject1.getPersonalemailP().toString());
+
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+
+    }
+
+   }

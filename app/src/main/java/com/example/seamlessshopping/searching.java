@@ -103,12 +103,12 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
                 {imagecategories.setVisibility(View.INVISIBLE);
                     searchObjectArrayList.clear();
                     String  search=textsearch.getText().toString();
-                    if(categories.equals("")){   url = "http://192.168.1.12/searchactivity2.php?namesearch=" + search;
+                    if(categories.equals("")){   url = "http://192.168.137.1/searchactivity2.php?namesearch=" + search;
                         Log.d("hhh","pleeeeeeee"+url);
                         dataSaving(url);   }
                     else
                     {   imagecategories.setVisibility(View.INVISIBLE);
-                        url = "http://192.168.1.12/searchactivity.php?namesearch=" + search+"&categories="+categories;
+                        url = "http://192.168.137.1/searchactivity.php?namesearch=" + search+"&categories="+categories;
                         Log.d("hhh","j"+url);
                         dataSaving(url);  }
 

@@ -44,12 +44,15 @@ public class cartObject {
         this.productId = productId;
     }
 
-    public cartObject(String cartImage, String pnameCart, String priceCart , Integer quantityCart,Integer transactionId,Integer productId,Integer marketId, String marketName){
-        this.cartImage=cartImage; this.transactionId=transactionId;
-        this.productId=productId; this.marketId=marketId; this.marketName=marketName;
-        this.pnameCart=pnameCart;
-        this.priceCart=priceCart;
-        this.quantityCart=quantityCart;
+    public cartObject(String cartImage, String pnameCart, String priceCart, Integer quantityCart, String marketName, Integer transactionId, Integer marketId, Integer productId) {
+        this.cartImage = cartImage;
+        this.pnameCart = pnameCart;
+        this.priceCart = priceCart;
+        this.quantityCart = quantityCart;
+        this.marketName = marketName;
+        this.transactionId = transactionId;
+        this.marketId = marketId;
+        this.productId = productId;
     }
 
     public String getCartImage() {

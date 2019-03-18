@@ -21,7 +21,7 @@ public class profilecategory extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i= new Intent(getApplicationContext(), profile.class);
                 startActivity(i);
-            }});
+                  }});
         pymentPage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i= new Intent(getApplicationContext(),bankInfo.class);

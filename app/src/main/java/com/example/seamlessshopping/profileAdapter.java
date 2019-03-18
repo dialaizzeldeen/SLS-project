@@ -3,6 +3,7 @@ package com.example.seamlessshopping;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,9 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -25,7 +32,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class profileAdapter extends BaseAdapter {
     ArrayList<ProfileObject> profileObjectArrayList;
-    ProfileObject profileObject;
+    ProfileObject profileObject1;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
@@ -58,7 +65,7 @@ public class profileAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ProfileObject profileObject = profileObjectArrayList.get(position);
-        Button save=(Button) convertView.findViewById(R.id.save);
+        Button save=(Button) convertView.findViewById(R.id.saveP);
         EditText gender=(EditText)convertView.findViewById(R.id.genderP);
         EditText email=(EditText)convertView.findViewById(R.id.personalemailP);
         EditText bday=(EditText)convertView.findViewById(R.id.bdayP);
@@ -72,10 +79,10 @@ public class profileAdapter extends BaseAdapter {
 
 
 
-        save.setOnClickListener(new View.OnClickListener() {
+       /* save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
-                String urll = "http://192.168.1.9/update.php";
+                String urll = "http://192.168.137.1/update.php";
                 RequestQueue queue = Volley.newRequestQueue(mContext);
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urll,
@@ -85,6 +92,11 @@ public class profileAdapter extends BaseAdapter {
                             public void onResponse(String response) {
                                 // response
                                 Log.d("Response", response);
+                                if(response=="error")
+                                    Toast.makeText(mContext, "connection problem", Toast.LENGTH_SHORT).show();
+                                else{
+                                    Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         },
                         new Response.ErrorListener()
@@ -110,8 +122,8 @@ public class profileAdapter extends BaseAdapter {
                         return params;
                     }
                 };
-                queue.add(postRequest);}});
-        return null;
+                queue.add(postRequest);}});*/
+        return convertView;
 
     }
     public void getData(){
@@ -119,4 +131,7 @@ public class profileAdapter extends BaseAdapter {
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
     }
+
+
 }
+
