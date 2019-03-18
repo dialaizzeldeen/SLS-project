@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class Categories_Activity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
+public class Categories_Activity extends AppCompatActivity  implements AdapterView.OnItemClickListener , BottomNavigationView.OnNavigationItemSelectedListener  {
     ListView categoriesListView;
     categoriesObject categoriesObjects;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
@@ -30,38 +30,9 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
         categoriesListView = (ListView) findViewById(R.id.listViewcategories);
 
  categoriesListView.setOnItemClickListener(this);
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
-                        startActivity(i);
-                        break;
-                    case R.id.navigation_Categories:
-                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
-                        startActivity(ii);
-                        break;
-
-                    case R.id.navigation_notifications:
-                        break;
-                    case R.id.navigation_profile:
-                        Intent intent1=new Intent( getBaseContext(),profile.class);
-                        startActivity(intent1);
-
-                        break;
-                    case R.id.navigation_search:
-                        Intent intent=new Intent( getBaseContext(),productMain.class);
-                        startActivity(intent);
-                        break;
-                }
-                return false;
-            }
-        };
 
 
+        navigation.setOnNavigationItemSelectedListener(this);
 
 
 
@@ -105,5 +76,36 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
         categoriesObject objectView = categoriesObjectArrayList.get(itemposition);
         Log.d("hhh","hh"+itemposition);
 
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+                Intent home =new Intent(Categories_Activity.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+
+                Intent categorie=new Intent(Categories_Activity.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+
+                Intent profile=new Intent(Categories_Activity.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+                Intent search=new Intent(Categories_Activity.this,searching.class);
+                startActivity(search) ;
+
+                break;
+        }
+        return false;
     }
 }

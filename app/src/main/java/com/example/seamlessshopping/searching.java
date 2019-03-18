@@ -1,6 +1,7 @@
 package com.example.seamlessshopping;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Build;
@@ -51,8 +52,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 
-public class searching extends AppCompatActivity implements  View.OnClickListener
-{
+public class searching extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
 
@@ -126,30 +126,8 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
         textsearch.setOnClickListener(this);
 
 
+navigation.setOnNavigationItemSelectedListener(this);
 
-
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        break;
-
-                    case R.id.navigation_Categories:
-
-                        break;
-                    case R.id.navigation_notifications:
-                        break;
-                    case R.id.navigation_profile:
-                        break;
-                    case R.id.navigation_search:
-                        break;
-                }
-                return false;
-            }
-        };
 
 
         gridView = (GridView) findViewById(R.id.gridView);
@@ -360,5 +338,38 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-}
+            switch (menuItem.getItemId()) {
+                case R.id.navigation_home:
+                    finish();
+
+                    Intent home =new Intent(searching.this,NewllyAdded.class);
+                    startActivity(home) ;
+                    break;
+
+                case R.id.navigation_Categories:
+                    finish();
+
+                    Intent categorie=new Intent(searching.this,Categories_Activity.class);
+                    startActivity(categorie) ;
+
+
+                    break;
+                case R.id.navigation_notifications:
+                    break;
+                case R.id.navigation_profile:
+                    finish();
+
+
+                    Intent profile=new Intent(searching.this,profilecategory.class);
+                    startActivity(profile) ;
+                    break;
+                case R.id.navigation_search:
+
+            }
+            return false;
+        }
+    }
+

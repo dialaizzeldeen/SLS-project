@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class resturanatActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class resturanatActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     ListView categoriesListView;
     categoriesObject categoriesObjects;
@@ -23,46 +23,7 @@ public class resturanatActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
-
-
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        return true;
-                    case R.id.navigation_Categories:
-                        // Intent categorie=new Intent(this,Categories_Activity.class);
-                        //startActivity(categorie);
-                        return true;
-                    case R.id.navigation_notifications:
-                        return true;
-                    case R.id.navigation_profile:
-                        return true;
-                    case R.id.navigation_search:
-                        return true;
-                }
-                return false;
-            }
-        };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+navigation.setOnNavigationItemSelectedListener(this);
 
 
         categoriesListView = (ListView) findViewById(R.id.listViewcategories);
@@ -100,5 +61,43 @@ public class resturanatActivity extends AppCompatActivity implements AdapterView
 
         startActivity(viewIntent);
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+                finish();
+
+                Intent home =new Intent(resturanatActivity.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+                finish();
+
+                Intent categorie=new Intent(resturanatActivity.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+                finish();
+
+                Intent profile=new Intent(resturanatActivity.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+                finish();
+
+                Intent search=new Intent(resturanatActivity.this,searching.class);
+                startActivity(search) ;
+
+                break;
+        }
+        return false;
     }
 }
