@@ -16,7 +16,9 @@
         android:layout_alignParentTop="true">
 
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +31,11 @@
         android:id="@+id/profileid"
        />
 
+</LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <TextView
         android:layout_width="match_parent"
@@ -42,6 +48,11 @@
         android:textStyle="bold"
         android:id="@+id/paymentid"
         />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +64,28 @@
         android:textStyle="bold"
         android:id="@+id/historyid"
          />
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="61dp"
+            android:background="@drawable/cart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Cart"
+            android:textColor="#000"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:id="@+id/cartid"
+            />
     </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
@@ -66,6 +99,6 @@
         android:layout_alignParentBottom="true"
         />
 
-
+    </LinearLayout>
 </RelativeLayout>
 
