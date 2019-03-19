@@ -68,8 +68,8 @@ public class newllyAddedAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final newllyAddedObject newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+           newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
         convertView = LayoutInflater.from(mContext).inflate(R.layout.newllyadded_rows, null);
         ImageButton imageurlNew= (ImageButton)convertView.findViewById(R.id.imageurlNew);
         TextView productnameNew=(TextView)convertView.findViewById(R.id.productnameNew);
@@ -78,8 +78,12 @@ public class newllyAddedAdapter extends BaseAdapter {
 
         imageurlNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i= new Intent(mContext,productMain.class);
+                newllyAddedObject1=newllyAddedObjectArrayList.get(position);
+
+                Intent i= new Intent(v.getContext(),productMain.class);
                 String idmarket =newllyAddedObject1.getIdmarket();
+                i.putExtra("idmarket",idmarket);
+                v.getContext().startActivity(i);
                 Log.d("Response",idmarket);
                 }});
 

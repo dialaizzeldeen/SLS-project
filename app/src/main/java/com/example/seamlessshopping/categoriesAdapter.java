@@ -80,6 +80,17 @@ public class categoriesAdapter extends BaseAdapter {
 
         ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
 
+        /*imageurlNew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                newllyAddedObject1=newllyAddedObjectArrayList.get(position);
+
+                Intent i= new Intent(v.getContext(),productMain.class);
+                String idmarket =newllyAddedObject1.getIdmarket();
+                i.putExtra("idmarket",idmarket);
+                v.getContext().startActivity(i);
+                Log.d("Response",idmarket);
+            }});*/
+
 
 
 

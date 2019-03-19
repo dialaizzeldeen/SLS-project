@@ -53,6 +53,11 @@ public class productMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+        Intent intent=getIntent();
+        String idmarket =intent.getStringExtra("idmarket");
+        Toast.makeText(this, idmarket, Toast.LENGTH_SHORT).show();
+        url="http://192.168.137.1/joinsmarketproducts.php?idmarket="+idmarket;
+        dataSaving(url);
 
 
 
@@ -95,8 +100,7 @@ public class productMain extends AppCompatActivity {
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        url="http://192.168.137.1/product.php";
-        dataSaving(url);
+
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
         gridView.setAdapter(productAdapter);
@@ -150,7 +154,7 @@ public class productMain extends AppCompatActivity {
                     public void onResponse(JSONObject jsonObject) {
                         try {
 
-                            JSONArray responseArray= jsonObject.getJSONArray("products");
+                            JSONArray responseArray= jsonObject.getJSONArray("marketproducts");
                             Log.i("Response",responseArray+"");
                             Log.i("Response",jsonObject+"");
                             StringBuilder textViewData = new StringBuilder();
@@ -159,8 +163,9 @@ public class productMain extends AppCompatActivity {
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
-                                Integer productId=response.getInt("id");
-                                String name = response.getString("name");
+                                Integer productId=response.getInt("productid");
+                                String name = response.getString("productname");
+                                String marketName=response.getString("marketfoodname");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
