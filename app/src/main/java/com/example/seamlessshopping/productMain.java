@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-public class productMain extends AppCompatActivity {
+public class productMain extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
@@ -66,41 +66,13 @@ public class productMain extends AppCompatActivity {
 
 
 
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
-                        startActivity(i);
-                        break;
-                    case R.id.navigation_Categories:
-                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
-                        startActivity(ii);
-                        break;
-
-                    case R.id.navigation_notifications:
-                        break;
-                    case R.id.navigation_profile:
-                        Intent intent1=new Intent( getBaseContext(),profile.class);
-                        startActivity(intent1);
-
-                        break;
-                        case R.id.navigation_search:
-                            Intent intent=new Intent( getBaseContext(),productMain.class);
-                            startActivity(intent);
-                        break;
-                }
-                return false;
-            }
-        };
+        navigation.setOnNavigationItemSelectedListener(this);
 
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-
+        url="http://192.168.137.1/product.php";
+        dataSaving(url);
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
         gridView.setAdapter(productAdapter);
@@ -224,6 +196,43 @@ public class productMain extends AppCompatActivity {
         Log.d("response  ",id);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+                finish();
+
+                Intent home =new Intent(productMain.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+                finish();
+
+                Intent categorie=new Intent(productMain.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+                finish();
+
+                Intent profile=new Intent(productMain.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+                finish();
+
+                Intent search=new Intent(productMain.this,searching.class);
+                startActivity(search) ;
+
+                break;
+        }
+        return false;
+    }
 
 
 }
