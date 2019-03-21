@@ -59,7 +59,7 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         setContentView(R.layout.activity_profile);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String url="http://192.168.137.1/profilePage.php";
+        String url="http://192.168.137.1/profilePage.php?userid="+id;
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

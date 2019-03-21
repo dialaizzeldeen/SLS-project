@@ -3,44 +3,30 @@ package com.example.seamlessshopping;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
-public class categoriesAdapter extends BaseAdapter {
-    ArrayList<categoriesObject> categoriesObjectsArrayList;
-    productsObject productsObj;
-    categoriesObject categoriesObject1;
+public class marketAdapter extends BaseAdapter {
+    ArrayList<marketObject> marketObjectArrayList;
+    marketObject marketObject1;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
+
     private String id="0";
     Context mContext;
     int positionitem;
@@ -50,23 +36,21 @@ public class categoriesAdapter extends BaseAdapter {
     //ImageButton btnEdit;
     TextView text;
 
-    public categoriesAdapter(Context context, ArrayList<categoriesObject> categoriesObjectsArrayList) {
-        this.mContext = context;
-        this.categoriesObjectsArrayList=categoriesObjectsArrayList;
-
+    public marketAdapter(ArrayList<marketObject> marketObjectArrayList, Context mContext) {
+        this.marketObjectArrayList = marketObjectArrayList;
+        this.mContext = mContext;
     }
-
 
     @Override
     public int getCount() {
-        return categoriesObjectsArrayList.size();
+        return marketObjectArrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
         positionitem = position;
         Log.d("hey", "i clicked you" + position);
-        return categoriesObjectsArrayList.get(position);
+        return marketObjectArrayList.get(position);
     }
 
     @Override
@@ -76,22 +60,20 @@ public class categoriesAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-         categoriesObject productsObj = categoriesObjectsArrayList.get(position);
+         marketObject1 = marketObjectArrayList.get(position);
         convertView = LayoutInflater.from(mContext).inflate(R.layout.categories_rows, null);
 
         ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
 
         imageUrls.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                categoriesObject1=categoriesObjectsArrayList.get(position);
+               marketObject1=marketObjectArrayList.get(position);
 
-
-
-                Intent i= new Intent(v.getContext(),marketsActivity.class);
-                String categoryID =categoriesObject1.getCategoryID();
-                i.putExtra("categoryID",categoryID);
+                Intent i= new Intent(v.getContext(),productMain.class);
+                String idmarket =marketObject1.getIdmarket();
+                i.putExtra("idmarket",idmarket);
                 v.getContext().startActivity(i);
-                Log.d("Response",categoryID);
+                Log.d("Response",idmarket);
             }});
 
 
@@ -100,12 +82,12 @@ public class categoriesAdapter extends BaseAdapter {
 
 
 
-        String productImage = productsObj.getCategoryImage();
+        String markerImage = marketObject1.getMarketImage();
 
         try {
             RequestManager requestManager = Glide.with(mContext);
 // Create request builder and load image.
-            RequestBuilder requestBuilder = requestManager.load(new URL( productImage));
+            RequestBuilder requestBuilder = requestManager.load(new URL( markerImage));
 // Show image into target imageview.
             requestBuilder.into(imageUrls);
         } catch (IOException e) {

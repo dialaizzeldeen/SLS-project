@@ -11,6 +11,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -18,6 +30,8 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
     ListView categoriesListView;
     categoriesObject categoriesObjects;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
+    categoriesAdapter categoriesAdapters;
+    String url="http://192.168.137.1//categoriesInfo.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +39,7 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
         setContentView(R.layout.activity_categories_);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         categoriesAdapter categoriesAdapters;
+        dataSaving(url);
 
 
         categoriesListView = (ListView) findViewById(R.id.listViewcategories);
@@ -36,39 +51,6 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        String ImageurlBoutique = "https://i.postimg.cc/rF25vLyd/boutique-logo-1-vector-18631407.jpg";
-        String ImageurlBank =" https://i.postimg.cc/dtQV7W4H/bank.jpg";
-        String ImageurlMarket = "https://i.postimg.cc/7PGNFVgR/markets.png";
-        String ImageurlResturant = "https://i.postimg.cc/DwM03qQC/depositphotos-118355644-stock-illustration-restaurant-logo-desig.jpg";
-
-        categoriesObjects = new categoriesObject(ImageurlMarket);
-        categoriesObjectArrayList.add(categoriesObjects);
-        categoriesObjects = new categoriesObject(ImageurlResturant);
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(ImageurlBoutique);
-
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(ImageurlBank);
-
-        categoriesObjectArrayList.add(categoriesObjects);
-
-    categoriesAdapters   = new categoriesAdapter(Categories_Activity.this, categoriesObjectArrayList);
-        categoriesAdapters.notifyDataSetChanged();
-        categoriesListView.setAdapter(categoriesAdapters);
 
     }
     @Override
@@ -107,5 +89,60 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
                 break;
         }
         return false;
+    }
+
+    private void dataSaving(String url) {
+
+        RequestQueue queue = Volley.newRequestQueue(this);  //
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+
+                            JSONArray responseArray= jsonObject.getJSONArray("categories");
+                            Log.i("Response",responseArray+"");
+                            Log.i("Response",jsonObject+"");
+
+                            //Parse the JSON response array by iterating over it
+                            //categoriesObjectArrayList.clear();
+
+                            for (int i = 0; i < responseArray.length(); i++) {
+                                JSONObject response = responseArray.getJSONObject(i);
+                               String categoryID=response.getString("categoryID");
+                               String categoryName=response.getString("categoryName");
+                               String categoryImage = response.getString("categoryImage");
+
+                                categoriesObjects=new categoriesObject(categoryID,categoryName,categoryImage);
+                               categoriesObjectArrayList.add(categoriesObjects);
+
+                                categoriesAdapters = new categoriesAdapter(Categories_Activity.this, categoriesObjectArrayList);
+                                categoriesAdapters.notifyDataSetChanged();
+                                categoriesListView.setAdapter(categoriesAdapters);
+
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        //Display error message whenever an error occurs
+                        Toast.makeText(getApplicationContext(),
+                                error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("Error",  error.getMessage());
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        queue.add(jsObjRequest);
     }
 }

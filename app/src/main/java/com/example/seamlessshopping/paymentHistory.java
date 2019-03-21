@@ -43,10 +43,9 @@ public class paymentHistory extends AppCompatActivity {
    //  paymentHistoryAdapters  = new paymentHistoryAdapter(paymentHistory.this, paymentHistoryObjectArrayList);
      // paymentHistoryListView.setAdapter(paymentHistoryAdapters);
 
+        getData();
 
-
-
-        final String url ="http://192.168.137.1/joinsmarketpayment.php";
+        final String url ="http://192.168.137.1/joinsmarketpayment.php?CustomerID="+id;
 
         RequestQueue queue = Volley.newRequestQueue(this);  //192.168.1.12
         JsonObjectRequest jsObjRequest = new JsonObjectRequest

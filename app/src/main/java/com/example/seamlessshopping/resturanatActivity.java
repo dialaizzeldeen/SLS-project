@@ -27,27 +27,6 @@ navigation.setOnNavigationItemSelectedListener(this);
 
 
         categoriesListView = (ListView) findViewById(R.id.listViewcategories);
-        String ImageurlAatoutpizza= "https://i.postimg.cc/T32mZRG2/15036277-1423421534354241-3339396250817945020-n.png";
-        String ImageurlwardResturant ="https://i.postimg.cc/0NFVk620/19756324-1408085675934992-3924642961369307931-n.png";
-        String ImageurlKFc = "https://i.postimg.cc/BvB2yXPv/kfc.png";
-        String ImageurlResturantdominoz = "https://i.postimg.cc/fRZFpq8j/26195460-2068440073413878-1996396889198920258-n.jpg";
-
-        categoriesObjects = new categoriesObject(ImageurlKFc);
-        categoriesObjectArrayList.add(categoriesObjects);
-        categoriesObjects = new categoriesObject(ImageurlResturantdominoz);
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(ImageurlAatoutpizza);
-
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(ImageurlwardResturant);
-
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesAdapter categoriesAdapters = new categoriesAdapter(resturanatActivity.this, categoriesObjectArrayList);
-        categoriesAdapters.notifyDataSetChanged();
-        categoriesListView.setAdapter(categoriesAdapters);
 
 
     }

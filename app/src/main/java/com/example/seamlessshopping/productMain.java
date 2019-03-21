@@ -138,6 +138,7 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
                                 Integer productId=response.getInt("productid");
                                 String name = response.getString("productname");
                                 String marketName=response.getString("marketfoodname");
+                                Integer marketID=response.getInt("marketid");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
@@ -147,7 +148,7 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-                                productObject = new productsObject(productId,name,quantity,imageurl,price);
+                                productObject = new productsObject(productId,name,quantity,imageurl,price,marketName,marketID);
                                 productsObjectArrayList.add(productObject);
                                 productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
                                 productAdapter.notifyDataSetChanged();

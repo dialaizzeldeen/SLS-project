@@ -19,12 +19,18 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
         TextView openProfile=findViewById(R.id.profileid);
         TextView pymentPage=findViewById(R.id.paymentid);
         TextView historyPage=findViewById(R.id.historyid);
+        TextView carticon=findViewById(R.id.cartprofilecat);
 
         openProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i= new Intent(getApplicationContext(), profile.class);
                 startActivity(i);
                   }});
+        carticon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i= new Intent(getApplicationContext(), cart.class);
+                startActivity(i);
+            }});
         pymentPage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i= new Intent(getApplicationContext(),bankInfo.class);

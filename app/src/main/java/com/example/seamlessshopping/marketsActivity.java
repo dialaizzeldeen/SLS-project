@@ -5,45 +5,43 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class marketsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     ListView categoriesListView;
-    categoriesObject categoriesObjects;
-    ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
+    marketObject marketObject1;
+    marketAdapter marketAdapter1;
+    ArrayList<marketObject> marketObjectArrayList = new ArrayList<marketObject>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
+        Intent intent=getIntent();
+        String cat =intent.getStringExtra("categoryID");
+        Toast.makeText(this, cat, Toast.LENGTH_SHORT).show();
+        String url="http://192.168.137.1//marketPage.php?categoryid="+cat;
+        dataSaving(url);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
         categoriesListView = (ListView) findViewById(R.id.listViewcategories);
-        String Imageurldaylight = "https://i.postimg.cc/7PB2WTbh/18446645-1449095245151165-4085136091615123560-n.png";
-        String Imageurldreammall ="https://i.postimg.cc/FRrYP940/24301397-515337462174379-7992937270913746045-n.png";
-        String ImageurlswalhiMarket = "https://i.postimg.cc/rwgsKBWm/swalhi.png";
-        String ImageurlBravo = "https://i.postimg.cc/MHhR3htx/21430169-1731867953513191-8768882580645375130-n.png";
-
-        categoriesObjects = new categoriesObject(ImageurlswalhiMarket);
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(Imageurldreammall);
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(Imageurldaylight);
-
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesObjects = new categoriesObject(ImageurlBravo);
-
-        categoriesObjectArrayList.add(categoriesObjects);
-
-        categoriesAdapter categoriesAdapters = new categoriesAdapter(marketsActivity.this, categoriesObjectArrayList);
-        categoriesAdapters.notifyDataSetChanged();
-        categoriesListView.setAdapter(categoriesAdapters);
 
 
     }
@@ -85,5 +83,60 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
                 break;
         }
         return false;
+    }
+    private void dataSaving(String url) {
+
+        RequestQueue queue = Volley.newRequestQueue(this);  //
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+
+                            JSONArray responseArray= jsonObject.getJSONArray("marketList");
+                            Log.i("Response",responseArray+"");
+                            Log.i("Response",jsonObject+"");
+
+                            //Parse the JSON response array by iterating over it
+                            //categoriesObjectArrayList.clear();
+
+                            for (int i = 0; i < responseArray.length(); i++) {
+                                JSONObject response = responseArray.getJSONObject(i);
+                                String marketImage=response.getString("marketImage");
+                                String marketfoodname=response.getString("marketfoodname");
+                                String idmarket = response.getString("idmarket");
+                                String categoryid=response.getString("categoryID");
+
+                                marketObject1=new marketObject(marketImage,idmarket,marketfoodname,categoryid);
+                                marketObjectArrayList.add(marketObject1);
+
+                                marketAdapter1 = new marketAdapter( marketObjectArrayList,marketsActivity.this);
+                                marketAdapter1.notifyDataSetChanged();
+                                categoriesListView.setAdapter(marketAdapter1);
+
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        //Display error message whenever an error occurs
+                        Toast.makeText(getApplicationContext(),
+                                error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("Error",  error.getMessage());
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        queue.add(jsObjRequest);
     }
 }
