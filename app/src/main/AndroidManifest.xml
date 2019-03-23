@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.seamlessshopping">
+    <supports-screens
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true"/>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,6 +34,11 @@
         </activity>
         <activity android:name=".timePage" />
         <activity android:name=".cart">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".marketsActivity"></activity>
@@ -40,19 +51,15 @@
 
         <activity android:name=".signupPage" />
         <activity android:name=".loginPage">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".profile">
 
         </activity>
+        <activity android:name=".bankInfo">   </activity>
         <activity android:name=".productMain"></activity>
-        <activity android:name=".paymentHistory" />
         <activity android:name=".NewllyAdded"></activity>
     </application>
 

@@ -34,5 +34,9 @@
         android:title="payment page"
 
         ></item>
+    <item android:id="@+id/bankinfo"
+        android:title="bankinfo"
+
+        ></item>
 
 </menu>

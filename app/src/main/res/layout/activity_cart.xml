@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="8"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -15,8 +16,10 @@
 
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="           Welcome To Cart"
+        android:text="      Cart"
         android:layout_alignParentTop="true"
+        android:layout_weight="1"
+
         android:layout_marginTop="3dp"
         android:textColor="#000000"
         android:textSize="30dp"
@@ -24,10 +27,13 @@
         />
 
     <ListView
-      android:layout_below="@+id/fab"
         android:id="@+id/listViewCart"
+        android:layout_weight="3"
+
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="580dp"
+        android:layout_below="@+id/fab"
+        android:layout_marginTop="-9dp"
         android:horizontalSpacing="10dp"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
@@ -41,6 +47,7 @@
         android:src="@drawable/cartimagee1"
         app:elevation="5dp"
         app:backgroundTint="#E8E08D06"
+        android:layout_weight="1"
 
         app:borderWidth="0dp"
         android:layout_below="@id/nth"
@@ -57,6 +64,8 @@
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation"
+        android:layout_weight="2"
+
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

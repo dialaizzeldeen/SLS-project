@@ -31,13 +31,15 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
     categoriesObject categoriesObjects;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
     categoriesAdapter categoriesAdapters;
-    String url="http://192.168.137.1//categoriesInfo.php";
+    String url="http://192.168.1.9//categoriesInfo.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
+
         categoriesAdapter categoriesAdapters;
         dataSaving(url);
 
@@ -46,8 +48,6 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
 
  categoriesListView.setOnItemClickListener(this);
 
-
-        navigation.setOnNavigationItemSelectedListener(this);
 
 
 
