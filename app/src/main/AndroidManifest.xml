@@ -34,20 +34,22 @@
         </activity>
         <activity android:name=".timePage" />
         <activity android:name=".cart">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
-        <activity android:name=".marketsActivity"></activity>
+        <activity android:name=".marketsActivity"> </activity>
         <activity android:name=".resturanatActivity"></activity>
         <activity android:name=".Categories_Activity"></activity>
         <activity android:name=".searching">
 
         </activity>
-        <activity android:name=".paymentHistory"></activity>
+        <activity android:name=".paymentHistory">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".signupPage" />
         <activity android:name=".loginPage">
