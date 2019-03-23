@@ -42,11 +42,6 @@
         <activity android:name=".Categories_Activity"></activity>
         <activity android:name=".searching">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".paymentHistory">
 
@@ -65,6 +60,12 @@
         <activity android:name=".bankInfo">   </activity>
         <activity android:name=".productMain">   </activity>
         <activity android:name=".NewllyAdded">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>
