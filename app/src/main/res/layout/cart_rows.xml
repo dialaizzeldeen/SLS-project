@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingBottom="2dp"
+
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="2dp">
     <LinearLayout
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/pnameCart"
                 android:text="product name "
+                android:textColor="#000"
                 android:layout_marginTop="3dp"
                 android:textSize="20dp"/>
             <LinearLayout
@@ -79,7 +81,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/priceCart"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
+                    android:textColor="#000"
+
                     android:text="0 NIS"
                     android:layout_gravity="center"/>
 
