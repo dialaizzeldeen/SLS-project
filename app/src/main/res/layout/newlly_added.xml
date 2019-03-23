@@ -10,10 +10,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <RelativeLayout
-        android:background="@drawable/shape"
-        android:layout_width="fill_parent"
+        android:layout_marginTop="20dp"
+        android:layout_width="380dp"
         android:layout_weight="2"
-
+        android:layout_marginLeft="16dp"
+android:gravity="center"
         android:layout_height="wrap_content">
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
