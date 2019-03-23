@@ -30,25 +30,26 @@
         >
         <activity android:name=".profilecategory">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>Zz
         </activity>
         <activity android:name=".timePage" />
         <activity android:name=".cart">
 
 
         </activity>
-        <activity android:name=".marketsActivity"> </activity>
+        <activity android:name=".marketsActivity">
+        </activity>
         <activity android:name=".resturanatActivity"></activity>
         <activity android:name=".Categories_Activity"></activity>
         <activity android:name=".searching">
 
         </activity>
         <activity android:name=".paymentHistory">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".signupPage" />
@@ -59,9 +60,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".profile">
 
+
         </activity>
         <activity android:name=".bankInfo">   </activity>
-        <activity android:name=".productMain"></activity>
+        <activity android:name=".productMain">   </activity>
         <activity android:name=".NewllyAdded"></activity>
     </application>
 
