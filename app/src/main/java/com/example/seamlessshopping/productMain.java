@@ -46,7 +46,7 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
     String url;
     productAdapter productAdapter;
     String search;
-    String idmarket="1";
+    String idmarket;
     ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
 
 
