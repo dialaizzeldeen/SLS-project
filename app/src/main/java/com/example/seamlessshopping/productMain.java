@@ -55,9 +55,9 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         Intent intent=getIntent();
-       // final String idmarket =intent.getStringExtra("idmarket");
+        idmarket =intent.getStringExtra("idmarket");
         Toast.makeText(this, idmarket, Toast.LENGTH_SHORT).show();
-        url="http://192.168.1.9/joinsmarketproducts.php?idmarket="+idmarket;
+        url="http://"+ippage.ip+"/joinsmarketproducts.php?idmarket="+idmarket;
         //url=" http://192.168.1.9/search.php?namesearch=m&idmarket=1";
 
         dataSaving(url);
@@ -102,13 +102,13 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
 
                     search=text.getText().toString();
                   // url=" http://192.168.1.9/search.php?namesearch=m&idmarket=1";
-                   url = "http://192.168.1.9/search.php?namesearch="+ search+"&idmarket="+idmarket;
+                   url = "http://"+ippage.ip+"/search.php?namesearch="+ search+"&idmarket="+idmarket;
 
                     Log.d("hhh","j"+url);
                    dataSaving(url);
 
                 }
-                else {                     url="http://192.168.1.9/joinsmarketproducts.php?idmarket="+idmarket;
+                else {                     url="http://"+ippage.ip+"/joinsmarketproducts.php?idmarket="+idmarket;
                     dataSaving(url);
                 }
 
