@@ -46,6 +46,7 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
     String url;
     productAdapter productAdapter;
     String search;
+    String idmarket="1";
     ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
 
 
@@ -54,9 +55,11 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         Intent intent=getIntent();
-        String idmarket =intent.getStringExtra("idmarket");
+       // final String idmarket =intent.getStringExtra("idmarket");
         Toast.makeText(this, idmarket, Toast.LENGTH_SHORT).show();
-        url="http://192.168.137.1/joinsmarketproducts.php?idmarket="+idmarket;
+        url="http://192.168.1.9/joinsmarketproducts.php?idmarket="+idmarket;
+        //url=" http://192.168.1.9/search.php?namesearch=m&idmarket=1";
+
         dataSaving(url);
 
 
@@ -71,7 +74,7 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        url="http://192.168.137.1/product.php";
+      //  url="http://192.168.137.1/product.php";
         dataSaving(url);
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
@@ -98,12 +101,15 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
 
 
                     search=text.getText().toString();
-                    url = "http://192.168.137.1/search.php?namesearch=" + search;
+                  // url=" http://192.168.1.9/search.php?namesearch=m&idmarket=1";
+                   url = "http://192.168.1.9/search.php?namesearch="+ search+"&idmarket="+idmarket;
+
                     Log.d("hhh","j"+url);
-                    dataSaving(url);
+                   dataSaving(url);
 
                 }
-                else {              dataSaving("http://192.168.137.1/product.php");
+                else {                     url="http://192.168.1.9/joinsmarketproducts.php?idmarket="+idmarket;
+                    dataSaving(url);
                 }
 
             }
