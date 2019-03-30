@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.seamlessshopping">
+
     <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
         android:resizeable="true"
         android:smallScreens="true"
-        android:largeScreens="true"
-        android:xlargeScreens="true"
-        android:anyDensity="true"/>
+        android:xlargeScreens="true" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,48 +27,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning"
-        >
-        <activity android:name=".profilecategory">
-
-        </activity>
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".questions"></activity>
+        <activity android:name=".profilecategory" />
         <activity android:name=".timePage" />
-        <activity android:name=".cart">
-
-
-        </activity>
-        <activity android:name=".marketsActivity">
-        </activity>
-        <activity android:name=".resturanatActivity"></activity>
-        <activity android:name=".Categories_Activity"></activity>
-        <activity android:name=".searching">
-
-        </activity>
-        <activity android:name=".paymentHistory">
-
-        </activity>
-
+        <activity android:name=".cart" />
+        <activity android:name=".marketsActivity" />
+        <activity android:name=".resturanatActivity" />
+        <activity android:name=".Categories_Activity" />
+        <activity android:name=".searching" />
+        <activity android:name=".paymentHistory" />
         <activity android:name=".signupPage" />
-        <activity android:name=".loginPage">
-
-
-        </activity>
+        <activity android:name=".loginPage" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".profile">
+        <activity android:name=".profile" />
+        <activity android:name=".bankInfo" />
+        <activity android:name=".productMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".bankInfo">   </activity>
-        <activity android:name=".productMain">      <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>  </activity>
-        <activity android:name=".NewllyAdded">
-
-
-
-        </activity>
+        <activity android:name=".NewllyAdded" />
     </application>
 
 </manifest>
