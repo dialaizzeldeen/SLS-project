@@ -10,9 +10,30 @@ public class productsObject {
     private String price;
     private String imageurl;
     private String marketfoodname;
-    public productsObject(String name , int quantity,String imageurl,String price){
+    private Integer marketID;
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public Integer getMarketID() {
+        return marketID;
+    }
+
+    public void setMarketID(Integer marketID) {
+        this.marketID = marketID;
+    }
+
+
+    public productsObject(Integer productId,String name , Integer quantity,String imageurl,String price,String marketfoodname,Integer marketID){
         //    int id ,this.id=id;
-        this.name=name;this.quantity=quantity;this.imageurl=imageurl;this.price=price;
+        this.name=name;this.quantity=quantity;this.imageurl=imageurl;this.price=price; this.marketfoodname=marketfoodname;
+        this.marketID=marketID;
+        this.productId=productId;
     }
 
     public productsObject(String name , int quantity,String imageurl,String price,String marketfoodname){

@@ -33,7 +33,7 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class NewllyAdded extends AppCompatActivity {
+public class NewllyAdded extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener  {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
@@ -61,25 +61,7 @@ public class NewllyAdded extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        break;
-                    case R.id.navigation_Categories:
-
-                    case R.id.navigation_notifications:break;
-                    case R.id.navigation_profile:
-                        break;                    case R.id.navigation_search:
-                        break;
-                }
-                return false;
-            }
-        };
-
+        navigation.setOnNavigationItemSelectedListener(this);
 
         gridView = (GridView) findViewById(R.id.gridViewNew);
         dataSaving(url = "http://192.168.137.1/newllyAdded.php");
@@ -109,7 +91,8 @@ public class NewllyAdded extends AppCompatActivity {
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
-                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl);
+                                String idmarket=response.getString("idmarket");
+                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket);
                                 ;
 
                                 newllyAddedObjectArrayList.add(newllyAddedObject2);
@@ -178,5 +161,40 @@ public class NewllyAdded extends AppCompatActivity {
         }, 2500, 2500);
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+
+
+            case R.id.navigation_Categories:
+                finish();
+
+                Intent categorie=new Intent(NewllyAdded.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+                finish();
+
+
+                Intent profile=new Intent(NewllyAdded.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+                finish();
+
+                Intent search=new Intent(NewllyAdded.this,searching.class);
+                startActivity(search) ;
+
+                break;
+        }
+        return false;
+    }
 
 }

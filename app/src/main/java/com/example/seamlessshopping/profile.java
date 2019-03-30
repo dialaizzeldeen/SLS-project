@@ -36,7 +36,7 @@ import java.util.Map;
 import okhttp3.internal.Internal;
 
 
-public class profile extends AppCompatActivity {
+public class profile extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener{
 
     TextView usernameP;
     EditText  genderP,locationP,bdayP,mobileP,personalemailP;
@@ -59,7 +59,7 @@ public class profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String url="http://192.168.137.1/profilePage.php";
+        String url="http://192.168.137.1/profilePage.php?userid="+id;
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -71,36 +71,8 @@ public class profile extends AppCompatActivity {
         mobileP=(EditText)findViewById(R.id.mobileP);
         personalemailP=(EditText)findViewById(R.id.personalemailP);
 
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        navigation.setOnNavigationItemSelectedListener(this);
 
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
-                        startActivity(i);
-                        break;
-                    case R.id.navigation_Categories:
-                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
-                        startActivity(ii);
-                        break;
-
-                    case R.id.navigation_notifications:
-                        break;
-                    case R.id.navigation_profile:
-                        Intent intent1=new Intent( getBaseContext(),profile.class);
-                        startActivity(intent1);
-
-                        break;
-                    case R.id.navigation_search:
-                        Intent intent=new Intent( getBaseContext(),productMain.class);
-                        startActivity(intent);
-                        break;
-                }
-                return false;
-            }
-        };
 
         dataSaving(url);
 
@@ -217,5 +189,45 @@ public class profile extends AppCompatActivity {
         queue.add(postRequest);
 
     }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+                finish();
+
+                Intent home =new Intent(profile.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+                finish();
+
+                Intent categorie=new Intent(profile.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+                finish();
+
+
+                Intent profile=new Intent(profile.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+                finish();
+
+
+                Intent search=new Intent(profile.this,searching.class);
+                startActivity(search) ;
+                break;
+
+        }
+        return false;
+    }
+
 
    }

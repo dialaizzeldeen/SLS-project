@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-public class productMain extends AppCompatActivity {
+public class productMain extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GridView gridView;
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
@@ -46,6 +46,7 @@ public class productMain extends AppCompatActivity {
     String url;
     productAdapter productAdapter;
     String search;
+    String idmarket;
     ArrayList<productsObject> productsObjectArrayList = new ArrayList<productsObject>();
 
 
@@ -53,6 +54,13 @@ public class productMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+        Intent intent=getIntent();
+        idmarket =intent.getStringExtra("idmarket");
+        Toast.makeText(this, idmarket, Toast.LENGTH_SHORT).show();
+        url="http://"+ippage.ip+"/joinsmarketproducts.php?idmarket="+idmarket;
+        //url=" http://192.168.1.9/search.php?namesearch=m&idmarket=1";
+
+        dataSaving(url);
 
 
 
@@ -61,41 +69,12 @@ public class productMain extends AppCompatActivity {
 
 
 
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
-                        startActivity(i);
-                        break;
-                    case R.id.navigation_Categories:
-                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
-                        startActivity(ii);
-                        break;
-
-                    case R.id.navigation_notifications:
-                        break;
-                    case R.id.navigation_profile:
-                        Intent intent1=new Intent( getBaseContext(),profile.class);
-                        startActivity(intent1);
-
-                        break;
-                        case R.id.navigation_search:
-                            Intent intent=new Intent( getBaseContext(),productMain.class);
-                            startActivity(intent);
-                        break;
-                }
-                return false;
-            }
-        };
+        navigation.setOnNavigationItemSelectedListener(this);
 
 
 
         gridView = (GridView) findViewById(R.id.gridView);
-        url="http://192.168.137.1/product.php";
+      //  url="http://192.168.137.1/product.php";
         dataSaving(url);
         productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
         productAdapter.notifyDataSetChanged();
@@ -122,12 +101,15 @@ public class productMain extends AppCompatActivity {
 
 
                     search=text.getText().toString();
-                    url = "http://192.168.137.1/search.php?namesearch=" + search;
+                  // url=" http://192.168.1.9/search.php?namesearch=m&idmarket=1";
+                   url = "http://"+ippage.ip+"/search.php?namesearch="+ search+"&idmarket="+idmarket;
+
                     Log.d("hhh","j"+url);
-                    dataSaving(url);
+                   dataSaving(url);
 
                 }
-                else {              dataSaving("http://192.168.137.1/product.php");
+                else {                     url="http://"+ippage.ip+"/joinsmarketproducts.php?idmarket="+idmarket;
+                    dataSaving(url);
                 }
 
             }
@@ -150,7 +132,7 @@ public class productMain extends AppCompatActivity {
                     public void onResponse(JSONObject jsonObject) {
                         try {
 
-                            JSONArray responseArray= jsonObject.getJSONArray("products");
+                            JSONArray responseArray= jsonObject.getJSONArray("marketproducts");
                             Log.i("Response",responseArray+"");
                             Log.i("Response",jsonObject+"");
                             StringBuilder textViewData = new StringBuilder();
@@ -159,8 +141,10 @@ public class productMain extends AppCompatActivity {
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
-                                Integer productId=response.getInt("id");
-                                String name = response.getString("name");
+                                Integer productId=response.getInt("productid");
+                                String name = response.getString("productname");
+                                String marketName=response.getString("marketfoodname");
+                                Integer marketID=response.getInt("marketid");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
@@ -170,7 +154,7 @@ public class productMain extends AppCompatActivity {
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-                                productObject = new productsObject(productId,name,quantity,imageurl,price);
+                                productObject = new productsObject(productId,name,quantity,imageurl,price,marketName,marketID);
                                 productsObjectArrayList.add(productObject);
                                 productAdapter = new productAdapter(productMain.this, productsObjectArrayList);
                                 productAdapter.notifyDataSetChanged();
@@ -219,6 +203,43 @@ public class productMain extends AppCompatActivity {
         Log.d("response  ",id);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+                finish();
+
+                Intent home =new Intent(productMain.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+                finish();
+
+                Intent categorie=new Intent(productMain.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+                finish();
+
+                Intent profile=new Intent(productMain.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+                finish();
+
+                Intent search=new Intent(productMain.this,searching.class);
+                startActivity(search) ;
+
+                break;
+        }
+        return false;
+    }
 
 
 }

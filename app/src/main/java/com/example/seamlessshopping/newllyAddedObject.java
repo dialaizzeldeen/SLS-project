@@ -6,12 +6,22 @@ public class newllyAddedObject {
     private int id;
     private String price;
     private String imageurl;
+    private String idmarket;
 
-    public newllyAddedObject(String name, int quantity, String price, String imageurl) {
+    public String getIdmarket() {
+        return idmarket;
+    }
+
+    public void setIdmarket(String idmarket) {
+        this.idmarket = idmarket;
+    }
+
+    public newllyAddedObject(String name, int quantity, String price, String imageurl, String idmarket) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.imageurl = imageurl;
+        this.idmarket=idmarket;
     }
     public newllyAddedObject(){
         this.name=name;}

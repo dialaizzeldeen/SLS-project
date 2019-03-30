@@ -133,8 +133,10 @@ public class productAdapter extends BaseAdapter {
                         params.put("pricekey", productsObj.getPrice().toString());
                         params.put("quntitykey",productsObj.getQuantity().toString());
                         params.put("imagekey",productsObj.getImageurl().toString());
-                        params.put("idkey",productsObj.getID().toString());
+                        params.put("productId",productsObj.getProductId().toString());
                         params.put("CustomerID",id.toString());
+                        params.put("marketId",productsObj.getMarketID().toString());
+                        params.put("marketName",productsObj.getMarketfoodname().toString());
 
                         return params;
                     }

@@ -1,10 +1,9 @@
-
-
-
-<android.support.v7.widget.CardView  android:layout_width="wrap_content"
+<android.support.v7.widget.CardView android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="5dp"
     android:layout_marginLeft="10dp"
+    app:cardCornerRadius="20dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -52,7 +51,7 @@
             android:padding="2dp"
             android:textColor="#000000"
             android:textSize="15dp"
-            android:textStyle="bold" />
+             />
 
 
 
@@ -81,7 +80,7 @@
                 android:padding="2dp"
                 android:textColor="#000000"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                />
 
             <ImageButton
                 android:id="@+id/addQuantity"
@@ -103,12 +102,13 @@
             android:textColor="#000000"
 
             android:textSize="15dp"
-            android:textStyle="bold" />
+             />
 <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:text="BUY"
+    android:background="@drawable/button"
     android:id="@+id/buynow"
     />
 

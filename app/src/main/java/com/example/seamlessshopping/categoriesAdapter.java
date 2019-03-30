@@ -38,6 +38,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class categoriesAdapter extends BaseAdapter {
     ArrayList<categoriesObject> categoriesObjectsArrayList;
     productsObject productsObj;
+    categoriesObject categoriesObject1;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
@@ -74,19 +75,32 @@ public class categoriesAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final categoriesObject productsObj = categoriesObjectsArrayList.get(position);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+         categoriesObject productsObj = categoriesObjectsArrayList.get(position);
         convertView = LayoutInflater.from(mContext).inflate(R.layout.categories_rows, null);
 
         ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
 
+        imageUrls.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                categoriesObject1=categoriesObjectsArrayList.get(position);
+
+
+
+                Intent i= new Intent(v.getContext(),marketsActivity.class);
+                String categoryID =categoriesObject1.getCategoryID();
+                i.putExtra("categoryID",categoryID);
+                v.getContext().startActivity(i);
+                Log.d("Response",categoryID);
+            }});
 
 
 
 
 
 
-        String productImage = productsObj.getImageurl();
+
+        String productImage = productsObj.getCategoryImage();
 
         try {
             RequestManager requestManager = Glide.with(mContext);
@@ -108,127 +122,3 @@ public class categoriesAdapter extends BaseAdapter {
     }
 
 }
-/**
- * btnDelete.setTag(position); //important so we know which item to delete on button click
- * btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * int positionToRemove = (int) v.getTag();
- * //get the position of the view to delete stored in the tag
- * contactsInfoArrayList.remove(positionToRemove);
- * notifyDataSetChanged(); //remove the item
- * }
- * });
- * editIntent = new Intent(this,editContact.class);
- * editIntent.putExtra("editMail",editMail);
- * editIntent.putExtra("editName",editName);
- * editIntent.putExtra("editDate",editDate);
- * editIntent.putExtra("editPhone",editPhone);
- * startActivityForResult(editIntent, 3);btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- * btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- * btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- * <p>
- * editIntent = new Intent(this,editContact.class);
- * editIntent.putExtra("editMail",editMail);
- * editIntent.putExtra("editName",editName);
- * editIntent.putExtra("editDate",editDate);
- * editIntent.putExtra("editPhone",editPhone);
- * startActivityForResult(editIntent, 3);btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- * btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- * btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- **/
-
-
-//  Button   btnDelete =(Button)findViewById(R.id.deletecontact);
-
-/**
- * editIntent = new Intent(this,editContact.class);
- * editIntent.putExtra("editMail",editMail);
- * editIntent.putExtra("editName",editName);
- * editIntent.putExtra("editDate",editDate);
- * editIntent.putExtra("editPhone",editPhone);
- * startActivityForResult(editIntent, 3);btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- * btnDelete.setOnClickListener(new View.OnClickListener() {
- * public void onClick(View v) {
- * <p>
- * contactsInfoArrayList.remove(positionitem);
- * <p>
- * adapter.notifyDataSetChanged();
- * <p>
- * <p>
- * }
- * }}
- **/
-/**btnDelete.setOnClickListener(new View.OnClickListener() {
- public void onClick(View v) {
-
- contactsInfoArrayList.remove(positionitem);
-
- adapter.notifyDataSetChanged();
-
-
- }
- }}**/
-

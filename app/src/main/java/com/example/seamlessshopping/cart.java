@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class cart extends AppCompatActivity {
+public class cart extends AppCompatActivity  implements BottomNavigationView.OnNavigationItemSelectedListener {
     ListView listViewCart;
     cartObject cartObject1;
     ArrayList<cartObject> cartObjectArrayList= new ArrayList<cartObject>();
@@ -57,41 +57,12 @@ public class cart extends AppCompatActivity {
 
             }});
 
-
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent i=new Intent(getBaseContext(), NewllyAdded.class);
-                        startActivity(i);
-                        break;
-                    case R.id.navigation_Categories:
-                        Intent ii=new Intent( getBaseContext(),Categories_Activity.class);
-                        startActivity(ii);
-                        break;
-
-                    case R.id.navigation_notifications:
-                        break;
-                    case R.id.navigation_profile:
-                        Intent intent1=new Intent( getBaseContext(),profile.class);
-                        startActivity(intent1);
-
-                        break;
-                    case R.id.navigation_search:
-                        Intent intent=new Intent( getBaseContext(),productMain.class);
-                        startActivity(intent);
-                        break;
-                }
-                return false;
-            }
-        };
+navigation.setOnNavigationItemSelectedListener(this);
 
 
         listViewCart = (ListView) findViewById(R.id.listViewCart);
-  String url ="http://192.168.137.1/cartPage.php";
+        getData();
+  String url ="http://192.168.1.9/cartPage.php?userid="+id;
       dataSaving(url);
 
 
@@ -163,6 +134,43 @@ public class cart extends AppCompatActivity {
         Log.d("response  ",id);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+                finish();
+
+                Intent home =new Intent(cart.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+                finish();
+
+                Intent categorie=new Intent(cart.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+                finish();
+
+                Intent profile=new Intent(cart.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+                finish();
+
+                Intent search=new Intent(cart.this,searching.class);
+                startActivity(search) ;
+
+                break;
+        }
+        return false;
+    }
 
 
 }

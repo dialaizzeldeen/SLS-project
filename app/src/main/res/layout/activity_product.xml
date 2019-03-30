@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_marginTop="10dp"
     android:layout_marginRight="5dp"
+    android:layout_weight="6"
     android:layout_height="match_parent"
     android:background="#00000000"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,12 +12,12 @@
 
     <EditText
         android:layout_width="316dp"
-        android:layout_height="47dp"
+        android:layout_height="50dp"
         android:id="@+id/search"
+
         android:layout_marginStart="20dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/shape"
-        android:drawableLeft="@mipmap/search_launcher_round"
         android:hint="@string/title_search" />
 
     <GridView
@@ -26,6 +27,8 @@
         android:layout_marginTop="10dp"
         android:horizontalSpacing="10dp"
         android:numColumns="3"
+        android:layout_weight="3"
+
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
         android:verticalScrollbarPosition="right"
@@ -36,6 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_gravity="bottom"
+        android:layout_weight="1"
+
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
 

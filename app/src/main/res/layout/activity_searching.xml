@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginTop="20dp"
     android:layout_height="match_parent"
+android:layout_weight="8"
     android:background="#00000000"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -51,10 +54,12 @@
 
 
     <GridView
+        android:layout_weight="3"
+
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="470dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:horizontalSpacing="10dp"
         android:numColumns="2"
         android:scrollbarStyle="outsideOverlay"
@@ -66,12 +71,12 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/gridView"
+        android:layout_weight="1"
 
         android:layout_alignParentBottom="true"
         android:layout_marginTop="-1dp"
-        android:layout_marginBottom="0dp"
         android:background="?android:attr/windowBackground"
         app:elevation="0dp"
         app:menu="@menu/navigation" />

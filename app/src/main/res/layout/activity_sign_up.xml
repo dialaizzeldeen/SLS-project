@@ -6,9 +6,10 @@
     android:layout_height="670dp"
     android:layout_gravity="center"
     android:gravity="center"
+    android:layout_weight="8"
     android:background="#00000000"
     android:orientation="vertical"
-    tools:context=".SignUp">
+    tools:context=".signupPage">
 
     <ImageView
         android:id="@+id/addImage"

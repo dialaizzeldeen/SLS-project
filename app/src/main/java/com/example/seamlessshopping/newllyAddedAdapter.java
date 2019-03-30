@@ -1,14 +1,26 @@
 package com.example.seamlessshopping;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
@@ -16,10 +28,19 @@ import com.bumptech.glide.RequestManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class newllyAddedAdapter extends BaseAdapter {
     ArrayList<newllyAddedObject> newllyAddedObjectArrayList;
     newllyAddedObject newllyAddedObject1;
+
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
+    String url="http://192.168.137.1/update.php";
 
     Context mContext;
     int positionitem;
@@ -47,12 +68,24 @@ public class newllyAddedAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final newllyAddedObject newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+           newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
         convertView = LayoutInflater.from(mContext).inflate(R.layout.newllyadded_rows, null);
-        ImageView imageurlNew= (ImageView)convertView.findViewById(R.id.imageurlNew);
+        ImageButton imageurlNew= (ImageButton)convertView.findViewById(R.id.imageurlNew);
         TextView productnameNew=(TextView)convertView.findViewById(R.id.productnameNew);
         TextView priceNew=(TextView)convertView.findViewById(R.id.priceNew);
+
+
+        imageurlNew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                newllyAddedObject1=newllyAddedObjectArrayList.get(position);
+
+                Intent i= new Intent(v.getContext(),productMain.class);
+                String idmarket =newllyAddedObject1.getIdmarket();
+                i.putExtra("idmarket",idmarket);
+                v.getContext().startActivity(i);
+                Log.d("Response",idmarket);
+                }});
 
 
         priceNew.setText(newllyAddedObject1.getPrice()+" NIS");
@@ -72,6 +105,11 @@ public class newllyAddedAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=mContext.getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 
 }
