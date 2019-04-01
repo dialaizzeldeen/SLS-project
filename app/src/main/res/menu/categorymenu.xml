@@ -38,5 +38,9 @@
         android:title="bankinfo"
 
         ></item>
+    <item android:id="@+id/questionPage"
+        android:title="questionPage"
+
+        ></item>
 
 </menu>
