@@ -39,8 +39,8 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
         categoriesListView = (ListView) findViewById(R.id.listViewcategories);
-    //    String url="http://192.168.137.1//marketPage.php?categoryid="+cat;
-        String url="http://192.168.1.9//marketPage.php?categoryid=1";
+        String url="http://"+ippage.ip+"//marketPage.php?categoryid="+cat;
+    //    String url="http://"+ippage.ip+"//marketPage.php?categoryid=1";
 
         Log.d("Ddddd","ddd"+url);
         dataSaving(url);

@@ -146,7 +146,7 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
 
         Log.i("Response",emaill);
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String urll = "http://192.168.137.1/update.php";
+        String urll = "http://"+ippage.ip+"/update.php";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, urll,
