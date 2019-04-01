@@ -53,6 +53,8 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
        signout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Savedata("0");
+                Intent i=new Intent(getApplicationContext(),NewllyAdded.class);
+                startActivity(i);
             }});
 
 
