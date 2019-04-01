@@ -41,7 +41,7 @@ public class signupPage extends AppCompatActivity {
         Lname=findViewById(R.id.addedLastName);
         phoneNo=findViewById(R.id.addedphone);
         password=findViewById(R.id.addedPassword);
-        signup_url="http://192.168.137.1/signup.php";
+        signup_url="http://"+ippage.ip+"/signup.php";
 
 
     }

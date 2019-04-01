@@ -31,7 +31,7 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
     categoriesObject categoriesObjects;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
     categoriesAdapter categoriesAdapters;
-    String url="http://192.168.1.9//categoriesInfo.php";
+    String url="http://"+ippage.ip+"//categoriesInfo.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
