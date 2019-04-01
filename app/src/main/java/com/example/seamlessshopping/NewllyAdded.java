@@ -51,14 +51,13 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
     String url;
     newllyAddedAdapter newllyAddedAdapter1;
     ArrayList<newllyAddedObject> newllyAddedObjectArrayList = new ArrayList<newllyAddedObject>();
-
-
+    BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newlly_added);
         init();
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation= (BottomNavigationView) findViewById(R.id.navigation);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         navigation.setOnNavigationItemSelectedListener(this);
@@ -125,6 +124,23 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
         // Access the RequestQueue through your singleton class.
         queue.add(jsObjRequest);
+
+    }
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(NewllyAdded.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(NewllyAdded.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
+            startActivity(profile);
+        } else {
+            super.onBackPressed();
+        }
 
     }
     public void getData(){

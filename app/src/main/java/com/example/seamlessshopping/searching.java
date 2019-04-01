@@ -64,6 +64,7 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
     ArrayList<productsObject> searchObjectArrayList = new ArrayList<productsObject>();
     ImageView imagecategories;
     String categories="";
+    BottomNavigationView navigation;
     TextView filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
         setContentView(R.layout.activity_searching);
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
         final EditText textsearch = findViewById(R.id.search);
 
@@ -139,7 +140,23 @@ navigation.setOnNavigationItemSelectedListener(this);
 
     }
 
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(searching.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
 
+            Intent categorie = new Intent(searching.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(searching.this, profilecategory.class);
+            startActivity(profile);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
     private void dataSaving(String url) {
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
@@ -343,14 +360,12 @@ navigation.setOnNavigationItemSelectedListener(this);
 
             switch (menuItem.getItemId()) {
                 case R.id.navigation_home:
-                    finish();
 
                     Intent home =new Intent(searching.this,NewllyAdded.class);
                     startActivity(home) ;
                     break;
 
                 case R.id.navigation_Categories:
-                    finish();
 
                     Intent categorie=new Intent(searching.this,Categories_Activity.class);
                     startActivity(categorie) ;
@@ -360,7 +375,7 @@ navigation.setOnNavigationItemSelectedListener(this);
                 case R.id.navigation_notifications:
                     break;
                 case R.id.navigation_profile:
-                    finish();
+
 
 
                     Intent profile=new Intent(searching.this,profilecategory.class);

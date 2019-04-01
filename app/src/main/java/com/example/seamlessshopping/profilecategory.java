@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class profilecategory extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener{
-
+    BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +20,10 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
         TextView pymentPage=findViewById(R.id.paymentid);
         TextView historyPage=findViewById(R.id.historyid);
         TextView carticon=findViewById(R.id.cartprofilecat);
+
+
+
+
 
         openProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,26 +45,43 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
                 Intent i=new Intent(getApplicationContext(),paymentHistory.class);
                 startActivity(i);
             }});
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+     navigation= (BottomNavigationView) findViewById(R.id.navigation);
 
         navigation.setOnNavigationItemSelectedListener(this);
 
 
 
     }
-    @Override
+
+
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(profilecategory.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(profilecategory.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(profilecategory.this, profilecategory.class);
+            startActivity(profile);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+        @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(profilecategory.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(profilecategory.this,Categories_Activity.class);
                 startActivity(categorie) ;
@@ -72,7 +93,6 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
             case R.id.navigation_profile:
 
             case R.id.navigation_search:
-                finish();
 
                 Intent search=new Intent(profilecategory.this,searching.class);
                 startActivity(search) ;

@@ -28,6 +28,7 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
     ListView categoriesListView;
     marketObject marketObject1;
     marketAdapter marketAdapter1;
+    BottomNavigationView navigation;
     ArrayList<marketObject> marketObjectArrayList = new ArrayList<marketObject>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
         Intent intent=getIntent();
         String cat =intent.getStringExtra("categoryID");
         Toast.makeText(this, cat, Toast.LENGTH_SHORT).show();
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+   navigation= (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
         categoriesListView = (ListView) findViewById(R.id.listViewcategories);
         String url="http://"+ippage.ip+"//marketPage.php?categoryid="+cat;
@@ -49,6 +50,24 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
 
 
     }
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(marketsActivity.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(marketsActivity.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(marketsActivity.this, profilecategory.class);
+            startActivity(profile);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
 
 
     @Override
@@ -56,14 +75,12 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(marketsActivity.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(marketsActivity.this,Categories_Activity.class);
                 startActivity(categorie) ;
@@ -73,13 +90,12 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
-                finish();
+
 
                 Intent profile=new Intent(marketsActivity.this,profilecategory.class);
                 startActivity(profile) ;
                 break;
             case R.id.navigation_search:
-                finish();
 
                 Intent search=new Intent(marketsActivity.this,searching.class);
                 startActivity(search) ;

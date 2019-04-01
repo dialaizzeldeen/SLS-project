@@ -146,15 +146,15 @@
 
 
 
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
+        android:layout_weight="1"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="50dp"
-        android:layout_weight="1"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navigation"
+        android:layout_alignParentBottom="true"/>
 
 </LinearLayout>
