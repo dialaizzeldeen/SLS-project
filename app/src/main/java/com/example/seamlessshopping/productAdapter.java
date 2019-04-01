@@ -1,6 +1,8 @@
 package com.example.seamlessshopping;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -48,6 +50,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class productAdapter extends BaseAdapter {
     ArrayList<productsObject> productsObjectsArrayList;
     productsObject productsObj;
+    AlertDialog alertDialog1;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
@@ -55,7 +58,7 @@ public class productAdapter extends BaseAdapter {
 
     Context mContext;
     int positionitem;
-    final String url ="http://192.168.137.1/addToCart.php";
+    final String url ="http://192.168.1.6/addToCart.php";
     //Intent editIntent;
     // ImageButton btnDelete;
     //ImageButton btnCall;
@@ -98,12 +101,13 @@ public class productAdapter extends BaseAdapter {
         final TextView name = (TextView) convertView.findViewById(R.id.Name);
         final ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
         Button addtocart=(Button) convertView.findViewById(R.id.checkboxProduct);
-        getData();
+        //getData();
 
 
 
         addtocart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(id!="0"){
                 Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
                 RequestQueue queue = Volley.newRequestQueue(mContext);
                 StringRequest postRequest = new StringRequest(Request.Method.POST, url,
@@ -141,7 +145,20 @@ public class productAdapter extends BaseAdapter {
                         return params;
                     }
                 };
-                queue.add(postRequest);}});
+                queue.add(postRequest);}
+            else {
+                    AlertDialog.Builder builder= new AlertDialog.Builder(mContext);
+                    builder.setMessage("please sign in");
+                    builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        Intent i=new Intent(mContext,loginPage.class);
+                        mContext.startActivity(i);}
+                    });
+
+                    builder.setNegativeButton("Cancel", null);
+                    builder.show();
+
+                }}});
 
 
 

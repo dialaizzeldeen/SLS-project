@@ -1,5 +1,8 @@
 package com.example.seamlessshopping;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -41,6 +44,8 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
+    Context mContext;
+
     TextView textView;
     productsObject productObject;
     String url;
@@ -226,9 +231,18 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
                 break;
             case R.id.navigation_profile:
                 finish();
+                if(id!="0"){
 
-                Intent profile=new Intent(productMain.this,profilecategory.class);
-                startActivity(profile) ;
+                    Intent profile=new Intent(productMain.this,profilecategory.class);
+                    startActivity(profile) ;}
+                    else {
+                    Intent profile=new Intent(productMain.this,loginPage.class);
+                    startActivity(profile) ;
+
+
+                }
+
+
                 break;
             case R.id.navigation_search:
                 finish();

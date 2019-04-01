@@ -92,7 +92,8 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
                                 String idmarket=response.getString("idmarket");
-                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket);
+                                String marketfoodname=response.getString("marketfoodname");
+                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket,marketfoodname);
                                 ;
 
                                 newllyAddedObjectArrayList.add(newllyAddedObject2);

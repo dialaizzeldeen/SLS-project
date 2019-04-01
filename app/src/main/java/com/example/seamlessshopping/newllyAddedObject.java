@@ -7,6 +7,7 @@ public class newllyAddedObject {
     private String price;
     private String imageurl;
     private String idmarket;
+    private String marketfoodname;
 
     public String getIdmarket() {
         return idmarket;
@@ -16,12 +17,13 @@ public class newllyAddedObject {
         this.idmarket = idmarket;
     }
 
-    public newllyAddedObject(String name, int quantity, String price, String imageurl, String idmarket) {
+    public newllyAddedObject(String name, int quantity, String price, String imageurl, String idmarket,String marketfoodname) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.imageurl = imageurl;
         this.idmarket=idmarket;
+        this.marketfoodname=marketfoodname;
     }
     public newllyAddedObject(){
         this.name=name;}
