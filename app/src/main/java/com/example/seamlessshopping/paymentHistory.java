@@ -45,7 +45,7 @@ public class paymentHistory extends AppCompatActivity {
 
         getData();
 
-        final String url ="http://192.168.137.1/joinsmarketpayment.php?CustomerID="+id;
+        final String url ="http://"+ippage.ip+"/joinsmarketpayment.php?CustomerID="+id;
 
         RequestQueue queue = Volley.newRequestQueue(this);  //192.168.1.12
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
