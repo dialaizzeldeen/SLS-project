@@ -32,7 +32,7 @@
 
         </activity>
         <activity android:name=".profilecategory" />
-        <activity android:name=".timePage" />
+        <activity android:name=".timePage" > </activity>
         <activity android:name=".cart" />
         <activity android:name=".marketsActivity" />
         <activity android:name=".resturanatActivity" />
@@ -40,18 +40,18 @@
         <activity android:name=".searching" />
         <activity android:name=".paymentHistory" />
         <activity android:name=".signupPage" />
-        <activity android:name=".loginPage" >    <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".loginPage" >  <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>  </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".profile" />
         <activity android:name=".bankInfo" />
         <activity android:name=".productMain">
 
         </activity>
-        <activity android:name=".NewllyAdded" />
+       <activity android:name=".NewllyAdded" />
     </application>
 
 </manifest>
