@@ -128,7 +128,7 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:background="@drawable/logout" />
+                 />
 
             <TextView
                 android:layout_width="match_parent"
