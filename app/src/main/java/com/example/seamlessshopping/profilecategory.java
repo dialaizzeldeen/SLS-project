@@ -2,6 +2,7 @@ package com.example.seamlessshopping;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,12 @@ import android.widget.TextView;
 
 public class profilecategory extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener{
 
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+
+    private String id="0";
+    Context Context;
+    int positionitem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +27,7 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
         TextView pymentPage=findViewById(R.id.paymentid);
         TextView historyPage=findViewById(R.id.historyid);
         TextView carticon=findViewById(R.id.cartprofilecat);
+        TextView signout=findViewById(R.id.signout);
 
         openProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,6 +49,13 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
                 Intent i=new Intent(getApplicationContext(),paymentHistory.class);
                 startActivity(i);
             }});
+
+       signout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Savedata("0");
+            }});
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
         navigation.setOnNavigationItemSelectedListener(this);
@@ -83,6 +98,13 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
     }
 
 
+
+    public void Savedata(String s){
+        SharedPreferences sharedPreferences=Context.getApplicationContext().getSharedPreferences(shared_pres,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString(iduser,s.toString());
+        editor.apply();
+    }
 
 
 
