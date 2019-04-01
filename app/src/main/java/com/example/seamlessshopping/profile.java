@@ -50,7 +50,7 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
     Context mContext;
     int positionitem;
 
-
+    BottomNavigationView navigation;
 
 
     @Override
@@ -62,7 +62,7 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         String url="http://192.168.137.1/profilePage.php?userid="+id;
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+   navigation = (BottomNavigationView) findViewById(R.id.navigation);
         usernameP=(TextView) findViewById(R.id.usernameP);
         genderP=(EditText) findViewById(R.id.genderP);
         saveP=findViewById(R.id.saveP);
@@ -189,19 +189,22 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         queue.add(postRequest);
 
     }
+
+
+
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(profile.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(profile.this,Categories_Activity.class);
                 startActivity(categorie) ;
@@ -211,14 +214,12 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
-                finish();
 
 
                 Intent profile=new Intent(profile.this,profilecategory.class);
                 startActivity(profile) ;
                 break;
             case R.id.navigation_search:
-                finish();
 
 
                 Intent search=new Intent(profile.this,searching.class);

@@ -1,7 +1,11 @@
 package com.example.seamlessshopping;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,11 +25,11 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
-public class questions extends AppCompatActivity {
+public class questions extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     EditText locQ,timeQ,dataQ;
     Button sumbitQ;
-    String url="http://192.168.1.6:8978/";
-
+    String url="http://"+ippage.ip+":8978/";
+BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,9 @@ public class questions extends AppCompatActivity {
         timeQ=findViewById(R.id.timeID);
         dataQ=findViewById(R.id.dateID);
         sumbitQ=findViewById(R.id.submitQuestion);
+        navigation= (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
+
 
         sumbitQ.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +51,23 @@ public class questions extends AppCompatActivity {
             }
         });
     }
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(questions.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
 
+            Intent categorie = new Intent(questions.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(questions.this, profilecategory.class);
+            startActivity(profile);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
 
 
 
@@ -94,5 +117,36 @@ public class questions extends AppCompatActivity {
             Toast.makeText(questions.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+
+                Intent home =new Intent(questions.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+
+                Intent categorie=new Intent(questions.this,Categories_Activity.class);
+                startActivity(categorie) ;
+
+
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+
+
+
+                Intent profile=new Intent(questions.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+
+        }
+        return false;
     }
 }

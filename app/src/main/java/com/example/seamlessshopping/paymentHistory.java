@@ -1,5 +1,6 @@
 package com.example.seamlessshopping;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,18 +26,21 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class paymentHistory extends AppCompatActivity {
+public class paymentHistory extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
    ListView paymentHistoryListView;
     paymentHistoryAdapter paymentHistoryAdapters;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
+    BottomNavigationView navigation;
 
     ArrayList<paymentHistoryObject> paymentHistoryObjectArrayList = new ArrayList<paymentHistoryObject>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_history);
+        navigation= (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
        paymentHistoryListView = (ListView) findViewById(R.id.listViewpaymenthistory);
       //  dataSaving();
 
@@ -106,6 +110,24 @@ paymentHistoryObject paymentHistoryObjects=new paymentHistoryObject(dateofpurcha
 
 
     }
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(paymentHistory.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(paymentHistory.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(paymentHistory.this, profilecategory.class);
+            startActivity(profile);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");
@@ -116,6 +138,35 @@ paymentHistoryObject paymentHistoryObjects=new paymentHistoryObject(dateofpurcha
 
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+
+                Intent home =new Intent(paymentHistory.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
+
+            case R.id.navigation_Categories:
+
+                Intent categorie=new Intent(paymentHistory.this,Categories_Activity.class);
+                startActivity(categorie) ;
 
 
+                break;
+            case R.id.navigation_notifications:
+                break;
+            case R.id.navigation_profile:
+
+
+
+                Intent profile=new Intent(paymentHistory.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
+            case R.id.navigation_search:
+
+        }
+        return false;
+    }
 }

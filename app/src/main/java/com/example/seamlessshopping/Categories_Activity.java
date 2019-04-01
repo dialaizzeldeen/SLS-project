@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class Categories_Activity extends AppCompatActivity  implements AdapterView.OnItemClickListener , BottomNavigationView.OnNavigationItemSelectedListener  {
     ListView categoriesListView;
-    categoriesObject categoriesObjects;
+    categoriesObject categoriesObjects;  BottomNavigationView navigation;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
     categoriesAdapter categoriesAdapters;
     String url="http://"+ippage.ip+"//categoriesInfo.php";
@@ -37,7 +37,7 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+      navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
         categoriesAdapter categoriesAdapters;
@@ -53,6 +53,30 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
 
 
     }
+
+
+
+    public void onBackPressed() {
+        int seletedItemId =navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home =new Intent(Categories_Activity.this,NewllyAdded.class);
+            startActivity(home) ;
+        }else if(2== seletedItemId){
+
+        Intent categorie=new Intent(Categories_Activity.this,Categories_Activity.class);
+        startActivity(categorie) ;}
+        else if( 3 == seletedItemId){
+        Intent profile=new Intent(Categories_Activity.this,profilecategory.class);
+        startActivity(profile) ;}
+
+        else {
+            super.onBackPressed();
+        }
+
+
+
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int itemposition, long id) {
         categoriesObject objectView = categoriesObjectArrayList.get(itemposition);
