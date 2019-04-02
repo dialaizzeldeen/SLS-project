@@ -31,16 +31,16 @@
         <activity android:name=".questions">
 
         </activity>
-        <activity android:name=".profilecategory" />
+        <activity android:name=".profilecategory" ><intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".timePage" > </activity>
         <activity android:name=".cart" />
         <activity android:name=".marketsActivity" />
         <activity android:name=".resturanatActivity" />
-        <activity android:name=".Categories_Activity" ><intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter></activity>
+        <activity android:name=".Categories_Activity" ></activity>
         <activity android:name=".searching" />
         <activity android:name=".paymentHistory" />
         <activity android:name=".signupPage" />
