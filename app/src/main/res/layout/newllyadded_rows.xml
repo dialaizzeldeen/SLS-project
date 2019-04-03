@@ -1,16 +1,19 @@
 
 
-<android.support.v7.widget.CardView  android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:paddingLeft="5dp"
-android:orientation="vertical"
-android:foreground="@drawable/shaaape"
+<android.support.v7.widget.CardView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="5dp"
+    android:orientation="vertical"
+    android:foreground="@drawable/shaaape"
+    app:cardCornerRadius="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-xmlns:android="http://schemas.android.com/apk/res/android">
 
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_marginLeft="5dp"
+    android:layout_gravity="center"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -18,21 +21,32 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:id="@+id/imageurlNew"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:layout_marginLeft="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
 
         />
-    <TextView
-        android:id="@+id/PMNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="3dp"
-        android:padding="2dp"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:background="@mipmap/location_foreground" />
+        <TextView
+            android:id="@+id/PMNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:padding="2dp"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/NamePNew"

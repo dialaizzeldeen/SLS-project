@@ -1,10 +1,12 @@
 package com.example.seamlessshopping;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +19,9 @@ public class resturanatActivity extends AppCompatActivity implements AdapterView
     ListView categoriesListView;
     categoriesObject categoriesObjects;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +70,14 @@ navigation.setOnNavigationItemSelectedListener(this);
                 break;
             case R.id.navigation_profile:
                 finish();
+                if(id.equals("0")){
+                    Intent login=new Intent(resturanatActivity.this,loginPage.class);
+                    startActivity(login);
 
-                Intent profile=new Intent(resturanatActivity.this,profilecategory.class);
-                startActivity(profile) ;
+                }else {
+                    Intent profile = new Intent(resturanatActivity.this, profilecategory.class);
+                    startActivity(profile);
+                }
                 break;
             case R.id.navigation_search:
                 finish();
@@ -79,4 +89,9 @@ navigation.setOnNavigationItemSelectedListener(this);
         }
         return false;
     }
-}
+
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
+    }}

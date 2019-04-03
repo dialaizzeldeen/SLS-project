@@ -91,6 +91,14 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
+                if(id.equals("0")){
+                    Intent login=new Intent(profilecategory.this,loginPage.class);
+                    startActivity(login);
+
+                }else {
+                    Intent profile = new Intent(profilecategory.this, profilecategory.class);
+                    startActivity(profile);
+                }
 
             case R.id.navigation_search:
                 finish();

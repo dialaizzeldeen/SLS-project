@@ -214,10 +214,14 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
+                if(id.equals("0")){
+                    Intent login=new Intent(profile.this,loginPage.class);
+                    startActivity(login);
 
-
-                Intent profile=new Intent(profile.this,profilecategory.class);
-                startActivity(profile) ;
+                }else {
+                    Intent profile = new Intent(profile.this, profilecategory.class);
+                    startActivity(profile);
+                }
                 break;
             case R.id.navigation_search:
 

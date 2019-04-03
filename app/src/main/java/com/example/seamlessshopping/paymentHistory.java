@@ -158,11 +158,15 @@ paymentHistoryObject paymentHistoryObjects=new paymentHistoryObject(dateofpurcha
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
+                finish();
+                if(id.equals("0")){
+                    Intent login=new Intent(paymentHistory.this,loginPage.class);
+                    startActivity(login);
 
-
-
-                Intent profile=new Intent(paymentHistory.this,profilecategory.class);
-                startActivity(profile) ;
+                }else {
+                    Intent profile = new Intent(paymentHistory.this, profilecategory.class);
+                    startActivity(profile);
+                }
                 break;
             case R.id.navigation_search:
 

@@ -107,46 +107,8 @@ public class productAdapter extends BaseAdapter {
 
         addtocart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(id!="0"){
                 Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
-                RequestQueue queue = Volley.newRequestQueue(mContext);
-                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // response
-                                if(response=="true")
-                                    Toast.makeText(mContext, "connection problem", Toast.LENGTH_SHORT).show();
-                                else{
-                                    Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Error.Response", error.toString());
-
-                    }
-                }
-                ) {
-                    @Override
-                    protected Map<String, String> getParams()
-                    {
-                        Map<String, String>  params = new HashMap<String, String>();
-                        params.put("namekey", productsObj.getName().toString());
-                        params.put("pricekey", productsObj.getPrice().toString());
-                        params.put("quntitykey",productsObj.getQuantity().toString());
-                        params.put("imagekey",productsObj.getImageurl().toString());
-                        params.put("productId",productsObj.getProductId().toString());
-                        params.put("CustomerID",id.toString());
-                        params.put("marketId",productsObj.getMarketID().toString());
-                        params.put("marketName",productsObj.getMarketfoodname().toString());
-
-                        return params;
-                    }
-                };
-                queue.add(postRequest);}
-            else {
+                if(id.equals("0")) {
                     AlertDialog.Builder builder= new AlertDialog.Builder(mContext);
                     builder.setMessage("please sign in");
                     builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
@@ -158,7 +120,46 @@ public class productAdapter extends BaseAdapter {
                     builder.setNegativeButton("Cancel", null);
                     builder.show();
 
-                }}});
+                }
+            else {
+
+                    RequestQueue queue = Volley.newRequestQueue(mContext);
+                    StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // response
+                                    if(response=="true")
+                                        Toast.makeText(mContext, "connection problem", Toast.LENGTH_SHORT).show();
+                                    else{
+                                        Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Error.Response", error.toString());
+
+                        }
+                    }
+                    ) {
+                        @Override
+                        protected Map<String, String> getParams()
+                        {
+                            Map<String, String>  params = new HashMap<String, String>();
+                            params.put("namekey", productsObj.getName().toString());
+                            params.put("pricekey", productsObj.getPrice().toString());
+                            params.put("quntitykey",productsObj.getQuantity().toString());
+                            params.put("imagekey",productsObj.getImageurl().toString());
+                            params.put("productId",productsObj.getProductId().toString());
+                            params.put("CustomerID",id.toString());
+                            params.put("marketId",productsObj.getMarketID().toString());
+                            params.put("marketName",productsObj.getMarketfoodname().toString());
+
+                            return params;
+                        }
+                    };
+                    queue.add(postRequest);}}});
 
 
 

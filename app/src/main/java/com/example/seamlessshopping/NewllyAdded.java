@@ -198,10 +198,16 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                 break;
             case R.id.navigation_profile:
                 finish();
+                /*if(id.equals("0")){
+                    Intent login=new Intent(NewllyAdded.this,loginPage.class);
+                    startActivity(login);
 
-
-                Intent profile=new Intent(NewllyAdded.this,profilecategory.class);
-                startActivity(profile) ;
+                }else {
+                    Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
+                    startActivity(profile);
+                }*/
+                Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
+                startActivity(profile);
                 break;
             case R.id.navigation_search:
                 finish();

@@ -1,6 +1,7 @@
 package com.example.seamlessshopping;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,9 @@ import java.util.ArrayList;
 
 public class Categories_Activity extends AppCompatActivity  implements AdapterView.OnItemClickListener , BottomNavigationView.OnNavigationItemSelectedListener  {
     ListView categoriesListView;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
     categoriesObject categoriesObjects;  BottomNavigationView navigation;
     ArrayList<categoriesObject> categoriesObjectArrayList = new ArrayList<categoriesObject>();
     categoriesAdapter categoriesAdapters;
@@ -37,7 +41,9 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
+        getData();
       navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
         navigation.setOnNavigationItemSelectedListener(this);
 
         categoriesAdapter categoriesAdapters;
@@ -103,8 +109,14 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
                 break;
             case R.id.navigation_profile:
 
-                Intent profile=new Intent(Categories_Activity.this,profilecategory.class);
-                startActivity(profile) ;
+                if(id.equals("0")){
+                    Intent login=new Intent(Categories_Activity.this,loginPage.class);
+                    startActivity(login);
+
+                }else {
+                    Intent profile = new Intent(Categories_Activity.this, profilecategory.class);
+                    startActivity(profile);
+                }
                 break;
             case R.id.navigation_search:
                 Intent search=new Intent(Categories_Activity.this,searching.class);
@@ -168,5 +180,10 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
 
         // Access the RequestQueue through your singleton class.
         queue.add(jsObjRequest);
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 }

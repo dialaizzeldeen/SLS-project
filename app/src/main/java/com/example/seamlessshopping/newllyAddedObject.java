@@ -2,9 +2,12 @@ package com.example.seamlessshopping;
 
 public class newllyAddedObject {
     private String name;
-    private int quantity;
-    private int id;
+    private Integer quantity;
+    private Integer id;
     private String price;
+    private String imageurl;
+    private String idmarket;
+    private String marketfoodname;
 
     public String getMarketfoodname() {
         return marketfoodname;
@@ -14,9 +17,7 @@ public class newllyAddedObject {
         this.marketfoodname = marketfoodname;
     }
 
-    private String imageurl;
-    private String idmarket;
-    private String marketfoodname;
+
 
     public String getIdmarket() {
         return idmarket;
@@ -37,29 +38,35 @@ public class newllyAddedObject {
     public newllyAddedObject(){
         this.name=name;}
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
+
 
     public String getName() {
         return name;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public String getPrice() {
         return price;
