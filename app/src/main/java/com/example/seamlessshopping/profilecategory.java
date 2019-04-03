@@ -2,16 +2,24 @@ package com.example.seamlessshopping;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class profilecategory extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener{
 
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+
+    private String id="0";
+    int positionitem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +28,9 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
         TextView pymentPage=findViewById(R.id.paymentid);
         TextView historyPage=findViewById(R.id.historyid);
         TextView carticon=findViewById(R.id.cartprofilecat);
+        TextView signout=findViewById(R.id.signout);
+        getData();
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 
         openProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,6 +52,16 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
                 Intent i=new Intent(getApplicationContext(),paymentHistory.class);
                 startActivity(i);
             }});
+
+       signout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent i=new Intent(getApplicationContext(),NewllyAdded.class);
+                startActivity(i);
+                Savedata("0");
+            }});
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
         navigation.setOnNavigationItemSelectedListener(this);
@@ -83,6 +104,18 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
     }
 
 
+
+    public void Savedata(String s){
+        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences(shared_pres,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString(iduser,s.toString());
+        editor.apply();
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
+    }
 
 
 
