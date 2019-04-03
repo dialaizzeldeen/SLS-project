@@ -63,7 +63,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         navigation.setOnNavigationItemSelectedListener(this);
 
         gridView = (GridView) findViewById(R.id.gridViewNew);
-        dataSaving(url = "http://"+ippage.ip+"/newllyAdded.php");
+        dataSaving(url = "http://192.168.1.9/newllyAdded.php");
         gridView.setAdapter(newllyAddedAdapter1);
     }
     private void dataSaving(String url) {
