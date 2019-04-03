@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 android:layout_weight="8"
-    android:background="#00000000"
+    android:background="#0CF39311"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -53,13 +53,15 @@ android:layout_weight="8"
         />
 
 
-    <GridView
+    <ListView
         android:layout_weight="3"
 
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="470dp"
         android:layout_marginTop="80dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:horizontalSpacing="10dp"
         android:numColumns="2"
         android:scrollbarStyle="outsideOverlay"

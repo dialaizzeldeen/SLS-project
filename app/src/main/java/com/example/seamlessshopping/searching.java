@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,7 @@ import java.util.Comparator;
 
 
 public class searching extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
-    GridView gridView;
+  ListView gridView;
     private static final String NEW_LINE = "\n\n";
 
     TextView textView;
@@ -131,7 +132,7 @@ navigation.setOnNavigationItemSelectedListener(this);
 
 
 
-        gridView = (GridView) findViewById(R.id.gridView);
+        gridView = (ListView) findViewById(R.id.gridView);
         // dataSaving(url = "http://192.168.1.12/joinsmarketproducts.php");
         searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
         searchAdapter.notifyDataSetChanged();

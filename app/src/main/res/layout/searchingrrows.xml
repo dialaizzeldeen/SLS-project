@@ -1,45 +1,53 @@
-<android.support.v7.widget.CardView android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="5dp"
-    android:orientation="vertical"
-    android:foreground="@drawable/shaaape"
-    app:cardCornerRadius="15dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="#0CF39311"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="horizontal"
+    android:paddingLeft="5dp">
+
+
+    <ImageView
+        android:id="@+id/imageurl"
+        android:layout_width="163dp"
+        android:layout_height="178dp"
+
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+
+        />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_height="match_parent"
+        android:layout_width="198dp"
+        android:layout_height="176dp"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageurl"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-
-            />
 
         <TextView
             android:id="@+id/Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="3dp"
-            android:padding="2dp"
+            android:padding="1dp"
             android:textColor="#000000"
             android:textSize="20dp"
             android:textStyle="bold" />
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="45dp"
+
                 android:background="@mipmap/location_foreground" />
+
             <TextView
                 android:id="@+id/marketName"
                 android:layout_width="wrap_content"
@@ -48,12 +56,11 @@
                 android:layout_marginTop="3dp"
                 android:padding="2dp"
                 android:textColor="#000000"
-                android:textSize="15dp"
-                />
-
+                android:textSize="15dp" />
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,11 +81,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:textStyle="bold"
                 android:padding="2dp"
                 android:textColor="#000000"
                 android:textSize="15dp"
-                />
+                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/addQuantity"
@@ -103,13 +109,13 @@
             android:textStyle="bold" />
 
         <Button
-            android:layout_width="50dp"
-            android:text="Add"
-            android:background="@drawable/button"
             android:id="@+id/checkboxProduct"
+            android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            />
-    </LinearLayout></android.support.v7.widget.CardView>
+            android:background="@drawable/button"
+            android:text="Add" />
+    </LinearLayout>
+</LinearLayout>
 
 
