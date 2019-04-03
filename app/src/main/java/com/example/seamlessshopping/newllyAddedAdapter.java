@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class newllyAddedAdapter extends BaseAdapter {
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
-    String url="http://192.168.1.6/update.php";
+    String url="http://"+ippage.ip+"/update.php";
 
     Context mContext;
     int positionitem;
@@ -75,6 +76,65 @@ public class newllyAddedAdapter extends BaseAdapter {
         TextView productnameNew=(TextView)convertView.findViewById(R.id.NamePNew);
         TextView pmNew=(TextView)convertView.findViewById(R.id.PMNew);
         TextView priceNew=(TextView)convertView.findViewById(R.id.priceNew);
+        Button buttonNew =(Button)convertView.findViewById(R.id.checkboxNew);
+        getData();
+
+
+        buttonNew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String url ="http://"+ippage.ip+"/addToCart.php";
+                if(id.equals("0")) {
+                    AlertDialog.Builder builder= new AlertDialog.Builder(mContext);
+                    builder.setMessage("please sign in");
+                    builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent i=new Intent(mContext,loginPage.class);
+                            mContext.startActivity(i);}
+                    });
+
+                    builder.setNegativeButton("Cancel", null);
+                    builder.show();
+
+                }
+                {
+                    Toast.makeText(mContext, id+"in", Toast.LENGTH_SHORT).show();
+                    RequestQueue queue = Volley.newRequestQueue(mContext);
+                    StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // response
+                                    if(response=="true")
+                                        Toast.makeText(mContext, "connection problem", Toast.LENGTH_SHORT).show();
+                                    else{
+                                        Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Error.Response", error.toString());
+
+                        }
+                    }
+                    ) {
+                        @Override
+                        protected Map<String, String> getParams()
+                        {
+                            Map<String, String>  params = new HashMap<String, String>();
+                            params.put("namekey", newllyAddedObject1.getName().toString());
+                            params.put("pricekey", newllyAddedObject1.getPrice().toString());
+                            params.put("quntitykey",newllyAddedObject1.getQuantity().toString());
+                            params.put("imagekey",newllyAddedObject1.getImageurl().toString());
+                            params.put("productId",newllyAddedObject1.getId().toString());
+                            params.put("CustomerID",id.toString());
+                            params.put("marketId",newllyAddedObject1.getIdmarket().toString());
+                            params.put("marketName",newllyAddedObject1.getMarketfoodname().toString());
+
+                            return params;
+                        }
+                    };
+                    queue.add(postRequest);}}});
 
 
         imageurlNew.setOnClickListener(new View.OnClickListener() {

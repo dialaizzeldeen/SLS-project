@@ -3,6 +3,7 @@ package com.example.seamlessshopping;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Build;
 import android.os.Handler;
@@ -56,6 +57,9 @@ import java.util.Comparator;
 public class searching extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
   ListView gridView;
     private static final String NEW_LINE = "\n\n";
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
 
     TextView textView;
     productsObject productObject;
@@ -71,6 +75,7 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searching);
+        getData();
 
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -356,6 +361,7 @@ navigation.setOnNavigationItemSelectedListener(this);
     }
 
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -376,16 +382,27 @@ navigation.setOnNavigationItemSelectedListener(this);
                 case R.id.navigation_notifications:
                     break;
                 case R.id.navigation_profile:
+                    finish();
+                   /* if(id.equals("0")){
+                        Intent login=new Intent(searching.this,loginPage.class);
+                        startActivity(login);
 
-
-
-                    Intent profile=new Intent(searching.this,profilecategory.class);
-                    startActivity(profile) ;
+                    }else {
+                        Intent profile = new Intent(searching.this, profilecategory.class);
+                        startActivity(profile);
+                    }*/
+                    Intent profile = new Intent(searching.this, profilecategory.class);
+                    startActivity(profile);
                     break;
                 case R.id.navigation_search:
 
             }
             return false;
         }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
+    }
     }
 

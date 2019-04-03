@@ -1,6 +1,7 @@
 package com.example.seamlessshopping;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -29,11 +30,15 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
     marketObject marketObject1;
     marketAdapter marketAdapter1;
     BottomNavigationView navigation;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
     ArrayList<marketObject> marketObjectArrayList = new ArrayList<marketObject>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories_);
+        getData();
         Intent intent=getIntent();
         String cat =intent.getStringExtra("categoryID");
         Toast.makeText(this, cat, Toast.LENGTH_SHORT).show();
@@ -90,10 +95,14 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
+                if(id.equals("0")){
+                    Intent login=new Intent(marketsActivity.this,loginPage.class);
+                    startActivity(login);
 
-
-                Intent profile=new Intent(marketsActivity.this,profilecategory.class);
-                startActivity(profile) ;
+                }else {
+                    Intent profile = new Intent(marketsActivity.this, profilecategory.class);
+                    startActivity(profile);
+                }
                 break;
             case R.id.navigation_search:
 
@@ -158,5 +167,10 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
 
         // Access the RequestQueue through your singleton class.
         queue.add(jsObjRequest);
+    }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Log.d("response  ",id);
     }
 }

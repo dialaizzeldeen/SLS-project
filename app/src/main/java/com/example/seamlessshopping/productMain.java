@@ -232,10 +232,14 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
                 break;
             case R.id.navigation_profile:
                 finish();
+                if(id.equals("0")){
+                    Intent login=new Intent(productMain.this,loginPage.class);
+                    startActivity(login);
 
-                    Intent profile=new Intent(productMain.this,profilecategory.class);
-                    startActivity(profile) ;
-
+                }else {
+                 Intent profile = new Intent(productMain.this, profilecategory.class);
+                  startActivity(profile);
+                       }
 
 
                 break;
