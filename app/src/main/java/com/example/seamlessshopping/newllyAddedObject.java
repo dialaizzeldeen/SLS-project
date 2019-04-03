@@ -5,6 +5,15 @@ public class newllyAddedObject {
     private int quantity;
     private int id;
     private String price;
+
+    public String getMarketfoodname() {
+        return marketfoodname;
+    }
+
+    public void setMarketfoodname(String marketfoodname) {
+        this.marketfoodname = marketfoodname;
+    }
+
     private String imageurl;
     private String idmarket;
     private String marketfoodname;

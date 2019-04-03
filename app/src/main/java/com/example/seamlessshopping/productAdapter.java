@@ -101,7 +101,7 @@ public class productAdapter extends BaseAdapter {
         final TextView name = (TextView) convertView.findViewById(R.id.Name);
         final ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
         Button addtocart=(Button) convertView.findViewById(R.id.checkboxProduct);
-        //getData();
+        getData();
 
 
 

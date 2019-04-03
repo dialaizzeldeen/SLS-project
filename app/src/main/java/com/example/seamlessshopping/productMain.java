@@ -66,6 +66,7 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
         //url=" http://192.168.1.9/search.php?namesearch=m&idmarket=1";
 
         dataSaving(url);
+        getData();
 
 
 
@@ -231,16 +232,10 @@ public class productMain extends AppCompatActivity implements BottomNavigationVi
                 break;
             case R.id.navigation_profile:
                 finish();
-                if(id!="0"){
 
                     Intent profile=new Intent(productMain.this,profilecategory.class);
-                    startActivity(profile) ;}
-                    else {
-                    Intent profile=new Intent(productMain.this,loginPage.class);
                     startActivity(profile) ;
 
-
-                }
 
 
                 break;

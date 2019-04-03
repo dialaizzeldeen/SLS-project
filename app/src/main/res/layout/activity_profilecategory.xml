@@ -118,6 +118,27 @@
                 android:textColor="#E79B27"
                 android:textSize="20dp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="336dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                 />
+
+            <TextView
+                android:id="@+id/signout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="  sign out "
+                android:textColor="#E79B27"
+                android:textSize="20dp" />
+        </LinearLayout>
 
 
     </LinearLayout>

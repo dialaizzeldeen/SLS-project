@@ -12,6 +12,7 @@
     <RelativeLayout
         android:layout_marginTop="20dp"
         android:layout_width="380dp"
+
         android:layout_weight="2"
         android:layout_marginLeft="16dp"
 android:gravity="center"
@@ -39,7 +40,6 @@ android:gravity="center"
         android:layout_height="500dp"
         android:layout_above="@+id/navigation"
 
-        android:layout_below="@+id/nth"
         android:layout_marginTop="200dp"
         android:layout_marginBottom="-43dp"
         android:layout_weight="2"

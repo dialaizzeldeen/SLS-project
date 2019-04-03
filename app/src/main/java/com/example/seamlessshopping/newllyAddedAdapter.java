@@ -40,7 +40,7 @@ public class newllyAddedAdapter extends BaseAdapter {
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
-    String url="http://192.168.137.1/update.php";
+    String url="http://192.168.1.6/update.php";
 
     Context mContext;
     int positionitem;
@@ -72,7 +72,8 @@ public class newllyAddedAdapter extends BaseAdapter {
            newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
         convertView = LayoutInflater.from(mContext).inflate(R.layout.newllyadded_rows, null);
         ImageButton imageurlNew= (ImageButton)convertView.findViewById(R.id.imageurlNew);
-        TextView productnameNew=(TextView)convertView.findViewById(R.id.productnameNew);
+        TextView productnameNew=(TextView)convertView.findViewById(R.id.NamePNew);
+        TextView pmNew=(TextView)convertView.findViewById(R.id.PMNew);
         TextView priceNew=(TextView)convertView.findViewById(R.id.priceNew);
 
 
@@ -90,6 +91,9 @@ public class newllyAddedAdapter extends BaseAdapter {
 
         priceNew.setText(newllyAddedObject1.getPrice()+" NIS");
         productnameNew.setText(newllyAddedObject1.getName());
+        pmNew.setText(newllyAddedObject1.getMarketfoodname());
+
+
 
         String productImage = newllyAddedObject1.getImageurl();
 
