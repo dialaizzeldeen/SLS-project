@@ -4,16 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00000000"
     android:layout_weight="8"
+
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:fillViewport="true"
+    android:scrollbars="horizontal|vertical" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:layout_height="match_parent">
     <RelativeLayout
         android:layout_marginTop="10dp"
-        android:layout_width="330dp"
+        android:layout_width="380dp"
         android:layout_weight="2"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="10dp"
 android:gravity="center"
         android:layout_height="200dp">
         <android.support.v4.view.ViewPager
@@ -36,33 +48,33 @@ android:gravity="center"
     <GridView
         android:id="@+id/gridViewNew"
         android:layout_width="400dp"
-        android:layout_height="500dp"
-        android:layout_above="@+id/navigation"
+        android:layout_height="430dp"
+
 android:foregroundGravity="center"
         android:layout_below="@+id/nth"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="60dp"
         android:layout_marginTop="220dp"
         android:layout_weight="2"
-        android:horizontalSpacing="3dp"
+        android:horizontalSpacing="2dp"
         android:numColumns="2"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
-        android:verticalScrollbarPosition="right"
-        android:verticalSpacing="3dp" />
+        android:verticalSpacing="2dp" />
+        </RelativeLayout>
+    </ScrollView>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp"
-
+        android:layout_marginBottom="0dp"
         android:layout_weight="2"
         android:background="?android:attr/windowBackground"
+        android:foregroundGravity="bottom"
         app:menu="@menu/navigation" />
 
 </RelativeLayout>
