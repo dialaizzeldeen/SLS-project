@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:layout_weight="8"
-    android:background="#00000000"
+    android:background="#0CF39311"
     android:orientation="vertical"
     tools:context=".signupPage">
 

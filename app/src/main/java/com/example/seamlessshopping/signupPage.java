@@ -46,6 +46,54 @@ public class signupPage extends AppCompatActivity {
 
     }
     public void onSginup(View v){
+
+
+        boolean isValidate = true;
+        if (username.getText().toString().equals("")) {
+            isValidate = false;
+            //  errorName.setVisibility(View.VISIBLE);
+            username.setError("Error");
+        }
+
+        if (email.equals("")) {
+            isValidate = false;
+            //  errorMail.setVisibility(View.VISIBLE);
+            email.setError("Error");
+        }
+
+        if (Fname.getText().equals("")) {
+            isValidate = false;
+            //  errorLastname.setVisibility(View.VISIBLE);
+            Fname.setError("Error");
+        }
+        if (Lname.getText().equals("")) {
+            isValidate = false;
+            // errorFirstname.setVisibility(View.VISIBLE);
+            Lname.setError("Error");
+        }
+
+        if (phoneNo.getText().equals("")) {
+            isValidate = false;
+            //   errorphoneno.setVisibility(View.VISIBLE);
+            phoneNo.setError("Error");
+        }
+
+        if (password.getText().equals("")) {
+            isValidate = false;
+            // passworderror.setVisibility(View.VISIBLE);
+            password.setError("Error");
+        }
+
+        if (ippage.isRegexValidate(email.getText().toString()) != true) {
+            isValidate = false;
+            // errorMail.setVisibility(View.VISIBLE);
+            email.setError("Error");
+        }
+        if (isValidate == true) {
+            onSgin(signup_url);
+        }
+    }
+    public void onSgin(String signup_url){
         Log.i("Response",email.toString());
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -78,6 +126,10 @@ public class signupPage extends AppCompatActivity {
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<String, String>();
+
+
+
+
                 params.put("fnameKey",Fname.getText().toString());
                 params.put("lnameKey",Lname.getText().toString());
                 params.put("usernamekey",username.getText().toString());

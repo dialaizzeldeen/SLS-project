@@ -4,6 +4,7 @@
     android:paddingLeft="5dp"
     android:orientation="vertical"
     android:foreground="@drawable/shaaape"
+
     app:cardCornerRadius="15dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 

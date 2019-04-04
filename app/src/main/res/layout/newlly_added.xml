@@ -5,32 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="8"
-
-
+    android:background="#0CF39311"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <ScrollView
-        android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:fillViewport="true"
-    android:scrollbars="horizontal|vertical" >
+<scrollview      android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
+>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_weight="5"
             android:gravity="center"
             android:layout_height="match_parent">
     <RelativeLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_width="380dp"
         android:layout_weight="2"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="18dp"
 android:gravity="center"
-        android:layout_height="200dp">
+        android:layout_height="150dp">
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
-
+            android:isScrollContainer="true"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentTop="true" />
@@ -45,26 +41,29 @@ android:gravity="center"
     </RelativeLayout>
 
 
-    <GridView
-        android:id="@+id/gridViewNew"
-        android:layout_width="400dp"
-        android:layout_height="430dp"
+            <GridView
+                android:id="@+id/gridViewNew"
+                android:layout_width="400dp"
+                android:layout_height="385dp"
 
-android:foregroundGravity="center"
-        android:layout_below="@+id/nth"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="220dp"
-        android:layout_weight="2"
-        android:horizontalSpacing="2dp"
-        android:numColumns="2"
-        android:verticalSpacing="2dp" />
+
+                android:layout_below="@+id/nth"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="65dp"
+                android:layout_marginTop="195dp"
+                android:layout_marginEnd="33dp"
+                android:layout_marginRight="65dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="2"
+                android:foregroundGravity="center"
+                android:horizontalSpacing="2dp"
+                android:numColumns="2"
+                android:verticalSpacing="2dp" />
         </RelativeLayout>
-    </ScrollView>
+    </scrollview>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

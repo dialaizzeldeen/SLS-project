@@ -187,7 +187,6 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(NewllyAdded.this,Categories_Activity.class);
                 startActivity(categorie) ;
@@ -197,7 +196,6 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
-                finish();
                 /*if(id.equals("0")){
                     Intent login=new Intent(NewllyAdded.this,loginPage.class);
                     startActivity(login);
@@ -210,7 +208,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                 startActivity(profile);
                 break;
             case R.id.navigation_search:
-                finish();
+
 
                 Intent search=new Intent(NewllyAdded.this,searching.class);
                 startActivity(search) ;

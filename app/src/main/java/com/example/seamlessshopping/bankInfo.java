@@ -38,14 +38,12 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(bankInfo.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(bankInfo.this,Categories_Activity.class);
                 startActivity(categorie) ;
@@ -55,13 +53,11 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
             case R.id.navigation_notifications:
                 break;
             case R.id.navigation_profile:
-                finish();
 
                 Intent profile=new Intent(bankInfo.this,profilecategory.class);
                 startActivity(profile) ;
                 break;
             case R.id.navigation_search:
-                finish();
 
                 Intent search=new Intent(bankInfo.this,searching.class);
                 startActivity(search) ;

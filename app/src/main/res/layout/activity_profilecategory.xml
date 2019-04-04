@@ -1,158 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#00000000"
+    android:layout_height="wrap_content"
     android:layout_weight="8"
+    android:background="#0CF39311"
     android:orientation="vertical"
-    tools:context=".profilecategory"
-    >
+    android:scrollbars="horizontal"
+    tools:context=".profilecategory">
 
-    <LinearLayout
-        android:layout_width="353dp"
-        android:layout_height="663dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-
-
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="574dp"
+        android:fillViewport="true"
+       >
 
         <LinearLayout
-            android:layout_width="331dp"
-            android:layout_height="wrap_content"
+            android:layout_width="350dp"
+            android:layout_height="574dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="40dp"
 
-            android:layout_marginTop="60dp"
-           >
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:background="@drawable/updatepro" />
-
-            <TextView
-                android:id="@+id/profileid"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="Profile Update"
-                android:textColor="#E79B27"
-                android:textSize="20dp" />
+                android:layout_marginStart="10dp"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_marginTop="30dp"
+                    android:background="@mipmap/hey_launcher_round" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text=" Welcome , "
+                    android:textColor="#000"
+                    android:textSize="25dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="45dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/updatepro" />
+
+                <TextView
+                    android:id="@+id/profileid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Profile Update"
+
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
+
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/paymentinfo" />
+
+                <TextView
+                    android:id="@+id/paymentid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Payment Information"
+
+                    android:textColor="#000"
+                    android:textSize="20dp">
+
+                </TextView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/paymenthistory" />
+
+                <TextView
+                    android:id="@+id/historyid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Payment History"
+
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/carticon" />
+
+                <TextView
+                    android:id="@+id/cartprofilecat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="  Cart "
+
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/logout"
+
+                    />
+
+                <TextView
+                    android:id="@+id/signout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="  sign out "
+
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
 
         </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="336dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-
-
-            android:orientation="horizontal">
-
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:background="@drawable/paymentinfo" />
-
-            <TextView
-                android:id="@+id/paymentid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="Payment Information"
-                android:textColor="#E79B27"
-                android:textSize="20dp"></TextView>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="336dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-
-
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:background="@drawable/paymenthistory" />
-
-            <TextView
-                android:id="@+id/historyid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="Payment History"
-                android:textColor="#E79B27"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="336dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:background="@drawable/carticon" />
-
-            <TextView
-                android:id="@+id/cartprofilecat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="  Cart "
-                android:textColor="#E79B27"
-                android:textSize="20dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="336dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                 />
-
-            <TextView
-                android:id="@+id/signout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="  sign out "
-                android:textColor="#E79B27"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
+    </ScrollView>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="203dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
-
-</RelativeLayout>
+</LinearLayout>
 
