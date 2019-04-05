@@ -3,6 +3,8 @@ package com.example.seamlessshopping;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,8 +51,7 @@ errorusername=findViewById(R.id.errorusername);
 errormail=findViewById(R.id.errormail);
 errorphoneno=findViewById(R.id.errorphone);
 errorpassword=findViewById(R.id.errorpassword);
-
-errorpassword.setVisibility(View.INVISIBLE);
+        errorpassword.setVisibility(View.INVISIBLE);
         errorusername.setVisibility(View.INVISIBLE);
         errorfirstname.setVisibility(View.INVISIBLE);
         errorlastname.setVisibility(View.INVISIBLE);
@@ -58,42 +59,89 @@ errorpassword.setVisibility(View.INVISIBLE);
         errormail.setVisibility(View.INVISIBLE);
         signup_url="http://"+ippage.ip+"/signup.php";
 
+    }
+
+
+    class textwatcher implements TextWatcher {
+        int id;
+
+        public textwatcher(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            if (id == 1) {
+                errorusername.setVisibility(View.INVISIBLE);
+            }
+
+            if (id == 2) {
+                errorfirstname.setVisibility(View.INVISIBLE);
+            }
+            if (id == 3) {
+                errorlastname.setVisibility(View.INVISIBLE);
+            }
+            if (id == 4) {
+                errorpassword.setVisibility(View.INVISIBLE);
+            }
+
+            if (id == 5) {
+                errorphoneno.setVisibility(View.INVISIBLE);
+            }
+
+            if (id == 6) {
+                errormail.setVisibility(View.INVISIBLE);
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
 
     }
+
     public void onSginup(View v){
 
         boolean isValidate = true;
 
-        if (Fname.getText().equals("")) {
+        if (Fname.getText().toString().equals("")) {
             isValidate = false;
             errorfirstname.setVisibility(View.VISIBLE);
             //Fname.setError("Error");
         }
-        if (Lname.getText().equals("")) {
+        if (Lname.getText().toString().equals("")) {
             isValidate = false;
             errorlastname.setVisibility(View.VISIBLE);
             // Lname.setError("Error");
         }
         if (username.getText().toString().equals("")) {
-            isValidate = false;
             errorusername.setVisibility(View.VISIBLE);
             //  username.setError("Error");
         }
 
-        if (email.equals("")) {
+        isValidate = false;
+        if (email.getText().toString().equals("")) {
             isValidate = false;
             errormail.setVisibility(View.VISIBLE);
             // email.setError("Error");
         }
 
 
-        if (password.getText().equals("")) {
+        if (password.getText().toString().equals("")) {
             isValidate = false;
             errorpassword.setVisibility(View.VISIBLE);
             //  password.setError("Error");
         }
 
-        if (phoneNo.getText().equals("")) {
+        if (phoneNo.getText().toString().equals("")) {
             isValidate = false;
             errorphoneno.setVisibility(View.VISIBLE);
             // phoneNo.setError("Error");
@@ -105,6 +153,24 @@ errorpassword.setVisibility(View.INVISIBLE);
             errormail.setVisibility(View.VISIBLE);
             //email.setError("Error");
         }
+        int phoneId = 5;
+        int usernameId = 1;
+        int fisrtnameId = 2;
+        int lastnameId = 3;
+
+        int passwordid= 4;
+        int mailId = 6;
+      email.addTextChangedListener(new textwatcher(mailId));
+
+
+        username.addTextChangedListener(new textwatcher(usernameId));
+
+        Fname.addTextChangedListener(new textwatcher(fisrtnameId));
+        Lname.addTextChangedListener(new textwatcher(lastnameId));
+       phoneNo.addTextChangedListener(new textwatcher(phoneId));
+     password.addTextChangedListener(new textwatcher(passwordid));
+
+
 
 
 

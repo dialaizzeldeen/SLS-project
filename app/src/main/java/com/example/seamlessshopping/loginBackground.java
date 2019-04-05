@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -23,12 +24,17 @@ import java.net.URLEncoder;
 public class loginBackground extends AsyncTask<String,Void,String> {
     Context context;
     AlertDialog alertDialog1;
+    String username;
     loginBackground(Context ctx){
         context=ctx;
     }
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
+    public static final String usernamedb="idusername";
+    public static final String userpassworddb="iduserpassword";
 
+
+    String password;
 
     @Override
     protected String doInBackground(String... voids) {
@@ -36,8 +42,8 @@ public class loginBackground extends AsyncTask<String,Void,String> {
         String login_url="http://"+ippage.ip+"/loginPage.php"; //to conect with local host
         if(type.equals("login")){
             try {
-                String username =voids[1]; //get the username value from the edittext
-                String password =voids[2]; //get the password value from the edittext
+              username=voids[1]; //get the username value from the edittext
+         password =voids[2]; //get the password value from the edittext
 
                 URL url =new URL(login_url);
                 HttpURLConnection httpURLConnection1= (HttpURLConnection) url.openConnection();
@@ -96,10 +102,10 @@ public class loginBackground extends AsyncTask<String,Void,String> {
         {
             Intent i =new Intent(context,NewllyAdded.class);
             String USERIDD=aVoid.toString();
-            Savedata(USERIDD);
+            Savedata(USERIDD,password,username);
             context.startActivity(i);
 
-
+            Log.d("oss","pass"+password);
 
 
         }
@@ -110,10 +116,13 @@ public class loginBackground extends AsyncTask<String,Void,String> {
     protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
     }
-    public void Savedata(String s){
+    public void Savedata(String USERIDD, String passwords, String usernames){
         SharedPreferences sharedPreferences=context.getApplicationContext().getSharedPreferences(shared_pres,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString(iduser,s.toString());
+        editor.putString(iduser,USERIDD.toString());
+        editor.putString(userpassworddb,passwords);
+        editor.putString(usernamedb,usernames);
+
         editor.apply();
     }
 }

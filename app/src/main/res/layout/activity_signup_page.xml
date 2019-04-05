@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="320dp"
-    android:layout_height="match_parent"
+android:layout_width="match_parent"    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#00000000"
+    android:background="#0CF39311"
     android:gravity="center"
     android:layout_weight="10"
     android:orientation="vertical"
@@ -16,15 +15,43 @@
         android:layout_height="140dp"
         android:layout_gravity="center"
 
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="6dp"
         android:background="@mipmap/hey_launcher_round" />
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
+
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@drawable/shape"
+
+
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:hint="user name"
+            android:inputType="text"
+            android:singleLine="true"
+
+            />
+
+        <TextView
+            android:id="@+id/errorusername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your user name is error"
+            android:textColor="#EE1818" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:orientation="vertical">
 
         <EditText
@@ -51,10 +78,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
 
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:orientation="vertical">
 
         <EditText
@@ -79,41 +106,12 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
 
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:background="@drawable/shape"
-
-
-            android:clickable="true"
-            android:cursorVisible="true"
-            android:focusable="true"
-            android:hint="user name"
-            android:inputType="number"
-            android:singleLine="true"
-
-            />
-
-        <TextView
-            android:id="@+id/errorusername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your user name is error"
-            android:textColor="#EE1818" />
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:orientation="vertical">
 
         <EditText
@@ -137,9 +135,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:orientation="vertical">
 
         <EditText
@@ -164,9 +162,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:orientation="vertical">
 
 
@@ -197,10 +195,10 @@
 
     <Button
         android:id="@+id/signup"
-        android:layout_width="140dp"
+        android:layout_width="149dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="13dp"
         android:background="@drawable/button"
         android:onClick="onSginup"
         android:text="Create"

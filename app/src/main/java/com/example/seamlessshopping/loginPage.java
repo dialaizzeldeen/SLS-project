@@ -1,6 +1,7 @@
 package com.example.seamlessshopping;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -18,6 +19,13 @@ public class loginPage extends AppCompatActivity {
     TextView createAccount;
     Button singin;
     EditText username , password;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    public static final String usernamedb="idusername";
+    public static final String userpassworddb="iduserpassword";
+String id;
+String usernameshared;
+String passwordshared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +98,17 @@ public class loginPage extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
 
+
+
+
+
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+         id=sharedPreferences.getString(iduser,"0");
+       usernameshared=sharedPreferences.getString(usernamedb,"0");
+       passwordshared=sharedPreferences.getString(userpassworddb,"0");
+
+    }
     public void onLogin(View v){
         String usernameVal=username.getText().toString();
         String passwordVal=password.getText().toString();

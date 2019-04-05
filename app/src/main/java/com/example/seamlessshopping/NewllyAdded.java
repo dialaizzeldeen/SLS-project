@@ -39,7 +39,11 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id;
-
+    public static final String usernamedb="idusername";
+    public static final String userpassworddb="iduserpassword";
+    String idddd;
+    String usernameshared;
+    String passwordshared;
 
     private static ViewPager mPager;
     private static int currentPage = 0;
@@ -59,7 +63,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         init();
         navigation= (BottomNavigationView) findViewById(R.id.navigation);
         getData();
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, id+usernameshared+passwordshared, Toast.LENGTH_SHORT).show();
         navigation.setOnNavigationItemSelectedListener(this);
 
         gridView = (GridView) findViewById(R.id.gridViewNew);
@@ -146,8 +150,10 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
     }
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
-        id=sharedPreferences.getString(iduser,"0");
-        Log.d("response  ",id);
+        idddd=sharedPreferences.getString(iduser,"0");
+        usernameshared=sharedPreferences.getString(usernamedb,"0");
+        passwordshared=sharedPreferences.getString(userpassworddb,"0");
+
     }
     private void init() {
         for(int i=0;i<XMEN.length;i++)

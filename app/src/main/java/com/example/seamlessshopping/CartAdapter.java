@@ -76,6 +76,8 @@ public class CartAdapter extends BaseAdapter {
         convertView= LayoutInflater.from(mContext).inflate(R.layout.cart_rows,null);
         ImageView cartImage=convertView.findViewById(R.id.cartImage);
         TextView pnameCart=convertView.findViewById(R.id.pnameCart);
+        TextView marketnameCart=convertView.findViewById(R.id.marketnameCart);
+
         TextView quantityCart=convertView.findViewById(R.id.quantityCart);
         TextView priceCart=convertView.findViewById(R.id.priceCart);
         ImageButton addQuantityCart = convertView.findViewById(R.id.addQuantityCart);
@@ -157,7 +159,7 @@ public class CartAdapter extends BaseAdapter {
         priceCart.setText(cartObject1.getPriceCart()+"NIS");
         pnameCart.setText(cartObject1.getPnameCart().toString());
 
-
+marketnameCart.setText(cartObject1.getMarketName());
 
         String productImageCart=cartObject1.getCartImage();
         try {

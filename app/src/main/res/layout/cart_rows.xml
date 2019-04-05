@@ -26,16 +26,24 @@
                 android:id="@+id/cartImage"
                 android:layout_width="122dp"
                 android:layout_height="115dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="3dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
                 android:layout_marginTop="3dp" />
 
             <LinearLayout
                 android:layout_width="156dp"
                 android:layout_height="113dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="3dp"
+android:layout_gravity="center"                android:layout_marginTop="3dp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/marketnameCart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="market name "
+                    android:textColor="#000"
+                    android:textSize="20dp" />
 
 
                 <TextView
@@ -43,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
+                    android:layout_gravity="center"
                     android:text="product name "
                     android:textColor="#000"
                     android:textSize="20dp" />
@@ -99,7 +108,7 @@
             <LinearLayout
                 android:layout_width="71dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
