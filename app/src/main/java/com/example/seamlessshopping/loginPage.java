@@ -23,9 +23,9 @@ public class loginPage extends AppCompatActivity {
     public static final String iduser="iduesr";
     public static final String usernamedb="idusername";
     public static final String userpassworddb="iduserpassword";
-String id;
-String usernameshared;
-String passwordshared;
+String id=null;
+String usernameshared="";
+String passwordshared="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,7 @@ String passwordshared;
         username=findViewById(R.id.usernameID);
         password=findViewById(R.id.passwordID);
         singin=findViewById(R.id.signin);
+getData();
 
         createAccount =(TextView)findViewById(R.id.createAccount);
         SpannableString content = new SpannableString( createAccount.getText().toString() );
@@ -107,6 +108,12 @@ String passwordshared;
          id=sharedPreferences.getString(iduser,"0");
        usernameshared=sharedPreferences.getString(usernamedb,"0");
        passwordshared=sharedPreferences.getString(userpassworddb,"0");
+        if(!usernameshared.equals("")&&!passwordshared.equals(""))
+        {   Intent i =new Intent(loginPage.this,NewllyAdded.class);
+            startActivity(i);
+            Log.d("Dddd","ddd"+usernameshared+passwordshared);}
+        else{  Log.d( "Dddd","nnnnnnn");}
+
 
     }
     public void onLogin(View v){
@@ -115,6 +122,6 @@ String passwordshared;
         String type ="login";
 
         loginBackground loginBackground1= new loginBackground(this);
-        loginBackground1.execute(type,usernameVal,passwordVal);
-    }}
+        loginBackground1.execute(type,usernameVal,passwordVal);}
+    }
 

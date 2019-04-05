@@ -43,7 +43,7 @@
         <GridView
             android:id="@+id/gridViewNew"
             android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
 
 
             android:layout_below="@+id/nth"

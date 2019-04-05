@@ -117,6 +117,7 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
         SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences(shared_pres,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString(iduser,s.toString());
+
         editor.apply();
     }
     public void getData(){
