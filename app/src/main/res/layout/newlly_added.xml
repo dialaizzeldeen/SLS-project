@@ -8,10 +8,7 @@
     android:background="#0CF39311"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-<scrollview      android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_weight="5"
@@ -63,7 +60,6 @@ android:gravity="center"
                 android:numColumns="2"
                 android:verticalSpacing="2dp" />
         </RelativeLayout>
-    </scrollview>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

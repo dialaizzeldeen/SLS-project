@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,7 +30,7 @@ public class signupPage extends AppCompatActivity {
     Button signup;
     EditText email , username, Fname, Lname, phoneNo,password;
     String signup_url;
-
+TextView errormail , errorlastname,errorfirstname,errorphoneno,errorpassword,errorusername;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,54 +42,72 @@ public class signupPage extends AppCompatActivity {
         Lname=findViewById(R.id.addedLastName);
         phoneNo=findViewById(R.id.addedphone);
         password=findViewById(R.id.addedPassword);
+
+errorfirstname=findViewById(R.id.errorfname);
+errorlastname =findViewById(R.id.errorLastanme);
+errorusername=findViewById(R.id.errorusername);
+errormail=findViewById(R.id.errormail);
+errorphoneno=findViewById(R.id.errorphone);
+errorpassword=findViewById(R.id.errorpassword);
+
+errorpassword.setVisibility(View.INVISIBLE);
+        errorusername.setVisibility(View.INVISIBLE);
+        errorfirstname.setVisibility(View.INVISIBLE);
+        errorlastname.setVisibility(View.INVISIBLE);
+        errorphoneno.setVisibility(View.INVISIBLE);
+        errormail.setVisibility(View.INVISIBLE);
         signup_url="http://"+ippage.ip+"/signup.php";
 
 
     }
     public void onSginup(View v){
 
-
         boolean isValidate = true;
+
+        if (Fname.getText().equals("")) {
+            isValidate = false;
+            errorfirstname.setVisibility(View.VISIBLE);
+            //Fname.setError("Error");
+        }
+        if (Lname.getText().equals("")) {
+            isValidate = false;
+            errorlastname.setVisibility(View.VISIBLE);
+            // Lname.setError("Error");
+        }
         if (username.getText().toString().equals("")) {
             isValidate = false;
-            //  errorName.setVisibility(View.VISIBLE);
-            username.setError("Error");
+            errorusername.setVisibility(View.VISIBLE);
+            //  username.setError("Error");
         }
 
         if (email.equals("")) {
             isValidate = false;
-            //  errorMail.setVisibility(View.VISIBLE);
-            email.setError("Error");
+            errormail.setVisibility(View.VISIBLE);
+            // email.setError("Error");
         }
 
-        if (Fname.getText().equals("")) {
+
+        if (password.getText().equals("")) {
             isValidate = false;
-            //  errorLastname.setVisibility(View.VISIBLE);
-            Fname.setError("Error");
-        }
-        if (Lname.getText().equals("")) {
-            isValidate = false;
-            // errorFirstname.setVisibility(View.VISIBLE);
-            Lname.setError("Error");
+            errorpassword.setVisibility(View.VISIBLE);
+            //  password.setError("Error");
         }
 
         if (phoneNo.getText().equals("")) {
             isValidate = false;
-            //   errorphoneno.setVisibility(View.VISIBLE);
-            phoneNo.setError("Error");
+            errorphoneno.setVisibility(View.VISIBLE);
+            // phoneNo.setError("Error");
         }
 
-        if (password.getText().equals("")) {
-            isValidate = false;
-            // passworderror.setVisibility(View.VISIBLE);
-            password.setError("Error");
-        }
 
         if (ippage.isRegexValidate(email.getText().toString()) != true) {
             isValidate = false;
-            // errorMail.setVisibility(View.VISIBLE);
-            email.setError("Error");
+            errormail.setVisibility(View.VISIBLE);
+            //email.setError("Error");
         }
+
+
+
         if (isValidate == true) {
             onSgin(signup_url);
         }

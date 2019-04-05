@@ -3,118 +3,196 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
-    android:layout_height="670dp"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="#00000000"
     android:gravity="center"
+    android:layout_weight="10"
     android:orientation="vertical"
     tools:context=".signupPage">
 
     <ImageView
-        android:id="@+id/addImage"
-        android:layout_width="186dp"
-        android:layout_height="158dp"
+        android:layout_width="164dp"
+        android:layout_height="140dp"
         android:layout_gravity="center"
-        android:background="@drawable/heey"
-        android:scaleType="fitXY" />
 
-
-
-    <EditText
-        android:id="@+id/addedFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/shape"
-        android:clickable="true"
-        android:cursorVisible="true"
-        android:focusable="true"
-        android:hint="FirstName"
-        android:inputType="text"
-        android:singleLine="true" />
-    <EditText
-        android:id="@+id/addedLastName"
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/shape"
-        android:clickable="true"
+        android:layout_marginBottom="8dp"
+        android:background="@mipmap/hey_launcher_round" />
 
-        android:cursorVisible="true"
-        android:focusable="true"
-        android:hint="LastName"
-        android:inputType="text"
-        android:singleLine="true" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape"
-        android:clickable="true"
-        android:cursorVisible="true"
-        android:focusable="true"
-        android:hint="user name"
-        android:inputType="text"
-        android:singleLine="true"
-
-        />
-
-    <EditText
-        android:id="@+id/addedmail"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
 
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape"
-        android:clickable="true"
-        android:cursorVisible="true"
-        android:focusable="true"
-        android:hint="Email@Example.com"
-        android:inputType="textEmailAddress"
-        android:singleLine="true"
+        <EditText
+            android:id="@+id/addedFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
 
-        />
+            android:background="@drawable/shape"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:hint="FirstName"
+            android:inputType="text"
+            android:singleLine="true"
 
+            />
 
+        <TextView
+            android:id="@+id/errorfname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your first name is error"
+            android:textColor="#EE1818" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/addedPassword"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape"
-        android:clickable="true"
 
-        android:cursorVisible="true"
-        android:focusable="true"
-        android:hint="*********"
-        android:inputType="textPassword"
-        android:singleLine="true" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/addedLastName"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@drawable/shape"
+            android:clickable="true"
+
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:hint="LastName"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/errorLastanme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Last name is error"
+            android:textColor="#EE1818" />
+    </LinearLayout>
 
 
-    <EditText
-        android:id="@+id/addedphone"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape"
-        android:clickable="true"
-        android:cursorVisible="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@drawable/shape"
 
 
-        android:focusable="true"
-        android:hint="Mobile Number"
-        android:inputType="number"
-        android:singleLine="true"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:hint="user name"
+            android:inputType="number"
+            android:singleLine="true"
 
-        />
+            />
+
+        <TextView
+            android:id="@+id/errorusername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your user name is error"
+            android:textColor="#EE1818" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/addedmail"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@drawable/shape"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:hint="Email@Example.com"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/errormail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your mail is error"
+            android:textColor="#EE1818" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/addedPassword"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@drawable/shape"
+            android:clickable="true"
+
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:hint="*********"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/errorpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your password is error"
+            android:textColor="#EE1818" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
 
 
+        <EditText
+            android:id="@+id/addedphone"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@drawable/shape"
+            android:clickable="true"
+            android:cursorVisible="true"
 
 
+            android:focusable="true"
+            android:hint="Mobile Number"
+            android:inputType="number"
+            android:singleLine="true"
 
+            />
+
+        <TextView
+            android:id="@+id/errorphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your phone is error"
+            android:textColor="#EE1818" />
+    </LinearLayout>
 
 
     <Button
@@ -122,11 +200,11 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/button"
+        android:onClick="onSginup"
         android:text="Create"
-        android:textColor="#000000"
-        android:onClick="onSginup"/>
+        android:textColor="#000000" />
 
 
 </LinearLayout>
