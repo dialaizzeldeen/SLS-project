@@ -62,6 +62,7 @@ navigation.setOnNavigationItemSelectedListener(this);
 
         listViewCart = (ListView) findViewById(R.id.listViewCart);
         getData();
+
   String url ="http://192.168.1.9/cartPage.php?userid="+id;
       dataSaving(url);
 
@@ -131,6 +132,7 @@ navigation.setOnNavigationItemSelectedListener(this);
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");
+        Toast.makeText(this,"Eeeheloo id"+id,Toast.LENGTH_LONG).show();
         Log.d("response  ",id);
     }
 

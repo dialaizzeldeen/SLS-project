@@ -17,6 +17,8 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
 
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
+    public static final String usernamedb="idusername";
+    public static final String userpassworddb="iduserpassword";
 
     private String id="0";
     int positionitem;
@@ -55,10 +57,10 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
 
        signout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Savedata("0");
 
                 Intent i=new Intent(getApplicationContext(),NewllyAdded.class);
                 startActivity(i);
-                Savedata("0");
             }});
 
 
@@ -116,7 +118,9 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
     public void Savedata(String s){
         SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences(shared_pres,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString(iduser,s.toString());
+        sharedPreferences.edit().remove(iduser).apply();
+        sharedPreferences.edit().remove(usernamedb).apply();
+        sharedPreferences.edit().remove(userpassworddb).apply();
 
         editor.apply();
     }

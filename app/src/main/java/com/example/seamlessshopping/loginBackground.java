@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -100,15 +101,14 @@ public class loginBackground extends AsyncTask<String,Void,String> {
         }
         else
         {
-            Intent i =new Intent(context,NewllyAdded.class);
             String USERIDD=aVoid.toString();
             Savedata(USERIDD,password,username);
+
+Intent i =new Intent(context,NewllyAdded.class);
+
             context.startActivity(i);
 
-            Log.d("oss","pass"+password);
-
-
-        }
+    }
 
     }
 

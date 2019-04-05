@@ -43,8 +43,6 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
-    public static final String usernamedb="idusername";
-    public static final String userpassworddb="iduserpassword";
     private String id="0";
     Button saveP;
     ArrayList<ProfileObject> profileObjectArrayList;
@@ -61,7 +59,7 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         setContentView(R.layout.activity_profile);
         getData();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String url="http://"+ippage.ip+"/profilePage.php?userid="+id;
+        String url="http://"+ippage.ip+"/profilePage.php?id="+id;
 
 
    navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -139,8 +137,6 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");
-      sharedPreferences.edit().remove(usernamedb).commit();
-      sharedPreferences.edit().remove(userpassworddb).commit();
         Log.d("response  ",id);
     }
     public void upDate(View v){
