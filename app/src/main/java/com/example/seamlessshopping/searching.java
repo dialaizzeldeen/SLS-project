@@ -57,9 +57,7 @@ import java.util.Comparator;
 public class searching extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
   ListView gridView;
     private static final String NEW_LINE = "\n\n";
-    public static final String shared_pres="sharedPres";
-    public static final String iduser="iduesr";
-    private String id="0";
+
 
     TextView textView;
     productsObject productObject;
@@ -71,6 +69,10 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
     String categories="";
     BottomNavigationView navigation;
     TextView filter;
+    public static final String shared_pres="sharedPres";
+    public static final String iduser="iduesr";
+    private String id="0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

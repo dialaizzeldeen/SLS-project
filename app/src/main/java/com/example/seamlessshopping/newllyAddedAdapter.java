@@ -97,7 +97,7 @@ public class newllyAddedAdapter extends BaseAdapter {
 
                 }
                 {
-                    Toast.makeText(mContext, id+"in", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, id+"in", Toast.LENGTH_SHORT).show();
                     RequestQueue queue = Volley.newRequestQueue(mContext);
                     StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                             new Response.Listener<String>() {

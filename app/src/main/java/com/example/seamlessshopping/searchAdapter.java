@@ -40,6 +40,8 @@ public class searchAdapter extends BaseAdapter {
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
+    final String url ="http://"+ippage.ip+"/addToCart.php";
+
 
     public searchAdapter(Context context, ArrayList<productsObject> searchObjectArrayList) {
         this.mContext = context;
@@ -78,8 +80,6 @@ public class searchAdapter extends BaseAdapter {
         addSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
-                String url ="http://"+ippage.ip+"/addToCart.php";
-
                 if(id.equals("0")) {
                     AlertDialog.Builder builder= new AlertDialog.Builder(mContext);
                     builder.setMessage("please sign in");
@@ -132,6 +132,8 @@ public class searchAdapter extends BaseAdapter {
                         }
                     };
                     queue.add(postRequest);}}});
+
+
 
 
 
