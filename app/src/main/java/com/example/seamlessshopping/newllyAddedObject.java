@@ -9,6 +9,9 @@ public class newllyAddedObject {
     private String idmarket;
     private String marketfoodname;
 
+    public newllyAddedObject(Integer productId, String name, Integer quantity, String imageurl, String price, String marketName, Integer marketID) {
+    }
+
     public String getMarketfoodname() {
         return marketfoodname;
     }

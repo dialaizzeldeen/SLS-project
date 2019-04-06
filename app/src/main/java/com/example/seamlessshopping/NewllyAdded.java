@@ -1,6 +1,5 @@
 package com.example.seamlessshopping;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +51,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
     newllyAddedObject newllyAddedObject1;
     String url;
     newllyAddedAdapter newllyAddedAdapter1;
-    ArrayList<newllyAddedObject> newllyAddedObjectArrayList = new ArrayList<newllyAddedObject>();
+    ArrayList<productsObject> newllyAddedObjectArrayList = new ArrayList<productsObject>();
     BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,23 +83,36 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                             Log.i("Response",jsonObject+"");
                             StringBuilder textViewData = new StringBuilder();
                             //Parse the JSON response array by iterating over it
-
+                            productsObject newllyAddedObject2;
+                            newllyAddedAdapter newllyAddedAdapter;
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
-                                Integer id=response.getInt("id");
+
+                               // newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket,marketfoodname);
+                             //   ;
+
+
+
+                                Integer productId=response.getInt("id");
                                 String name = response.getString("name");
+                                String marketName=response.getString("marketfoodname");
+                                Integer marketID=response.getInt("idmarket");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
-                                String idmarket=response.getString("idmarket");
-                                String marketfoodname=response.getString("marketfoodname");
-                                newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket,marketfoodname);
-                                ;
+                                textViewData.append("quantity: ")
+                                        .append(quantity.toString()).append(NEW_LINE);
+                                textViewData.append("Name: ").append(name).append(NEW_LINE);
+                                textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
+                                textViewData.append("price: ").append(price).append(NEW_LINE);
 
+                              newllyAddedObject2= new productsObject(productId,name,quantity,imageurl,price,marketName,marketID);
                                 newllyAddedObjectArrayList.add(newllyAddedObject2);
-                                newllyAddedAdapter newllyAddedAdapter = new newllyAddedAdapter(NewllyAdded.this, newllyAddedObjectArrayList);
+                                 newllyAddedAdapter= new newllyAddedAdapter(NewllyAdded.this, newllyAddedObjectArrayList);
                                 newllyAddedAdapter.notifyDataSetChanged();
                                 gridView.setAdapter(newllyAddedAdapter);
+
+
 
 
 

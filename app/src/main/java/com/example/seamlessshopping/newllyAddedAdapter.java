@@ -35,8 +35,8 @@ import java.util.Map;
 import static android.content.Context.MODE_PRIVATE;
 
 public class newllyAddedAdapter extends BaseAdapter {
-    ArrayList<newllyAddedObject> newllyAddedObjectArrayList;
-    newllyAddedObject newllyAddedObject1;
+    ArrayList<productsObject> newllyAddedObjectArrayList;
+    productsObject newllyAddedObject1;
 
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
@@ -46,7 +46,7 @@ public class newllyAddedAdapter extends BaseAdapter {
     Context mContext;
     int positionitem;
 
-    public newllyAddedAdapter( Context mContext,ArrayList<newllyAddedObject> newllyAddedObjectArrayList) {
+    public newllyAddedAdapter( Context mContext,ArrayList<productsObject> newllyAddedObjectArrayList) {
         this.newllyAddedObjectArrayList = newllyAddedObjectArrayList;
         this.mContext = mContext;
     }
@@ -70,15 +70,28 @@ public class newllyAddedAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-           newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
-           getData();
+        final    productsObject newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
+
+        getData();
 
         convertView = LayoutInflater.from(mContext).inflate(R.layout.newllyadded_rows, null);
+
+
+
         ImageButton imageurlNew= (ImageButton)convertView.findViewById(R.id.imageurlNew);
         TextView productnameNew=(TextView)convertView.findViewById(R.id.NamePNew);
         TextView pmNew=(TextView)convertView.findViewById(R.id.PMNew);
         TextView priceNew=(TextView)convertView.findViewById(R.id.priceNew);
         Button buttonNew =(Button)convertView.findViewById(R.id.checkboxNew);
+        TextView quantity =(TextView)convertView.findViewById(R.id.quantityNew);
+        ImageButton addQuantitynew= convertView.findViewById(R.id.addQuantityNew);
+        ImageButton minusQuantitynew= convertView.findViewById(R.id.minusQuantityNew);
+
+
+
+        quantity.setText(newllyAddedObject1.getQuantity().toString());
+
+
 
 
         buttonNew.setOnClickListener(new View.OnClickListener() {
@@ -127,9 +140,9 @@ public class newllyAddedAdapter extends BaseAdapter {
                             params.put("pricekey", newllyAddedObject1.getPrice().toString());
                             params.put("quntitykey",newllyAddedObject1.getQuantity().toString());
                             params.put("imagekey",newllyAddedObject1.getImageurl().toString());
-                            params.put("productId",newllyAddedObject1.getId().toString());
+                            params.put("productId",newllyAddedObject1.getProductId().toString());
                             params.put("CustomerID",id);
-                            params.put("marketId",newllyAddedObject1.getIdmarket().toString());
+                            params.put("marketId",newllyAddedObject1.getMarketID().toString());
                             params.put("marketName",newllyAddedObject1.getMarketfoodname().toString());
 
                             return params;
@@ -138,22 +151,38 @@ public class newllyAddedAdapter extends BaseAdapter {
                     queue.add(postRequest);}}});
 
 
-        imageurlNew.setOnClickListener(new View.OnClickListener() {
+     /**   imageurlNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 newllyAddedObject1=newllyAddedObjectArrayList.get(position);
 
                 Intent i= new Intent(v.getContext(),productMain.class);
-                String idmarket =newllyAddedObject1.getIdmarket();
+                int idmarket =newllyAddedObject1.getMarketID();
                 i.putExtra("idmarket",idmarket);
                 v.getContext().startActivity(i);
-                Log.d("Response",idmarket);
+                Log.d("Response","gg"+idmarket);
                 }});
-
+**/
 
         priceNew.setText(newllyAddedObject1.getPrice()+" NIS");
         productnameNew.setText(newllyAddedObject1.getName());
         pmNew.setText(newllyAddedObject1.getMarketfoodname());
 
+
+        addQuantitynew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                newllyAddedObject1.setQuantity( newllyAddedObject1.getQuantity()+1);
+                notifyDataSetChanged();     }});
+
+
+
+
+
+
+        minusQuantitynew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(newllyAddedObject1.getQuantity() > 1){
+                    newllyAddedObject1.setQuantity( newllyAddedObject1.getQuantity()-1);}
+                notifyDataSetChanged();     }});
 
 
         String productImage = newllyAddedObject1.getImageurl();
