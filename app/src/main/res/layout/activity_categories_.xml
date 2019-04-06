@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/listViewcategories"
         android:layout_width="match_parent"
-        android:layout_height="610dp"
+        android:layout_height="700dp"
         android:layout_marginTop="10dp"
 
         android:layout_weight="2"
@@ -23,7 +23,7 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="wrap_content"
 
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"

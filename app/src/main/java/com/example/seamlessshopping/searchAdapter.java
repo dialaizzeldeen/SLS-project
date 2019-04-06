@@ -70,22 +70,21 @@ public class searchAdapter extends BaseAdapter {
         ImageButton addQuantity = (ImageButton) convertView.findViewById(R.id.addQuantity);
         ImageButton minusQuantity = (ImageButton) convertView.findViewById(R.id.minusQuantity);
         TextView marketName = (TextView) convertView.findViewById(R.id.marketName);
-
+getData();
         TextView price = (TextView) convertView.findViewById(R.id.price);
         TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
         TextView name = (TextView) convertView.findViewById(R.id.Name);
         ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
         Button addSearch=(Button)convertView.findViewById(R.id.checkboxProduct);
-
+        getData();
         addSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
                 if(id.equals("0")) {
                     AlertDialog.Builder builder= new AlertDialog.Builder(mContext);
                     builder.setMessage("please sign in");
                     builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Intent i=new Intent(mContext,loginPage.class);
+                            Intent i=new Intent(mContext,loginvolley.class);
                             mContext.startActivity(i);}
                     });
 
@@ -94,6 +93,7 @@ public class searchAdapter extends BaseAdapter {
 
                 }
                 else {
+                    Toast.makeText(mContext, id+"in", Toast.LENGTH_SHORT).show();
 
                     RequestQueue queue = Volley.newRequestQueue(mContext);
                     StringRequest postRequest = new StringRequest(Request.Method.POST, url,
@@ -124,7 +124,7 @@ public class searchAdapter extends BaseAdapter {
                             params.put("quntitykey",productsObj.getQuantity().toString());
                             params.put("imagekey",productsObj.getImageurl().toString());
                             params.put("productId",productsObj.getProductId().toString());
-                            params.put("CustomerID",id.toString());
+                            params.put("CustomerID",id);
                             params.put("marketId",productsObj.getMarketID().toString());
                             params.put("marketName",productsObj.getMarketfoodname().toString());
 
@@ -132,9 +132,6 @@ public class searchAdapter extends BaseAdapter {
                         }
                     };
                     queue.add(postRequest);}}});
-
-
-
 
 
         addQuantity.setOnClickListener(new View.OnClickListener() {

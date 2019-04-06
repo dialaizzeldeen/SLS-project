@@ -108,10 +108,10 @@ getData();
          id=sharedPreferences.getString(iduser,"0");
        usernameshared=sharedPreferences.getString(usernamedb,"0");
        passwordshared=sharedPreferences.getString(userpassworddb,"0");
-        if(!usernameshared.equals("")&&!passwordshared.equals("")&&!id.equals("0"))
+        if(!usernameshared.equals("")&&!passwordshared.equals("")&&!id.equals(""))
         {   Intent i =new Intent(loginPage.this,NewllyAdded.class);
             startActivity(i);
-            Log.d("Dddd","ddd"+usernameshared+passwordshared+id);}
+            Log.d("Dddd","ddd"+usernameshared+passwordshared);}
         else{  Log.d( "Dddd","nnnnnnn");}
 
 

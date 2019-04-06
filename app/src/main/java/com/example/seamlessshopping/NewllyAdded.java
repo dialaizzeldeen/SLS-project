@@ -63,7 +63,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         init();
         navigation= (BottomNavigationView) findViewById(R.id.navigation);
         getData();
-        Toast.makeText(this, id+usernameshared+passwordshared, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, idddd+usernameshared+passwordshared, Toast.LENGTH_SHORT).show();
         navigation.setOnNavigationItemSelectedListener(this);
 
         gridView = (GridView) findViewById(R.id.gridViewNew);

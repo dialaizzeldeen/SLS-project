@@ -57,7 +57,7 @@ android:layout_weight="8"
         android:id="@+id/gridView"
 
         android:layout_width="match_parent"
-        android:layout_height="565dp"
+        android:layout_height="575dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="85dp"
         android:layout_marginRight="15dp"

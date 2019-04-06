@@ -71,13 +71,14 @@ public class newllyAddedAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
            newllyAddedObject1 = newllyAddedObjectArrayList.get(position);
+           getData();
+
         convertView = LayoutInflater.from(mContext).inflate(R.layout.newllyadded_rows, null);
         ImageButton imageurlNew= (ImageButton)convertView.findViewById(R.id.imageurlNew);
         TextView productnameNew=(TextView)convertView.findViewById(R.id.NamePNew);
         TextView pmNew=(TextView)convertView.findViewById(R.id.PMNew);
         TextView priceNew=(TextView)convertView.findViewById(R.id.priceNew);
         Button buttonNew =(Button)convertView.findViewById(R.id.checkboxNew);
-        getData();
 
 
         buttonNew.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +89,7 @@ public class newllyAddedAdapter extends BaseAdapter {
                     builder.setMessage("please sign in");
                     builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Intent i=new Intent(mContext,loginPage.class);
+                            Intent i=new Intent(mContext,loginvolley.class);
                             mContext.startActivity(i);}
                     });
 
@@ -97,7 +98,7 @@ public class newllyAddedAdapter extends BaseAdapter {
 
                 }
                 {
-                    //Toast.makeText(mContext, id+"in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, id+"in", Toast.LENGTH_SHORT).show();
                     RequestQueue queue = Volley.newRequestQueue(mContext);
                     StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                             new Response.Listener<String>() {
@@ -127,7 +128,7 @@ public class newllyAddedAdapter extends BaseAdapter {
                             params.put("quntitykey",newllyAddedObject1.getQuantity().toString());
                             params.put("imagekey",newllyAddedObject1.getImageurl().toString());
                             params.put("productId",newllyAddedObject1.getId().toString());
-                            params.put("CustomerID",id.toString());
+                            params.put("CustomerID",id);
                             params.put("marketId",newllyAddedObject1.getIdmarket().toString());
                             params.put("marketName",newllyAddedObject1.getMarketfoodname().toString());
 

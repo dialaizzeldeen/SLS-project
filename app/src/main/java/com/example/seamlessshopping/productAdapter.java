@@ -113,8 +113,10 @@ public class productAdapter extends BaseAdapter {
                     builder.setMessage("please sign in");
                     builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                        Intent i=new Intent(mContext,loginPage.class);
-                        mContext.startActivity(i);}
+                  //      Intent i=new Intent(mContext,loginPage.class);
+                            Intent i=new Intent(mContext,loginvolley.class);
+
+                            mContext.startActivity(i);}
                     });
 
                     builder.setNegativeButton("Cancel", null);

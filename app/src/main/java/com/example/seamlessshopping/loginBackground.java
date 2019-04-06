@@ -55,6 +55,8 @@ public class loginBackground extends AsyncTask<String,Void,String> {
                 BufferedWriter bufferedWriter1=new BufferedWriter(new OutputStreamWriter(outputStream1,"UTF-8"));
                 String post_data= URLEncoder.encode("usernamekey","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"
                         +URLEncoder.encode("passwordkey","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+
+
                 bufferedWriter1.write(post_data);
                 bufferedWriter1.flush();
                 bufferedWriter1.close();
