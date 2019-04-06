@@ -184,21 +184,45 @@ navigation.setOnNavigationItemSelectedListener(this);
                             searchObjectArrayList.clear();
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject   response = responseArray.getJSONObject(i);
+                                Integer productId=response.getInt("id");
+                                String productname = response.getString("productname");
+                                String marketName=response.getString("marketname");
+                                Integer marketID=response.getInt("idmarket");
+                                Integer quantity = response.getInt("quantity");
+                                String imageurl = response.getString("imageurl");
+                                String price = response.getString("price");
+                                textViewData.append("quantity: ")
+                                        .append(quantity.toString()).append(NEW_LINE);
+                                textViewData.append("Name: ").append(productname).append(NEW_LINE);
+                                textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
+                                textViewData.append("price: ").append(price).append(NEW_LINE);
 
-                                String name = response.getString("productname");
+                                productObject = new productsObject(productId,productname,quantity,imageurl,price,marketName,marketID);
+                                searchObjectArrayList.add(productObject);
+                                    searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
+                                searchAdapter.notifyDataSetChanged();
+                                gridView.setAdapter(searchAdapter);
+
+
+
+
+
+
+
+                         /**       String name = response.getString("productname");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
                                 String marketfoodname = response.getString("marketname");
-                                productObject = new productsObject(name, quantity, imageurl, price, marketfoodname);
-                                searchObjectArrayList.add(productObject);
+                                productObject = new productsObject(name, quantity, imageurl, price, marketfoodname);**/
+                               // searchObjectArrayList.add(productObject);
 
                             }
 
-                            searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
+                    /**        searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
                             searchAdapter.notifyDataSetChanged();
                             gridView.setAdapter(searchAdapter);
-
+***/
                             //   textView.setText(textViewData.toString());
                             Log.d("response", "j" + textViewData);
 
