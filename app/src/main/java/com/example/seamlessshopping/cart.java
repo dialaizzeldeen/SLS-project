@@ -63,7 +63,7 @@ navigation.setOnNavigationItemSelectedListener(this);
         listViewCart = (ListView) findViewById(R.id.listViewCart);
         getData();
 
-  String url ="http://192.168.1.9/cartPage.php?userid="+id;
+  String url ="http://"+ippage.ip+"/cartPage.php?userid="+id;
       dataSaving(url);
 
 
