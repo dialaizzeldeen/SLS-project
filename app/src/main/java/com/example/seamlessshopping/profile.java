@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,12 +41,14 @@ import okhttp3.internal.Internal;
 public class profile extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener{
 
     TextView usernameP;
-    EditText  genderP,locationP,bdayP,mobileP,personalemailP;
+    EditText  fnameP,locationP,bdayP,mobileP,personalemailP,lnameP;
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
     Button saveP;
+    TextView errormail , errorlastname,errorfirstname,errorphoneno,errorpassword,errorusername;
+
     ArrayList<ProfileObject> profileObjectArrayList;
     ProfileObject profileObject1;
     Context mContext;
@@ -58,26 +62,137 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getData();
+        errorfirstname=findViewById(R.id.errorfname);
+        errorlastname =findViewById(R.id.errorLastanme);
+        errormail=findViewById(R.id.errormail);
+        errorphoneno=findViewById(R.id.errorphone);
+
+        errorfirstname.setVisibility(View.INVISIBLE);
+        errorlastname.setVisibility(View.INVISIBLE);
+        errorphoneno.setVisibility(View.INVISIBLE);
+        errormail.setVisibility(View.INVISIBLE);
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         String url="http://"+ippage.ip+"/profilePage.php?userid="+id;
 
 
+        dataSaving(url);
+
    navigation = (BottomNavigationView) findViewById(R.id.navigation);
         usernameP=(TextView) findViewById(R.id.usernameP);
-        genderP=(EditText) findViewById(R.id.genderP);
-        saveP=findViewById(R.id.saveP);
-
+      fnameP=(EditText) findViewById(R.id.fnameP);
+        lnameP=findViewById(R.id.lnameP);
         bdayP=(EditText) findViewById(R.id.bdayP);
         mobileP=(EditText)findViewById(R.id.mobileP);
         personalemailP=(EditText)findViewById(R.id.personalemailP);
+        saveP=findViewById(R.id.saveP);
 
         navigation.setOnNavigationItemSelectedListener(this);
 
 
-        dataSaving(url);
-
 
     }
+    class textwatcher implements TextWatcher {
+        int id;
+
+        public textwatcher(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            if (id == 1) {
+                errorusername.setVisibility(View.INVISIBLE);
+            }
+
+            if (id == 2) {
+                errorfirstname.setVisibility(View.INVISIBLE);
+            }
+            if (id == 3) {
+                errorlastname.setVisibility(View.INVISIBLE);
+            }
+            if (id == 4) {
+                errorpassword.setVisibility(View.INVISIBLE);
+            }
+
+            if (id == 5) {
+                errorphoneno.setVisibility(View.INVISIBLE);
+            }
+
+            if (id == 6) {
+                errormail.setVisibility(View.INVISIBLE);
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+
+    }
+
+    public void onSginup(View v){
+
+        boolean isValidate = true;
+
+        if (fnameP.getText().toString().equals("")) {
+            isValidate = false;
+            errorfirstname.setVisibility(View.VISIBLE);
+            //Fname.setError("Error");
+        }
+        if (lnameP.getText().toString().equals("")) {
+            isValidate = false;
+            errorlastname.setVisibility(View.VISIBLE);
+            // Lname.setError("Error");
+        }
+
+
+        isValidate = false;
+        if (personalemailP.getText().toString().equals("")) {
+            isValidate = false;
+            errormail.setVisibility(View.VISIBLE);
+            // email.setError("Error");
+        }
+
+
+        if (mobileP.getText().toString().equals("")) {
+            isValidate = false;
+            errorphoneno.setVisibility(View.VISIBLE);
+            // phoneNo.setError("Error");
+        }
+
+
+        if (ippage.isRegexValidate(personalemailP.getText().toString()) != true) {
+                isValidate = false;
+            errormail.setVisibility(View.VISIBLE);
+            //email.setError("Error");
+        }
+        int phoneId = 5;
+        int fisrtnameId = 2;
+        int lastnameId = 3;
+
+        int mailId = 6;
+
+
+
+        fnameP.addTextChangedListener(new textwatcher(fisrtnameId));
+       lnameP.addTextChangedListener(new textwatcher(lastnameId));
+        mobileP.addTextChangedListener(new textwatcher(phoneId));
+        personalemailP.addTextChangedListener(new textwatcher(mailId));
+
+
+
+
+
+        if (isValidate == true) {
+          upDate();
+        }}
     private void dataSaving(String url) {
 
 
@@ -99,11 +214,15 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
                                 JSONObject response = responseArray.getJSONObject(i);
                                 String name = response.getString("username");
                                 String personE=response.getString("personalemail");
-                                String gender = response.getString("gender");
+                                String Lname = response.getString("Lname");
+                                String Fname= response.getString("Fname");
+
                                 String bday = response.getString("bday");
                                 Integer mobile = response.getInt("mobile");
                                 usernameP.setText(name.toString());
-                                genderP.setText(gender.toString());
+                             fnameP.setText(Fname.toString());
+                                lnameP.setText(Lname.toString());
+
                                 bdayP.setText(bday.toString());
                                 mobileP.setText(mobile.toString());
                                 personalemailP.setText(personE.toString());
@@ -139,9 +258,9 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
     }
-    public void upDate(View v){
+    public void upDate(){
 
-        profileObject1= new ProfileObject(genderP.getText().toString(),bdayP.getText().toString(),mobileP.getText().toString(),personalemailP.getText().toString());
+        profileObject1= new ProfileObject(fnameP.getText().toString(),lnameP.getText().toString(),bdayP.getText().toString(),mobileP.getText().toString(),personalemailP.getText().toString());
         String emaill=profileObject1.getPersonalemailP();
 
         Log.i("Response",emaill);
@@ -176,8 +295,9 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("gender",profileObject1.getGenderP().toString());
+                params.put("Lname",profileObject1.getLname().toString());
                 params.put("userid",id.toString());
+                params.put("Fname",profileObject1.getFname().toString());
                 params.put("bday", profileObject1.getBdayP().toString());
                 params.put("mobile",profileObject1.getMobileP().toString());
                 params.put("personalemail",profileObject1.getPersonalemailP().toString());
