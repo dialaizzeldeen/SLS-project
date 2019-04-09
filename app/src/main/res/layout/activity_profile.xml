@@ -77,7 +77,6 @@
             android:layout_width="371dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -96,7 +95,7 @@
 
                 <EditText
                     android:id="@+id/fnameP"
-                    android:layout_width="230dp"
+                    android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="First name "
@@ -268,7 +267,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/button"
-                android:onClick="onSginup"
                 android:text="Save" />
 
 

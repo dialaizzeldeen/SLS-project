@@ -38,7 +38,7 @@ import java.util.Map;
 import okhttp3.internal.Internal;
 
 
-public class profile extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener{
+public class profile extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     TextView usernameP;
     EditText  fnameP,locationP,bdayP,mobileP,personalemailP,lnameP;
@@ -85,12 +85,70 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         mobileP=(EditText)findViewById(R.id.mobileP);
         personalemailP=(EditText)findViewById(R.id.personalemailP);
         saveP=findViewById(R.id.saveP);
-
+saveP.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(this);
 
 
 
     }
+
+    @Override
+    public void onClick(View v) {
+        boolean isValidate = true;
+
+        if (fnameP.getText().toString().equals("")) {
+            isValidate = false;
+            errorfirstname.setVisibility(View.VISIBLE);
+            //Fname.setError("Error");
+        }
+        if (lnameP.getText().toString().equals("")) {
+            isValidate = false;
+            errorlastname.setVisibility(View.VISIBLE);
+            // Lname.setError("Error");
+        }
+
+
+        if (personalemailP.getText().toString().equals("")) {
+            isValidate = false;
+            errormail.setVisibility(View.VISIBLE);
+            // email.setError("Error");
+        }
+
+
+        if (mobileP.getText().toString().equals("")) {
+            isValidate = false;
+            errorphoneno.setVisibility(View.VISIBLE);
+            // phoneNo.setError("Error");
+        }
+
+
+        if (ippage.isRegexValidate(personalemailP.getText().toString()) != true) {
+            isValidate = false;
+            errormail.setVisibility(View.VISIBLE);
+            //email.setError("Error");
+        }
+        int phoneId = 5;
+        int fisrtnameId = 2;
+        int lastnameId = 3;
+
+        int mailId = 6;
+
+
+
+        fnameP.addTextChangedListener(new textwatcher(fisrtnameId));
+        lnameP.addTextChangedListener(new textwatcher(lastnameId));
+        mobileP.addTextChangedListener(new textwatcher(phoneId));
+        personalemailP.addTextChangedListener(new textwatcher(mailId));
+
+
+        if (isValidate == true) {
+            upDate();
+            Intent profile = new Intent(profile.this, profilecategory.class);
+            startActivity(profile);
+        }
+
+    }
+
     class textwatcher implements TextWatcher {
         int id;
 
@@ -137,62 +195,63 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
 
     }
 
-    public void onSginup(View v){
-
-        boolean isValidate = true;
-
-        if (fnameP.getText().toString().equals("")) {
-            isValidate = false;
-            errorfirstname.setVisibility(View.VISIBLE);
-            //Fname.setError("Error");
-        }
-        if (lnameP.getText().toString().equals("")) {
-            isValidate = false;
-            errorlastname.setVisibility(View.VISIBLE);
-            // Lname.setError("Error");
-        }
-
-
-        isValidate = false;
-        if (personalemailP.getText().toString().equals("")) {
-            isValidate = false;
-            errormail.setVisibility(View.VISIBLE);
-            // email.setError("Error");
-        }
-
-
-        if (mobileP.getText().toString().equals("")) {
-            isValidate = false;
-            errorphoneno.setVisibility(View.VISIBLE);
-            // phoneNo.setError("Error");
-        }
-
-
-        if (ippage.isRegexValidate(personalemailP.getText().toString()) != true) {
-                isValidate = false;
-            errormail.setVisibility(View.VISIBLE);
-            //email.setError("Error");
-        }
-        int phoneId = 5;
-        int fisrtnameId = 2;
-        int lastnameId = 3;
-
-        int mailId = 6;
 
 
 
-        fnameP.addTextChangedListener(new textwatcher(fisrtnameId));
-       lnameP.addTextChangedListener(new textwatcher(lastnameId));
-        mobileP.addTextChangedListener(new textwatcher(phoneId));
-        personalemailP.addTextChangedListener(new textwatcher(mailId));
+    public void upDate(){
+
+        profileObject1= new ProfileObject(fnameP.getText().toString(),lnameP.getText().toString(),bdayP.getText().toString(),mobileP.getText().toString(),personalemailP.getText().toString());
+        String emaill=profileObject1.getPersonalemailP();
+
+        Log.i("Response",emaill);
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        String urll = "http://"+ippage.ip+"/update.php";
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, urll,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        if(response=="true")
+                            Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
+                        else{
+                            Toast.makeText(getApplicationContext(), "data updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Lname",profileObject1.getLname().toString());
+                params.put("userid",id.toString());
+                params.put("Fname",profileObject1.getFname().toString());
+                params.put("bday", profileObject1.getBdayP().toString());
+                params.put("mobile",profileObject1.getMobileP().toString());
+                params.put("personalemail",profileObject1.getPersonalemailP().toString());
+
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+
+    }
 
 
 
-
-
-        if (isValidate == true) {
-          upDate();
-        }}
     private void dataSaving(String url) {
 
 
@@ -257,57 +316,6 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");
         Log.d("response  ",id);
-    }
-    public void upDate(){
-
-        profileObject1= new ProfileObject(fnameP.getText().toString(),lnameP.getText().toString(),bdayP.getText().toString(),mobileP.getText().toString(),personalemailP.getText().toString());
-        String emaill=profileObject1.getPersonalemailP();
-
-        Log.i("Response",emaill);
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-        String urll = "http://"+ippage.ip+"/update.php";
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        StringRequest postRequest = new StringRequest(Request.Method.POST, urll,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
-                        if(response=="true")
-                            Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
-                        else{
-                            Toast.makeText(getApplicationContext(), "data updated", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.toString());
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Lname",profileObject1.getLname().toString());
-                params.put("userid",id.toString());
-                params.put("Fname",profileObject1.getFname().toString());
-                params.put("bday", profileObject1.getBdayP().toString());
-                params.put("mobile",profileObject1.getMobileP().toString());
-                params.put("personalemail",profileObject1.getPersonalemailP().toString());
-
-
-                return params;
-            }
-        };
-        queue.add(postRequest);
-
     }
 
 
