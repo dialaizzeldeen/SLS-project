@@ -1,5 +1,7 @@
 package com.example.seamlessshopping;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +15,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,21 +32,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.internal.Internal;
 
 
 public class profile extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     TextView usernameP;
-    EditText  fnameP,locationP,bdayP,mobileP,personalemailP,lnameP;
+    EditText  fnameP;
+    EditText locationP;
+    TextView bdayP;
+    EditText mobileP;
+    EditText personalemailP;
+    EditText lnameP;
     private static final String NEW_LINE = "\n\n";
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
+    private int year, month, day;
+    private DatePicker datePicker;
+    private Calendar calendar;
     private String id="0";
     Button saveP;
     TextView errormail , errorlastname,errorfirstname,errorphoneno,errorpassword,errorusername;
@@ -62,6 +70,12 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getData();
+
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+
         errorfirstname=findViewById(R.id.errorfname);
         errorlastname =findViewById(R.id.errorLastanme);
         errormail=findViewById(R.id.errormail);
@@ -81,7 +95,7 @@ public class profile extends AppCompatActivity implements  BottomNavigationView.
         usernameP=(TextView) findViewById(R.id.usernameP);
       fnameP=(EditText) findViewById(R.id.fnameP);
         lnameP=findViewById(R.id.lnameP);
-        bdayP=(EditText) findViewById(R.id.bdayP);
+        bdayP=(TextView) findViewById(R.id.bdayP);
         mobileP=(EditText)findViewById(R.id.mobileP);
         personalemailP=(EditText)findViewById(R.id.personalemailP);
         saveP=findViewById(R.id.saveP);
@@ -91,6 +105,8 @@ saveP.setOnClickListener(this);
 
 
     }
+
+
 
     @Override
     public void onClick(View v) {
