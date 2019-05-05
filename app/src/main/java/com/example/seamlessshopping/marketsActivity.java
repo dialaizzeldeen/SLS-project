@@ -56,24 +56,34 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
 
     }
     public void onBackPressed() {
-        int seletedItemId = navigation.getSelectedItemId();
+        int seletedItemId =navigation.getSelectedItemId();
         if (0 == seletedItemId) {
-            Intent home = new Intent(marketsActivity.this, NewllyAdded.class);
-            startActivity(home);
-        } else if (2 == seletedItemId) {
+            Intent home =new Intent(marketsActivity.this,NewllyAdded.class);
+            startActivity(home) ;
+        }else if(2== seletedItemId){
 
-            Intent categorie = new Intent(marketsActivity.this, Categories_Activity.class);
-            startActivity(categorie);
-        } else if (3 == seletedItemId) {
-            Intent profile = new Intent(marketsActivity.this, profilecategory.class);
-            startActivity(profile);
-        } else {
+            Intent categorie=new Intent(marketsActivity.this,Categories_Activity.class);
+            startActivity(categorie) ;}
+        else if( 3 == seletedItemId){
+            Intent profile=new Intent(marketsActivity.this,profilecategory.class);
+            startActivity(profile) ;}
+
+        else if(1== seletedItemId){
+            Intent Cart=new Intent(marketsActivity.this,cart.class);
+            startActivity(Cart) ;
+
+
+
+
+        }
+
+        else {
             super.onBackPressed();
         }
 
+
+
     }
-
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -87,16 +97,17 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
 
             case R.id.navigation_Categories:
 
-                Intent categorie=new Intent(marketsActivity.this,Categories_Activity.class);
-                startActivity(categorie) ;
-
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+                Intent Cart=new Intent(marketsActivity.this,cart.class);
+                startActivity(Cart) ;
+
                 break;
             case R.id.navigation_profile:
                 if(id.equals("0")){
-                    Intent login=new Intent(marketsActivity.this,loginPage.class);
+                    Intent login=new Intent(marketsActivity.this,loginvolley.class);
                     startActivity(login);
 
                 }else {
@@ -105,14 +116,14 @@ public class marketsActivity extends AppCompatActivity implements BottomNavigati
                 }
                 break;
             case R.id.navigation_search:
-
-                Intent search=new Intent(marketsActivity.this,searching.class);
-                startActivity(search) ;
-
+                Intent search = new Intent(marketsActivity.this, searching.class);
+                startActivity(search);
                 break;
         }
-        return false;
-    }
+        return false;    }
+
+
+
     private void dataSaving(String url) {
 
         RequestQueue queue = Volley.newRequestQueue(this);  //

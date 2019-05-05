@@ -10,6 +10,7 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -28,14 +29,9 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Notifications"></activity>
-        <activity android:name=".loginPage"></activity>
         <activity android:name=".questions">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".profilecategory" />
         <activity android:name=".timePage" />
@@ -43,13 +39,18 @@
         <activity android:name=".marketsActivity" />
         <activity android:name=".resturanatActivity" />
         <activity android:name=".Categories_Activity" />
-        <activity android:name=".searching"></activity>
+        <activity android:name=".searching" />
         <activity android:name=".paymentHistory" />
         <activity android:name=".signupPage" />
-        <activity android:name=".loginvolley"></activity>
+        <activity android:name=".loginvolley" >
+       </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".profile" />
-        <activity android:name=".bankInfo" />
+        <activity android:name=".bankInfo" > <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter></activity>
         <activity android:name=".productMain" />
         <activity android:name=".NewllyAdded" />
     </application>

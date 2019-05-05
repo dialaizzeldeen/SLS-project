@@ -91,7 +91,9 @@ public class newllyAddedAdapter extends BaseAdapter {
 
         quantity.setText(newllyAddedObject1.getQuantity().toString());
 
-
+        priceNew.setText(newllyAddedObject1.getPrice()+" NIS");
+        productnameNew.setText(newllyAddedObject1.getName());
+        pmNew.setText(newllyAddedObject1.getMarketfoodname());
 
 
         buttonNew.setOnClickListener(new View.OnClickListener() {
@@ -163,9 +165,7 @@ public class newllyAddedAdapter extends BaseAdapter {
                 }});
 **/
 
-        priceNew.setText(newllyAddedObject1.getPrice()+" NIS");
-        productnameNew.setText(newllyAddedObject1.getName());
-        pmNew.setText(newllyAddedObject1.getMarketfoodname());
+
 
 
         addQuantitynew.setOnClickListener(new View.OnClickListener() {

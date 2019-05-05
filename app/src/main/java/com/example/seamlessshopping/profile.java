@@ -355,28 +355,47 @@ saveP.setOnClickListener(this);
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+                Intent Cart=new Intent(profile.this,cart.class);
+                startActivity(Cart) ;
+
                 break;
             case R.id.navigation_profile:
-                if(id.equals("0")){
-                    Intent login=new Intent(profile.this,loginPage.class);
-                    startActivity(login);
 
-                }else {
-                    Intent profile = new Intent(profile.this, profilecategory.class);
-                    startActivity(profile);
-                }
+                Intent profile=new Intent(profile.this,profilecategory.class);
+                startActivity(profile) ;
                 break;
             case R.id.navigation_search:
 
-
                 Intent search=new Intent(profile.this,searching.class);
                 startActivity(search) ;
+
                 break;
-
         }
-        return false;
-    }
+        return false;    }
 
 
-   }
+
+
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(profile.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(profile.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(profile.this,profilecategory.class);
+            startActivity(profile);
+        } else if (1 == seletedItemId) {
+            Intent Cart = new Intent(profile.this, cart.class);
+            startActivity(Cart);
+
+
+        } else {
+            super.onBackPressed();
+        }
+    }   }

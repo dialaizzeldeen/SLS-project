@@ -22,6 +22,7 @@ public class resturanatActivity extends AppCompatActivity implements AdapterView
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
+    BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,32 +47,59 @@ navigation.setOnNavigationItemSelectedListener(this);
         startActivity(viewIntent);
 
     }
+    public void onBackPressed() {
+        int seletedItemId =navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home =new Intent(resturanatActivity.this,NewllyAdded.class);
+            startActivity(home) ;
+        }else if(2== seletedItemId){
+
+            Intent categorie=new Intent(resturanatActivity.this,Categories_Activity.class);
+            startActivity(categorie) ;}
+        else if( 3 == seletedItemId){
+            Intent profile=new Intent(resturanatActivity.this,profilecategory.class);
+            startActivity(profile) ;}
+
+        else if(1== seletedItemId){
+            Intent Cart=new Intent(resturanatActivity.this,cart.class);
+            startActivity(Cart) ;
+
+
+
+
+        }
+
+        else {
+            super.onBackPressed();
+        }
+
+
+
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(resturanatActivity.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
-                finish();
-
-                Intent categorie=new Intent(resturanatActivity.this,Categories_Activity.class);
-                startActivity(categorie) ;
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+                Intent Cart=new Intent(resturanatActivity.this,cart.class);
+                startActivity(Cart) ;
+
                 break;
             case R.id.navigation_profile:
-                finish();
                 if(id.equals("0")){
-                    Intent login=new Intent(resturanatActivity.this,loginPage.class);
+                    Intent login=new Intent(resturanatActivity.this,loginvolley.class);
                     startActivity(login);
 
                 }else {
@@ -80,15 +108,13 @@ navigation.setOnNavigationItemSelectedListener(this);
                 }
                 break;
             case R.id.navigation_search:
-                finish();
-
-                Intent search=new Intent(resturanatActivity.this,searching.class);
-                startActivity(search) ;
-
+                Intent search = new Intent(resturanatActivity.this, searching.class);
+                startActivity(search);
                 break;
         }
-        return false;
-    }
+        return false;    }
+
+
 
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);

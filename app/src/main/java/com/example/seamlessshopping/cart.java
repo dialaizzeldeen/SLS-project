@@ -148,19 +148,19 @@ navigation.setOnNavigationItemSelectedListener(this);
                 break;
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(cart.this,Categories_Activity.class);
                 startActivity(categorie) ;
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+
                 break;
             case R.id.navigation_profile:
-                finish();
                 if(id.equals("0")){
-                    Intent login=new Intent(cart.this,loginPage.class);
+                    Intent login=new Intent(cart.this,loginvolley.class);
                     startActivity(login);
 
                 }else {
@@ -169,8 +169,6 @@ navigation.setOnNavigationItemSelectedListener(this);
                 }
                 break;
             case R.id.navigation_search:
-                finish();
-
                 Intent search=new Intent(cart.this,searching.class);
                 startActivity(search) ;
 

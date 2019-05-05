@@ -110,23 +110,6 @@ paymentHistoryObject paymentHistoryObjects=new paymentHistoryObject(dateofpurcha
 
 
     }
-    public void onBackPressed() {
-        int seletedItemId = navigation.getSelectedItemId();
-        if (0 == seletedItemId) {
-            Intent home = new Intent(paymentHistory.this, NewllyAdded.class);
-            startActivity(home);
-        } else if (2 == seletedItemId) {
-
-            Intent categorie = new Intent(paymentHistory.this, Categories_Activity.class);
-            startActivity(categorie);
-        } else if (3 == seletedItemId) {
-            Intent profile = new Intent(paymentHistory.this, profilecategory.class);
-            startActivity(profile);
-        } else {
-            super.onBackPressed();
-        }
-
-    }
 
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
@@ -155,12 +138,15 @@ paymentHistoryObject paymentHistoryObjects=new paymentHistoryObject(dateofpurcha
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+                Intent Cart=new Intent(paymentHistory.this,cart.class);
+                startActivity(Cart) ;
+
                 break;
             case R.id.navigation_profile:
-                finish();
                 if(id.equals("0")){
-                    Intent login=new Intent(paymentHistory.this,loginPage.class);
+                    Intent login=new Intent(paymentHistory.this,loginvolley.class);
                     startActivity(login);
 
                 }else {
@@ -170,7 +156,31 @@ paymentHistoryObject paymentHistoryObjects=new paymentHistoryObject(dateofpurcha
                 break;
             case R.id.navigation_search:
 
+                break;
         }
-        return false;
+        return false;    }
+
+
+
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(paymentHistory.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(paymentHistory.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(paymentHistory.this, profilecategory.class);
+            startActivity(profile);
+        } else if (1 == seletedItemId) {
+            Intent Cart = new Intent(paymentHistory.this, cart.class);
+            startActivity(Cart);
+
+
+        } else {
+            super.onBackPressed();
+        }
     }
 }

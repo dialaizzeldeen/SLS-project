@@ -64,7 +64,10 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         navigation.setOnNavigationItemSelectedListener(this);
 
         gridView = (GridView) findViewById(R.id.gridViewNew);
-        dataSaving(url = "http://"+ippage.ip+"/newllyAdded.php");
+       // dataSaving(url = "http://"+ippage.ip+"/newllyAdded.php");
+
+         dataSaving(url = "http://192.168.1.8/newllyAdded.php");
+
         gridView.setAdapter(newllyAddedAdapter1);
     }
     private void dataSaving(String url) {
@@ -153,7 +156,13 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         } else if (3 == seletedItemId) {
             Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
             startActivity(profile);
-        } else {
+        }
+
+        else if (1==seletedItemId){
+            Intent cart=new Intent(NewllyAdded.this, cart.class);
+            startActivity(cart);
+        }
+        else {
             super.onBackPressed();
         }
 
@@ -209,7 +218,9 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+                Intent cart= new Intent(NewllyAdded.this, cart.class);
+                startActivity(cart);
                 break;
             case R.id.navigation_profile:
                 /*if(id.equals("0")){

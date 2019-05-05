@@ -148,23 +148,6 @@ navigation.setOnNavigationItemSelectedListener(this);
 
     }
 
-    public void onBackPressed() {
-        int seletedItemId = navigation.getSelectedItemId();
-        if (0 == seletedItemId) {
-            Intent home = new Intent(searching.this, NewllyAdded.class);
-            startActivity(home);
-        } else if (2 == seletedItemId) {
-
-            Intent categorie = new Intent(searching.this, Categories_Activity.class);
-            startActivity(categorie);
-        } else if (3 == seletedItemId) {
-            Intent profile = new Intent(searching.this, profilecategory.class);
-            startActivity(profile);
-        } else {
-            super.onBackPressed();
-        }
-
-    }
     private void dataSaving(String url) {
 
         RequestQueue queue = Volley.newRequestQueue(this);  //
@@ -388,43 +371,70 @@ navigation.setOnNavigationItemSelectedListener(this);
 
 
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-            switch (menuItem.getItemId()) {
-                case R.id.navigation_home:
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
 
-                    Intent home =new Intent(searching.this,NewllyAdded.class);
-                    startActivity(home) ;
-                    break;
+                Intent home =new Intent(searching.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
 
-                case R.id.navigation_Categories:
+            case R.id.navigation_Categories:
 
-                    Intent categorie=new Intent(searching.this,Categories_Activity.class);
-                    startActivity(categorie) ;
+                Intent categorie=new Intent(searching.this,Categories_Activity.class);
+                startActivity(categorie) ;
 
 
-                    break;
-                case R.id.navigation_notifications:
-                    break;
-                case R.id.navigation_profile:
-                    finish();
-                   /* if(id.equals("0")){
-                        Intent login=new Intent(searching.this,loginPage.class);
-                        startActivity(login);
+                break;
+            case R.id.navigation_cart:
 
-                    }else {
-                        Intent profile = new Intent(searching.this, profilecategory.class);
-                        startActivity(profile);
-                    }*/
+                Intent Cart=new Intent(searching.this,cart.class);
+                startActivity(Cart) ;
+
+                break;
+            case R.id.navigation_profile:
+                if(id.equals("0")){
+                    Intent login=new Intent(searching.this,loginvolley.class);
+                    startActivity(login);
+
+                }else {
                     Intent profile = new Intent(searching.this, profilecategory.class);
                     startActivity(profile);
-                    break;
-                case R.id.navigation_search:
+                }
+                break;
+            case R.id.navigation_search:
 
-            }
-            return false;
+                break;
         }
+        return false;    }
+
+
+
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(searching.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(searching.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(searching.this, profilecategory.class);
+            startActivity(profile);
+        } else if (1 == seletedItemId) {
+            Intent Cart = new Intent(searching.this, cart.class);
+            startActivity(Cart);
+
+
+        } else {
+            super.onBackPressed();
+        }
+    }
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");

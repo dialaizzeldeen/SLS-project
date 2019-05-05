@@ -19,7 +19,7 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
     public static final String iduser="iduesr";
     public static final String usernamedb="idusername";
     public static final String userpassworddb="iduserpassword";
-
+    BottomNavigationView navigation;
     private String id="0";
     int positionitem;
     @Override
@@ -71,48 +71,68 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
 
 
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(profilecategory.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(profilecategory.this,Categories_Activity.class);
                 startActivity(categorie) ;
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+                Intent Cart=new Intent(profilecategory.this,cart.class);
+                startActivity(Cart) ;
+
                 break;
             case R.id.navigation_profile:
-                if(id.equals("0")){
-                    Intent login=new Intent(profilecategory.this,loginPage.class);
-                    startActivity(login);
 
-                }else {
-                    Intent profile = new Intent(profilecategory.this, profilecategory.class);
-                    startActivity(profile);
-                }
-
+                Intent profile=new Intent(profilecategory.this,profilecategory.class);
+                startActivity(profile) ;
+                break;
             case R.id.navigation_search:
-                finish();
 
                 Intent search=new Intent(profilecategory.this,searching.class);
                 startActivity(search) ;
 
                 break;
         }
-        return false;
-    }
+        return false;    }
 
+
+
+
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(profilecategory.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(profilecategory.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(profilecategory.this,profilecategory.class);
+            startActivity(profile);
+        } else if (1 == seletedItemId) {
+            Intent Cart = new Intent(profilecategory.this, cart.class);
+            startActivity(Cart);
+
+
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 
     public void Savedata(String s){

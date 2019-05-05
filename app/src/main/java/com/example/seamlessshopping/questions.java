@@ -156,23 +156,6 @@ BottomNavigationView navigation;
 
         }
     }
-    public void onBackPressed() {
-        int seletedItemId = navigation.getSelectedItemId();
-        if (0 == seletedItemId) {
-            Intent home = new Intent(questions.this, NewllyAdded.class);
-            startActivity(home);
-        } else if (2 == seletedItemId) {
-
-            Intent categorie = new Intent(questions.this, Categories_Activity.class);
-            startActivity(categorie);
-        } else if (3 == seletedItemId) {
-            Intent profile = new Intent(questions.this, profilecategory.class);
-            startActivity(profile);
-        } else {
-            super.onBackPressed();
-        }
-
-    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -190,24 +173,58 @@ BottomNavigationView navigation;
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+                Intent Cart=new Intent(questions.this,cart.class);
+                startActivity(Cart) ;
+
                 break;
             case R.id.navigation_profile:
-                finish();
 
-                if(id.equals("0")){
-                    Intent login=new Intent(questions.this,loginPage.class);
-                    startActivity(login);
-
-                }else {
-                    Intent profile = new Intent(questions.this, profilecategory.class);
-                    startActivity(profile);
-                }
+                Intent profile=new Intent(questions.this,profilecategory.class);
+                startActivity(profile) ;
                 break;
             case R.id.navigation_search:
 
+                Intent search=new Intent(questions.this,searching.class);
+                startActivity(search) ;
+
+                break;
         }
-        return false;
+        return false;    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void onBackPressed() {
+        int seletedItemId = navigation.getSelectedItemId();
+        if (0 == seletedItemId) {
+            Intent home = new Intent(questions.this, NewllyAdded.class);
+            startActivity(home);
+        } else if (2 == seletedItemId) {
+
+            Intent categorie = new Intent(questions.this, Categories_Activity.class);
+            startActivity(categorie);
+        } else if (3 == seletedItemId) {
+            Intent profile = new Intent(questions.this, profilecategory.class);
+            startActivity(profile);
+        } else if (1 == seletedItemId) {
+            Intent Cart = new Intent(questions.this, cart.class);
+            startActivity(Cart);
+
+
+        } else {
+            super.onBackPressed();
+        }
     }
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
