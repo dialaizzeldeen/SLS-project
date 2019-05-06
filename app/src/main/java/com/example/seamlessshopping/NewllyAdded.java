@@ -111,14 +111,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                                 newllyAddedObjectArrayList.add(newllyAddedObject2);
                                 newllyAddedAdapter= new newllyAddedAdapter(NewllyAdded.this, newllyAddedObjectArrayList);
                                 newllyAddedAdapter.notifyDataSetChanged();
-                                gridView.setAdapter(newllyAddedAdapter);
-
-
-
-
-
-
-                            }
+                                gridView.setAdapter(newllyAddedAdapter); }
                             //   textView.setText(textViewData.toString());
                             Log.d("response","j"+textViewData);
                         } catch (JSONException e) {
