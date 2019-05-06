@@ -23,7 +23,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -32,42 +31,30 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 public class questions extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     EditText locQ,timeQ;
     TextView dateQ;
-    int totalsum=0;
-    public static final String usersum="usersum";
-    String urlbalance="http://"+ippage.ip+"/updatebank.php";
-
     Button sumbitQ;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
-   public static int balances;
     String url="http://"+ippage.ip+":8978/";
-
-
 BottomNavigationView navigation;
     private int year, month, day;
     private DatePicker datePicker;
     private Calendar calendar;
-    String cardNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getData();
-
         setContentView(R.layout.activity_questions);
         locQ=findViewById(R.id.LocId);
         timeQ=findViewById(R.id.timeID);
         dateQ=findViewById(R.id.dateID);
         sumbitQ=findViewById(R.id.submitQuestion);
-
         navigation= (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -78,22 +65,15 @@ BottomNavigationView navigation;
         sumbitQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int ss= getIntent().getIntExtra("totalsum",0);
-                Toast.makeText(getApplicationContext(),"totalsum"+ss,Toast.LENGTH_LONG).show();
-Intent i =new Intent(questions.this , bankInfo.class);
-i.putExtra("totalsum",ss);
-startActivity(i);
+
                 sendDataToServer();
             }
         });
-
-        //setBalance(urlbalance);
     }
-
 
     public void setDate(View view) {
         showDialog(999);
-    //    Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -216,15 +196,6 @@ startActivity(i);
 
 
 
-
-
-
-
-
-
-
-
-
     public void onBackPressed() {
         int seletedItemId = navigation.getSelectedItemId();
         if (0 == seletedItemId) {
@@ -235,7 +206,7 @@ startActivity(i);
             Intent categorie = new Intent(questions.this, Categories_Activity.class);
             startActivity(categorie);
         } else if (3 == seletedItemId) {
-            Intent profile = new Intent(questions.this, profilecategory.class);
+            Intent profile = new Intent(questions.this,profilecategory.class);
             startActivity(profile);
         } else if (1 == seletedItemId) {
             Intent Cart = new Intent(questions.this, cart.class);
@@ -249,11 +220,6 @@ startActivity(i);
     public void getData(){
         SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
         id=sharedPreferences.getString(iduser,"0");
-    totalsum=sharedPreferences.getInt(usersum,0);
-
-Toast.makeText(this,""+id,Toast.LENGTH_LONG).show();
+        Log.d("response  ",id);
     }
-
-
-
-          }
+}
