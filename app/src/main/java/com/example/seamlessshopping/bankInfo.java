@@ -351,13 +351,13 @@ public void onviewws(View v) {
     public void setBalance(String url, final String totalvalues, final String cardno){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+        StringRequest putRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
                 {
                     @Override
                     public void onResponse(String response) {
                         // response
-                  // Toast.makeText(getApplicationContext(),"Response"+response,Toast.LENGTH_LONG).show();
+                  Toast.makeText(getApplicationContext(),"Response",Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener()
@@ -374,7 +374,7 @@ public void onviewws(View v) {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String> ();
-                params.put("cardNo", "222");
+                params.put("cardNo", cardno);
                 params.put("balance", totalvalues);
 
                 return params;

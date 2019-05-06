@@ -72,7 +72,8 @@ private LocationRequest locationRequest;
          Double myLatitude ,,myLongitude;
          */
         Double myLatitude ,myLongitude;
-    EditText locQ, timeQ;
+    EditText  timeQ;
+    TextView locQ;
     TextView dateQ;
     Button sumbitQ;
     public static final String shared_pres = "sharedPres";
@@ -139,6 +140,7 @@ private LocationRequest locationRequest;
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     checkPermissions();
                 }
@@ -320,15 +322,6 @@ private LocationRequest locationRequest;
         id = sharedPreferences.getString(iduser, "0");
         Log.d("response  ", id);
     }
-
-
-
-
-
-
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void checkPermissions() {
         final List<String> missingPermissions = new ArrayList<String>();

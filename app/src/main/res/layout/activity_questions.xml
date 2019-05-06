@@ -59,7 +59,7 @@
                 android:textColor="#000"
                 android:textSize="20dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/LocId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
