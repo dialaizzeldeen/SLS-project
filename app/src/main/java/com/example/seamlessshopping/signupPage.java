@@ -193,7 +193,7 @@ errorpassword=findViewById(R.id.errorpassword);
                             Toast.makeText(getApplicationContext(), "true", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Intent i= new Intent(signupPage.this,loginPage.class);
+                            Intent i= new Intent(signupPage.this,loginvolley.class);
                             startActivity(i);
                         }
                     }

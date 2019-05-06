@@ -1,34 +1,46 @@
 package com.example.seamlessshopping;
 
+import android.text.Editable;
+
 public class ProfileObject{
         private String bdayP;
         private String genderP;
         private String mobileP;
         private String personalemailP;
+    private String fname;
 
-        public ProfileObject(String usernameP, String bdayP, String genderP, String mobileP, String personalemailP) {
-
-
-            this.bdayP = bdayP;
-            this.genderP = genderP;
-            this.mobileP = mobileP;
-            this.personalemailP = personalemailP;
-        }
+    private String lname;
 
 
 
-        public String getBdayP() {
+
+    public String getBdayP() {
             return bdayP;
         }
 
-    public ProfileObject( String genderP,String bdayP, String mobileP, String personalemailP) {
+
+    public ProfileObject(String fname, String lname,String bdayP, String mobileP, String personalemailP) {
         this.bdayP = bdayP;
-        this.genderP = genderP;
+        this.fname = fname;
+        this.lname=lname;
         this.mobileP = mobileP;
         this.personalemailP = personalemailP;
     }
 
-    public ProfileObject() {
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getLname() {
+        return lname;
     }
 
     public void setBdayP(String bdayP) {

@@ -151,17 +151,17 @@ public class newllyAddedAdapter extends BaseAdapter {
                     queue.add(postRequest);}}});
 
 
-     /**   imageurlNew.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                newllyAddedObject1=newllyAddedObjectArrayList.get(position);
+        /**   imageurlNew.setOnClickListener(new View.OnClickListener() {
+         public void onClick(View v) {
+         newllyAddedObject1=newllyAddedObjectArrayList.get(position);
 
-                Intent i= new Intent(v.getContext(),productMain.class);
-                int idmarket =newllyAddedObject1.getMarketID();
-                i.putExtra("idmarket",idmarket);
-                v.getContext().startActivity(i);
-                Log.d("Response","gg"+idmarket);
-                }});
-**/
+         Intent i= new Intent(v.getContext(),productMain.class);
+         int idmarket =newllyAddedObject1.getMarketID();
+         i.putExtra("idmarket",idmarket);
+         v.getContext().startActivity(i);
+         Log.d("Response","gg"+idmarket);
+         }});
+         **/
 
         priceNew.setText(newllyAddedObject1.getPrice()+" NIS");
         productnameNew.setText(newllyAddedObject1.getName());

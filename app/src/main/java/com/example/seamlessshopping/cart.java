@@ -34,13 +34,14 @@ import java.util.ArrayList;
 public class cart extends AppCompatActivity  implements BottomNavigationView.OnNavigationItemSelectedListener {
     ListView listViewCart;
     cartObject cartObject1;
-    ArrayList<cartObject> cartObjectArrayList= new ArrayList<cartObject>();
+   public ArrayList<cartObject> cartObjectArrayList= new ArrayList<cartObject>();
     FloatingActionButton fab;
     Context context;
     CartAdapter cartAdapters;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id="0";
+    int sum=0;
 
 
     @Override
@@ -52,7 +53,21 @@ public class cart extends AppCompatActivity  implements BottomNavigationView.OnN
         fab=(FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent=new Intent(v.getContext(),timePage.class);
+
+                for(int value=0;value< cartObjectArrayList.size();value++){
+
+                    int q=  cartObjectArrayList.get(value).getQuantityCart()*
+                            Integer.parseInt(cartObjectArrayList.get(value).getPriceCart());
+                    sum= sum+q;}
+
+                //   textView.setText(textViewData.toString());
+
+                Toast.makeText(getApplicationContext(), "heeeelo"+sum, Toast.LENGTH_SHORT).show();
+
+                Intent intent=new Intent(v.getContext(),questions.class);
+                intent.putExtra("totalsum",sum);
+                Log.d("response","totalsum"+ sum);
+
                 startActivity(intent);
 
             }});
@@ -63,7 +78,7 @@ navigation.setOnNavigationItemSelectedListener(this);
         listViewCart = (ListView) findViewById(R.id.listViewCart);
         getData();
 
-  String url ="http://192.168.1.9/cartPage.php?userid="+id;
+  String url ="http://"+ippage.ip+"/cartPage.php?userid="+id;
       dataSaving(url);
 
 
@@ -106,8 +121,8 @@ navigation.setOnNavigationItemSelectedListener(this);
 
 
                             }
-                            //   textView.setText(textViewData.toString());
-                            Log.d("response","j"+textViewData);
+
+                            Log.d("response","j"+cartObjectArrayList.size());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -128,12 +143,10 @@ navigation.setOnNavigationItemSelectedListener(this);
         // Access the RequestQueue through your singleton class.
         queue.add(jsObjRequest);
 
-    }
-    public void getData(){
-        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
-        id=sharedPreferences.getString(iduser,"0");
-        Toast.makeText(this,"Eeeheloo id"+id,Toast.LENGTH_LONG).show();
-        Log.d("response  ",id);
+
+
+
+
     }
 
     @Override
@@ -141,26 +154,25 @@ navigation.setOnNavigationItemSelectedListener(this);
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(cart.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
-                finish();
 
                 Intent categorie=new Intent(cart.this,Categories_Activity.class);
                 startActivity(categorie) ;
 
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+
                 break;
             case R.id.navigation_profile:
-                finish();
                 if(id.equals("0")){
-                    Intent login=new Intent(cart.this,loginPage.class);
+                    Intent login=new Intent(cart.this,loginvolley.class);
                     startActivity(login);
 
                 }else {
@@ -169,8 +181,6 @@ navigation.setOnNavigationItemSelectedListener(this);
                 }
                 break;
             case R.id.navigation_search:
-                finish();
-
                 Intent search=new Intent(cart.this,searching.class);
                 startActivity(search) ;
 
@@ -178,6 +188,20 @@ navigation.setOnNavigationItemSelectedListener(this);
         }
         return false;
     }
+    public void getData(){
+        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
+        id=sharedPreferences.getString(iduser,"0");
+        Toast.makeText(this,"heloo id"+id,Toast.LENGTH_LONG).show();
+        Log.d("response  ",id);
+    }
 
+/**    public void Savedata() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(shared_pres, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(usersum,sum );
 
+        editor.apply();
+    }
+
+**/
 }

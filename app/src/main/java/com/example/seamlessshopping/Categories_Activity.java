@@ -62,6 +62,14 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
 
 
 
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int itemposition, long id) {
+        categoriesObject objectView = categoriesObjectArrayList.get(itemposition);
+        Log.d("hhh","hh"+itemposition);
+
+    }
     public void onBackPressed() {
         int seletedItemId =navigation.getSelectedItemId();
         if (0 == seletedItemId) {
@@ -69,11 +77,20 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
             startActivity(home) ;
         }else if(2== seletedItemId){
 
-        Intent categorie=new Intent(Categories_Activity.this,Categories_Activity.class);
-        startActivity(categorie) ;}
+            Intent categorie=new Intent(Categories_Activity.this,Categories_Activity.class);
+            startActivity(categorie) ;}
         else if( 3 == seletedItemId){
-        Intent profile=new Intent(Categories_Activity.this,profilecategory.class);
-        startActivity(profile) ;}
+            Intent profile=new Intent(Categories_Activity.this,profilecategory.class);
+            startActivity(profile) ;}
+
+        else if(1== seletedItemId){
+            Intent Cart=new Intent(Categories_Activity.this,cart.class);
+            startActivity(Cart) ;
+
+
+
+
+        }
 
         else {
             super.onBackPressed();
@@ -84,33 +101,28 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int itemposition, long id) {
-        categoriesObject objectView = categoriesObjectArrayList.get(itemposition);
-        Log.d("hhh","hh"+itemposition);
-
-    }
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
+
                 Intent home =new Intent(Categories_Activity.this,NewllyAdded.class);
                 startActivity(home) ;
                 break;
 
             case R.id.navigation_Categories:
 
-                Intent categorie=new Intent(Categories_Activity.this,Categories_Activity.class);
-                startActivity(categorie) ;
-
 
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_cart:
+
+                Intent Cart=new Intent(Categories_Activity.this,cart.class);
+                startActivity(Cart) ;
+
                 break;
             case R.id.navigation_profile:
-
                 if(id.equals("0")){
-                    Intent login=new Intent(Categories_Activity.this,loginPage.class);
+                    Intent login=new Intent(Categories_Activity.this,loginvolley.class);
                     startActivity(login);
 
                 }else {
@@ -119,13 +131,15 @@ public class Categories_Activity extends AppCompatActivity  implements AdapterVi
                 }
                 break;
             case R.id.navigation_search:
-                Intent search=new Intent(Categories_Activity.this,searching.class);
-                startActivity(search) ;
-
+                Intent search = new Intent(Categories_Activity.this, searching.class);
+                startActivity(search);
                 break;
         }
-        return false;
-    }
+        return false;    }
+
+
+
+
 
     private void dataSaving(String url) {
 

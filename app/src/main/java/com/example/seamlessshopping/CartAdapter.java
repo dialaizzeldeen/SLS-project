@@ -37,11 +37,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class CartAdapter extends BaseAdapter {
+    int totalsum=0;
+    public static final String usersum="usersum";
+
+    Button sumbitQ;
     public static final String shared_pres="sharedPres";
-    public static final String iduser="iduesr";
+    public static final String total="Total";
     private String id="0";
 
     Context mContext;
+    public static final String iduser="iduesr";
+
     int positionitem;
     private ArrayList<cartObject>cartObjectArrayList;
     cartObject cartObject1;
@@ -78,7 +84,7 @@ public class CartAdapter extends BaseAdapter {
         TextView pnameCart=convertView.findViewById(R.id.pnameCart);
         TextView marketnameCart=convertView.findViewById(R.id.marketnameCart);
 
-        TextView quantityCart=convertView.findViewById(R.id.quantityCart);
+        final TextView quantityCart=convertView.findViewById(R.id.quantityCart);
         TextView priceCart=convertView.findViewById(R.id.priceCart);
         ImageButton addQuantityCart = convertView.findViewById(R.id.addQuantityCart);
         ImageButton minusQuantityCart = convertView.findViewById(R.id.minusQuantityCart);
@@ -91,11 +97,6 @@ public class CartAdapter extends BaseAdapter {
                 cartObject1.setQuantityCart( cartObject1.getQuantityCart()+1);
                 notifyDataSetChanged();     }});
 
-
-
-
-
-
         minusQuantityCart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(cartObject1.getQuantityCart() > 1){
@@ -103,7 +104,31 @@ public class CartAdapter extends BaseAdapter {
                 notifyDataSetChanged();     }});
 
 
+                           buyCart.setOnClickListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   int total=  cartObject1.getQuantityCart()*
+                                           Integer.parseInt(cartObject1.getPriceCart());
 
+
+                                      Toast.makeText(mContext,"total"+total,Toast.LENGTH_LONG).show();
+
+
+                                   Intent i= new Intent(mContext,questions.class);
+                                   i.putExtra("totalsum",total);
+                                   mContext.startActivity(i);
+
+
+
+
+
+
+
+                               }
+                           }
+
+
+);
 
         deleteCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

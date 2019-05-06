@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         else if (item.getItemId()==R.id.profile) {
-            Intent i = new Intent(this, loginPage.class);
+            Intent i = new Intent(this, loginvolley.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
@@ -74,11 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onLogin(View v){
-        String usernameVal=username.getText().toString();
+ /**       String usernameVal=username.getText().toString();
         String passwordVal=password.getText().toString();
         String type ="login";
 
         loginBackground loginBackground1= new loginBackground(this);
-        loginBackground1.execute(type,usernameVal,passwordVal);
+        loginBackground1.execute(type,usernameVal,passwordVal);**/
     }
 }

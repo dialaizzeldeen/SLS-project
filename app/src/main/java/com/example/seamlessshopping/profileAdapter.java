@@ -66,7 +66,7 @@ public class profileAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ProfileObject profileObject = profileObjectArrayList.get(position);
         Button save=(Button) convertView.findViewById(R.id.saveP);
-        EditText gender=(EditText)convertView.findViewById(R.id.genderP);
+        EditText gender=(EditText)convertView.findViewById(R.id.fnameP);
         EditText email=(EditText)convertView.findViewById(R.id.personalemailP);
         EditText bday=(EditText)convertView.findViewById(R.id.bdayP);
         EditText mobile=(EditText)convertView.findViewById(R.id.mobileP);

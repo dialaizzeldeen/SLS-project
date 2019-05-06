@@ -28,7 +28,6 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".loginPage">   </activity>
         <activity android:name=".questions">
 
         </activity>
@@ -51,11 +50,11 @@
         <activity android:name=".bankInfo" />
         <activity android:name=".productMain"></activity>
         <activity android:name=".NewllyAdded" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
