@@ -90,6 +90,9 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
                                 // newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket,marketfoodname);
                                 //   ;
+
+
+
                                 Integer productId=response.getInt("id");
                                 String name = response.getString("name");
                                 String marketName=response.getString("marketfoodname");
@@ -111,7 +114,14 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                                 newllyAddedObjectArrayList.add(newllyAddedObject2);
                                 newllyAddedAdapter= new newllyAddedAdapter(NewllyAdded.this, newllyAddedObjectArrayList);
                                 newllyAddedAdapter.notifyDataSetChanged();
-                                gridView.setAdapter(newllyAddedAdapter); }
+                                gridView.setAdapter(newllyAddedAdapter);
+
+
+
+
+
+
+                            }
                             //   textView.setText(textViewData.toString());
                             Log.d("response","j"+textViewData);
                         } catch (JSONException e) {
