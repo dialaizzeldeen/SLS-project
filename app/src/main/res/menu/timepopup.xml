@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/range1"
+        android:title="9-12"
+        />
+    <item
+        android:id="@+id/range2"
+        android:title="10-13"
+        />
+    <item
+        android:id="@+id/range3"
+        android:title="11-14 "/>
+    <item
+        android:id="@+id/range4"
+        android:title="15-18"/>
+    <item
+        android:id="@+id/range5"
+        android:title="16-19"/>
+    <item
+        android:id="@+id/range6"
+        android:title="18-21"/>
+    <item
+        android:id="@+id/range7"
+        android:title="21-23"/>
+
+</menu>
