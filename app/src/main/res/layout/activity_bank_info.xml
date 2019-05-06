@@ -6,7 +6,7 @@
 
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:layout_marginTop="80dp"
+    android:layout_marginTop="60dp"
     android:layout_weight="8"
 
     android:background="#00000000"
@@ -224,12 +224,12 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
 
-        android:layout_height="188dp"
+        android:layout_height="91dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
 </LinearLayout>

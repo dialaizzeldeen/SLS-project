@@ -32,10 +32,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        Toast.makeText(this,"start",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "start", Toast.LENGTH_LONG).show();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
 
     }
@@ -65,7 +64,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 // This will be displayed on taping the marker
                 markerOptions.title(latLng.latitude + " : " + latLng.longitude);
 
-                Log.d("myLatitudeeeeeemap", "d" + latLng.latitude + " : " + latLng.longitude);
+              //  Log.d("myLatitudeeeeeemap", "d" + latLng.latitude + " : " + latLng.longitude);
                 //   Coordinates.FirstlatCoordinates=location.getLatitude();
                 // Coordinates.FirstlongCoordinates=location.getLongitude();
                 //Log.d("dddddd",""+Coordinates.FirstAddressCoordinates);
@@ -73,20 +72,19 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 List<Address> addresses;
 
                 try {
-                    addresses = geocoder.getFromLocation(latLng.latitude ,latLng.longitude, 1);
+                    addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
 
-//                        String address = addresses.get(0).getAddressLine(0);
-
-                    //   String city = addresses.get(0).getLocality();
-                    String add=addresses.get(0)+"";
-                    Log.d("city", "d" +"addresses" +add);
-                    Coordinates.AddressCoordinates=add;
-                    Coordinates.distance = distance(Coordinates.FirstlatCoordinates,Coordinates.FirstlongCoordinates, latLng.latitude , latLng.longitude);
+        String address = addresses.get(0).getAddressLine(0);
+String area =addresses.get(0).getSubAdminArea();
+                     String city = addresses.get(0).getLocality();
+                    String add = addresses.get(0) + "";
+                    Log.d("city", "d" + "addresses" + add);
+                    Coordinates.AddressCoordinates = address;
+                    Coordinates.distance = distance(Coordinates.FirstlatCoordinates, Coordinates.FirstlongCoordinates,32.221, 35.238);
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
 
 
                 // Coordinates.AddressCoordinates=new LatLng(latLng.latitude,latLng.longitude);
@@ -103,8 +101,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         });
 
     }
-    public void onsave(View v){
-        Intent i= new Intent(this,questions.class);
+
+    public void onsave(View v) {
+        Intent i = new Intent(this, questions.class);
+       Toast.makeText(this,"Coordinates.distance"+"d" +Coordinates.distance,Toast.LENGTH_LONG).show();
+
         startActivity(i);
 
 
@@ -115,8 +116,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output
 
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
 
         double sindLat = Math.sin(dLat / 2);
         double sindLng = Math.sin(dLng / 2);
@@ -124,7 +125,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
                 * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
 
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         double dist = earthRadius * c;
 
