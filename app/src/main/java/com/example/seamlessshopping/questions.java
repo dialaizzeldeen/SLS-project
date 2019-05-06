@@ -221,7 +221,7 @@ locQ.setText(Coordinates.AddressCoordinates);
             JSONObject js2 = new JSONObject();
 
             try {
-                js.put("locQ", locQ.getText().toString());
+                js.put("locQ", Coordinates.distance);
                 js.put("timeval1", "23");//timeQ.getText().toString()
                 js.put("dateQ", dateQ.getText().toString());
                 js.put("timeval2","22");
