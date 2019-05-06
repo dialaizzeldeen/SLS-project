@@ -453,23 +453,6 @@ private LocationRequest locationRequest;
         }
 
     }
-    /** public void requestDirection() {
-     if(origin==null || destination==null){
-     Toast.makeText(this,origin+""+destination+"",Toast.LENGTH_SHORT).show();
-     return;
-     }
-
-     // Snackbar.make(btnRequestDirection, "Direction Requesting...", Snackbar.LENGTH_SHORT).show();
-     GoogleDirection.withServerKey(serverKey)
-     .from(origin)
-     .to(destination)
-     .transportMode(TransportMode.DRIVING)
-     .optimizeWaypoints(true)
-     //  .avoid(AvoidType.HIGHWAYS)
-     //.avoid(AvoidType.FERRIES)
-     .execute(this);
-     }
-     **/
     @Override
     public void onConnectionSuspended(int i) {
 
@@ -481,20 +464,3 @@ private LocationRequest locationRequest;
     }
 }
 
-/*
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED &&
-                        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
-                                PackageManager.PERMISSION_GRANTED) {
-                    Location loc = GPS.getLastLocation(this.getApplicationContext());
-و
-                    myLongitude = loc.getLongitude();
-                     myLatitude = loc.getLatitude();
-                    //using google maps you will create a map setting lat & long.
-                    //second option:: urlAddress = "http://maps.googleapis.com/maps/api/streetview?size=500x500&location=" + myLatitude + "," + myLongitude + "&fov=90&heading=235&pitch=10&sensor=false";
-                    //third option:: urlAddress = "geo:<" + myLatitude + ">,<" + myLongitude +">?q=<" + latitude + ">,<" + longitude +">(this is my currently location)"
-                    Log.d("myLatitude", "d" + myLatitude + myLongitude);
-                    Toast.makeText(this, "onConnected"+myLatitude+""+myLongitude, Toast.LENGTH_SHORT).show();
-
-
-                }*/
