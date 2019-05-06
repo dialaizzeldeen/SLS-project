@@ -62,7 +62,7 @@
             <TextView
                 android:id="@+id/LocId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:background="@drawable/shaaape"
                 android:ems="10"
                 android:hint="  Your Location"
@@ -90,7 +90,7 @@
             <EditText
                 android:id="@+id/timeID"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
 
                 android:background="@drawable/shaaape"
                 android:hint="  Your Best Time"
@@ -122,16 +122,16 @@
             <TextView
                 android:id="@+id/dateID"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:background="@drawable/shaaape"
                 android:clickable="true"
 
+                android:focusable="true"
                 android:gravity="center_vertical"
                 android:hint="  Your Best Date"
                 android:inputType="text"
                 android:onClick="setDate"
-                android:singleLine="true"
-                android:focusable="true" />
+                android:singleLine="true" />
 
 
 

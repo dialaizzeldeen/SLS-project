@@ -79,8 +79,8 @@ String area =addresses.get(0).getSubAdminArea();
                      String city = addresses.get(0).getLocality();
                     String add = addresses.get(0) + "";
                     Log.d("city", "d" + "addresses" + add);
-                    Coordinates.AddressCoordinates = "City"+ city+"address"+address +area;
-                    Coordinates.distance = distance(Coordinates.FirstlatCoordinates, Coordinates.FirstlongCoordinates,32.111, 33.123);
+                    Coordinates.AddressCoordinates = address;
+                    Coordinates.distance = distance(Coordinates.FirstlatCoordinates, Coordinates.FirstlongCoordinates,32.221, 35.238);
 
                 } catch (IOException e) {
                     e.printStackTrace();
