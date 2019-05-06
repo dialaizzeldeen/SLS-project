@@ -154,7 +154,7 @@ public void onviewws(View v) {
                         int totalsum = getIntent().getIntExtra("totalsum", 0);
 
                         int totalvalue = totalbalance - totalsum;
-                        // Toast.makeText(this,"ffffft"+totalbalance+""+cardsno+"nffff"+totalsum,Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"ffffft"+totalvalue+""+cardsno+"nffff"+totalsum,Toast.LENGTH_LONG).show();
 
 
                         createNotificationChannel(getBaseContext());
@@ -375,7 +375,7 @@ public void onviewws(View v) {
             {
                 Map<String, String>  params = new HashMap<String, String> ();
                 params.put("cardNo", "222");
-                params.put("balance", "2322");
+                params.put("balance", totalvalues);
 
                 return params;
             }

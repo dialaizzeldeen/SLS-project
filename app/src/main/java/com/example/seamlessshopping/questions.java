@@ -65,7 +65,11 @@ BottomNavigationView navigation;
         sumbitQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+Intent i = new Intent(questions.this,bankInfo.class);
+                int totalsum = getIntent().getIntExtra("totalsum", 0);
+Toast.makeText(getApplicationContext(),"eee"+totalsum,Toast.LENGTH_LONG).show();
+i.putExtra("totalsum",totalsum);
+startActivity(i);
                 sendDataToServer();
             }
         });
