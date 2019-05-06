@@ -30,11 +30,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".loginPage">   </activity>
         <activity android:name=".questions">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".profilecategory"></activity>
         <activity android:name=".timePage" />
@@ -54,7 +50,13 @@
         <activity android:name=".profile" />
         <activity android:name=".bankInfo" />
         <activity android:name=".productMain"></activity>
-        <activity android:name=".NewllyAdded" />
+        <activity android:name=".NewllyAdded" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>
