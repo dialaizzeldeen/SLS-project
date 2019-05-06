@@ -123,7 +123,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
                             }
                             //   textView.setText(textViewData.toString());
-                            Log.d("response","j"+textViewData);
+                            Log.d("response","j"+newllyAddedObjectArrayList.get(0).getImageurl());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
