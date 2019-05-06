@@ -1,11 +1,23 @@
 package com.example.seamlessshopping;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,15 +36,42 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
-public class questions extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class questions extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+protected LocationManager locationManager;
+private Button btnRequestDirection;
+private GoogleMap googleMap;
+private String serverKey = "AIzaSyA6yPhzcOM3ho3F39trzG-1bXFp1t29R6U";
+public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+private Location lastLocation;
+private LocationRequest locationRequest;
+
+        /**
+         * permissions request code
+         Double myLongitude = loc.getLongitude();
+         Double myLatitude ,,myLongitude;
+         */
+        Double myLatitude ,myLongitude;
     EditText locQ, timeQ;
     TextView dateQ;
     Button sumbitQ;
@@ -45,6 +84,35 @@ public class questions extends AppCompatActivity implements BottomNavigationView
     private DatePicker datePicker;
     private Calendar calendar;
 
+
+    //Double myLatitude ,myLongitude;
+
+
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+
+    /**
+     * Permissions that need to be explicitly requested from end user.
+     */
+
+    private static final String[] REQUIRED_SDK_PERMISSIONS = new String[] {
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CALL_PHONE
+    };
+
+
+    private LatLng origin ;//32.22111 35.25444
+    private LatLng destination;// = new LatLng(32.22111 , 35.25444);////32.22111 35.25444
+
+    private String Latitude,Longitude;
+    double dLatitude,dLongitude;
+    private GoogleApiClient mGoogleApiClient;
+    private GoogleApiClient getGoogleApiClient(){
+
+        return new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +129,34 @@ public class questions extends AppCompatActivity implements BottomNavigationView
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
+
+
+
+
+
+
+        locQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    checkPermissions();
+                }
+                if (mGoogleApiClient != null){
+
+                    mGoogleApiClient.connect();
+
+                } else {
+                    mGoogleApiClient = getGoogleApiClient();
+                    mGoogleApiClient.connect();
+
+                }
+            }
+        });
+
+
+
+
 
 
         sumbitQ.setOnClickListener(new View.OnClickListener() {
@@ -224,4 +320,188 @@ public class questions extends AppCompatActivity implements BottomNavigationView
         id = sharedPreferences.getString(iduser, "0");
         Log.d("response  ", id);
     }
+
+
+
+
+
+
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    protected void checkPermissions() {
+        final List<String> missingPermissions = new ArrayList<String>();
+// check all required dynamic permissions
+        for (final String permission : REQUIRED_SDK_PERMISSIONS) {
+            final int result = ContextCompat.checkSelfPermission(this, permission);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(permission);
+            }
+        }
+        if (!missingPermissions.isEmpty()) {
+// request all missing permissions
+            final String[] permissions = missingPermissions
+                    .toArray(new String[missingPermissions.size()]);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
+        } else {
+            final int[] grantResults = new int[REQUIRED_SDK_PERMISSIONS.length];
+            Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED);
+            onRequestPermissionsResult(REQUEST_CODE_ASK_PERMISSIONS, REQUIRED_SDK_PERMISSIONS,
+                    grantResults);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                for (int index = permissions.length - 1; index >= 0; --index) {
+                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+// exit the app if one permission is not granted
+                        Toast.makeText(this, "Required permission '" + permissions[index]
+                                + "' not granted, exiting", Toast.LENGTH_LONG).show();
+                        finish();
+                        return;
+                    }
+                }
+
+                //startService(new Intent(this,LocationService.class));
+
+// all permissions were granted
+                break;
+        }
+    }
+
+
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+        final Context context = getApplicationContext();
+        LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+        if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER) == false) {
+            Toast.makeText(this, "Please make sure that Gps is open", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
+            try {
+                Toast.makeText(this, "onConnected"+"", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
+                double lat, lng;
+                locationRequest = new LocationRequest();
+                locationRequest.setInterval(1000);
+                locationRequest.setFastestInterval(1000);
+
+                locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                // Location loc = GPS.getLastLocation(this.getApplicationContext());
+                Location LastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                //  Location  LastLocation = LocationServices.getFusedLocationProviderClient(this);
+
+                FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+                mFusedLocationClient.getLastLocation()
+                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                // Got last known location. In some rare situations, this can be null.
+                                if (location != null) {
+                                    Toast.makeText(getApplicationContext(),location+"" , Toast.LENGTH_SHORT).show();
+                                    Log.d("myLatitude", "d" + location.getLatitude() + location.getLongitude());
+                                    Coordinates.FirstlatCoordinates=location.getLatitude();
+                                    Coordinates.FirstlongCoordinates=location.getLongitude();
+                                    Log.d("dddddd",""+Coordinates.FirstAddressCoordinates);
+                                    Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                                    List<Address> addresses;
+
+                                    try {
+                                        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+                                        String address = addresses.get(0).getAddressLine(0);
+
+                                        String city = addresses.get(0).getLocality();
+                                        String add=addresses.get(0)+"";
+                                        // Log.d("city", "d" + city +"addresses" +add);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                    Intent myIntent = new Intent(getApplicationContext(), MapActivity.class);
+                                    getApplicationContext().startActivity(myIntent);
+                                    // LocationAddress locationAddress = new LocationAddress();
+
+                                    //Toast.makeText(getAppl  LocationAddress locationAddress = new LocationAddress();
+                                    //                    locationAddress.getAddressFromLocation(latitude, longitude,
+                                    //                            getApplicationContext(), new GeocoderHandler());icationContext(),location.+"" , Toast.LENGTH_SHORT).show();
+
+                                    // Logic to handle location object
+                                }
+                            }
+                        });
+
+
+            } catch (Exception e) {
+                Log.e("d", e.toString());
+            }
+        }
+
+    }
+    /** public void requestDirection() {
+     if(origin==null || destination==null){
+     Toast.makeText(this,origin+""+destination+"",Toast.LENGTH_SHORT).show();
+     return;
+     }
+
+     // Snackbar.make(btnRequestDirection, "Direction Requesting...", Snackbar.LENGTH_SHORT).show();
+     GoogleDirection.withServerKey(serverKey)
+     .from(origin)
+     .to(destination)
+     .transportMode(TransportMode.DRIVING)
+     .optimizeWaypoints(true)
+     //  .avoid(AvoidType.HIGHWAYS)
+     //.avoid(AvoidType.FERRIES)
+     .execute(this);
+     }
+     **/
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
+
+/*
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                                PackageManager.PERMISSION_GRANTED) {
+                    Location loc = GPS.getLastLocation(this.getApplicationContext());
+و
+                    myLongitude = loc.getLongitude();
+                     myLatitude = loc.getLatitude();
+                    //using google maps you will create a map setting lat & long.
+                    //second option:: urlAddress = "http://maps.googleapis.com/maps/api/streetview?size=500x500&location=" + myLatitude + "," + myLongitude + "&fov=90&heading=235&pitch=10&sensor=false";
+                    //third option:: urlAddress = "geo:<" + myLatitude + ">,<" + myLongitude +">?q=<" + latitude + ">,<" + longitude +">(this is my currently location)"
+                    Log.d("myLatitude", "d" + myLatitude + myLongitude);
+                    Toast.makeText(this, "onConnected"+myLatitude+""+myLongitude, Toast.LENGTH_SHORT).show();
+
+
+                }*/
