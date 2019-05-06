@@ -60,14 +60,11 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         init();
         navigation= (BottomNavigationView) findViewById(R.id.navigation);
         getData();
-       // Toast.makeText(this, idddd+usernameshared+passwordshared, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, idddd+usernameshared+passwordshared, Toast.LENGTH_SHORT).show();
         navigation.setOnNavigationItemSelectedListener(this);
 
         gridView = (GridView) findViewById(R.id.gridViewNew);
-       // dataSaving(url = "http://"+ippage.ip+"/newllyAdded.php");
-
-         dataSaving(url = "http://192.168.1.8/newllyAdded.php");
-
+        dataSaving(url = "http://"+ippage.ip+"/newllyAdded.php");
         gridView.setAdapter(newllyAddedAdapter1);
     }
     private void dataSaving(String url) {
@@ -91,8 +88,8 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
 
-                               // newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket,marketfoodname);
-                             //   ;
+                                // newllyAddedObject newllyAddedObject2 = new newllyAddedObject( name,quantity, price ,imageurl,idmarket,marketfoodname);
+                                //   ;
 
 
 
@@ -109,9 +106,9 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-                              newllyAddedObject2= new productsObject(productId,name,quantity,imageurl,price,marketName,marketID);
+                                newllyAddedObject2= new productsObject(productId,name,quantity,imageurl,price,marketName,marketID);
                                 newllyAddedObjectArrayList.add(newllyAddedObject2);
-                                 newllyAddedAdapter= new newllyAddedAdapter(NewllyAdded.this, newllyAddedObjectArrayList);
+                                newllyAddedAdapter= new newllyAddedAdapter(NewllyAdded.this, newllyAddedObjectArrayList);
                                 newllyAddedAdapter.notifyDataSetChanged();
                                 gridView.setAdapter(newllyAddedAdapter);
 
@@ -157,10 +154,10 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
             Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
             startActivity(profile);
         }
+        else if (1 == seletedItemId) {
+            Intent Cart = new Intent(NewllyAdded.this, cart.class);
+            startActivity(Cart);
 
-        else if (1==seletedItemId){
-            Intent cart=new Intent(NewllyAdded.this, cart.class);
-            startActivity(cart);
         }
         else {
             super.onBackPressed();
@@ -203,13 +200,16 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         }, 2500, 2500);
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
+                finish();
 
+                Intent home =new Intent(NewllyAdded.this,NewllyAdded.class);
+                startActivity(home) ;
+                break;
 
             case R.id.navigation_Categories:
 
@@ -219,24 +219,18 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
                 break;
             case R.id.navigation_cart:
-                Intent cart= new Intent(NewllyAdded.this, cart.class);
-                startActivity(cart);
+                Intent cart=new Intent(NewllyAdded.this,cart.class);
+                startActivity(cart) ;
+
+
                 break;
             case R.id.navigation_profile:
-                /*if(id.equals("0")){
-                    Intent login=new Intent(NewllyAdded.this,loginPage.class);
-                    startActivity(login);
 
-                }else {
                     Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
                     startActivity(profile);
-                }*/
-                Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
-                startActivity(profile);
+
                 break;
             case R.id.navigation_search:
-
-
                 Intent search=new Intent(NewllyAdded.this,searching.class);
                 startActivity(search) ;
 
@@ -244,5 +238,6 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
         }
         return false;
     }
+
 
 }

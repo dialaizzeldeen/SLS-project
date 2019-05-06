@@ -29,10 +29,8 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".questions">
-
-
-        </activity>
+        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".questions"></activity>
         <activity android:name=".profilecategory" />
         <activity android:name=".timePage" />
         <activity android:name=".cart" />
@@ -42,17 +40,18 @@
         <activity android:name=".searching" />
         <activity android:name=".paymentHistory" />
         <activity android:name=".signupPage" />
-        <activity android:name=".loginvolley" >
-       </activity>
+        <activity android:name=".loginvolley"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".profile" />
-        <activity android:name=".bankInfo" > <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter></activity>
+        <activity android:name=".bankInfo"></activity>
         <activity android:name=".productMain" />
-        <activity android:name=".NewllyAdded" />
+        <activity android:name=".NewllyAdded">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -45,7 +45,11 @@ import java.util.Map;
 public class bankInfo extends AppCompatActivity  implements  BottomNavigationView.OnNavigationItemSelectedListener {
  EditText cardno,customerName,expdate,cvv;
  Button submitbutton;
+    public static final String usersum="usersum";
+
     public int NotificationID = 0;
+    public String cardsno;
+    public int NotificationID2 = 2;
     public static final String shared_pres="sharedPres";
     public static final String iduser="iduesr";
     private String id;
@@ -54,47 +58,51 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
     String idddd;
     String usernameshared;
     String passwordshared;
-    String urlupdate="http://"+ippage.ip+"/bankInfoget.php?updatebank="+idddd;
 
     String urlinsert="http://"+ippage.ip+"/bankInfo.php";
     public static final String ChannelID = "Services_Channel_ID_9";
+    public static final String ChannelID2 = "Services_Channel_ID_999";
+
     NotificationCompat.Action call1 = null;
     NotificationCompat.Action ignore = null;
     NotificationCompat.Builder notify = null;
+    NotificationCompat.Builder notify2 = null;
+
 
     NotificationManager mNotificationManager = null;
     Bitmap largeIcon = null;
+public int totalbalance;
     Bitmap Picture = null; BottomNavigationView navigation;
     PendingIntent pending = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank_info);
-        cardno=findViewById(R.id.cardNo);
+        cardno = findViewById(R.id.cardNo);
         getData();
 
-        customerName=findViewById(R.id.customerName);
-        expdate=findViewById(R.id.expireDate);
-        cvv=findViewById(R.id.cvv);
-       navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        customerName = findViewById(R.id.customerName);
+        expdate = findViewById(R.id.expireDate);
+        cvv = findViewById(R.id.cvv);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
-        submitbutton=findViewById(R.id.submit);
+        submitbutton = findViewById(R.id.submit);
 
-        String geturl="http://"+ippage.ip+"/bankInfoget.php?CustomerID="+idddd;
-
-
-
-dataget(geturl);
+        String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
 
 
-
+        dataget(geturl);
 
 
     }
-
 public void onviewws(View v) {
-   // dataSaving(urlinsert);
-    dataSaving(urlupdate);
+    String url2="http://"+ippage.ip+"/updatebank.php";
+    int totalsum= getIntent().getIntExtra("totalsum",0);
+
+    int totalvalue=totalbalance-totalsum;
+   // Toast.makeText(this,"ffffft"+totalbalance+""+cardsno+"nffff"+totalsum,Toast.LENGTH_LONG).show();
+
+
     createNotificationChannel(getBaseContext());
 
     notify = new NotificationCompat.Builder(getBaseContext(), ChannelID);
@@ -120,7 +128,10 @@ public void onviewws(View v) {
     mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
     mNotificationManager.notify(NotificationID++, notify.build());
-}
+    setBalance(url2,String.valueOf(totalvalue) , cardsno);
+
+
+    }
 
 
 
@@ -189,6 +200,7 @@ public void onviewws(View v) {
         usernameshared=sharedPreferences.getString(usernamedb,"0");
         passwordshared=sharedPreferences.getString(userpassworddb,"0");
 
+
     }
 
 
@@ -221,16 +233,17 @@ public void onviewws(View v) {
 
     private void dataget(String url) {
 
-
         RequestQueue queue = Volley.newRequestQueue(this);  //
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+                        int balance = 0;
                         try {
+                             String cardNos = "";
 
-                            JSONArray responseArray= jsonObject.getJSONArray("bankInfo");
+                            JSONArray responseArray= jsonObject.getJSONArray("cardaccount");
                             Log.i("Response",responseArray+"");
                             Log.i("Response",jsonObject+"");
                             StringBuilder textViewData = new StringBuilder();
@@ -238,11 +251,12 @@ public void onviewws(View v) {
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
-                                String cardNos = response.getString("cardNo");
+                           cardsno = response.getString("cardNo");
                                 String customernames=response.getString("customername");
                                 String cvvs = response.getString("cvv");
                                 String datecard= response.getString("datecard");
-                                cardno.setText(cardNos);
+                               totalbalance=response.getInt("balance");
+                                cardno.setText(cardsno);
                                 customerName.setText(customernames);
                                 cvv.setText(cvvs);
                                 expdate.setText(datecard);
@@ -250,7 +264,7 @@ public void onviewws(View v) {
 
                             }
                             //   textView.setText(textViewData.toString());
-                            Log.d("response","j"+textViewData);
+                          //  Log.d("responseeeeeeeeeeeeeeee","j"+balance);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -273,47 +287,84 @@ public void onviewws(View v) {
 
     }
 
-    private void dataSaving(String url) {
 
+
+
+
+
+
+
+    public void setBalance(String url, final String totalvalues, final String cardno){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>()
+                {
                     @Override
                     public void onResponse(String response) {
                         // response
-                        if(response=="true")
-                            Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
-                        else{
-                            Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
-                        }
+                   Toast.makeText(getApplicationContext(),"Response"+response,Toast.LENGTH_LONG).show();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", error.toString());
-
-            }
-        }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                    }
+                }
         ) {
+
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
-           params.put("customername",customerName.getText().toString());
-                params.put("customerid",idddd.toString() );
-                params.put("CVV",cvv.getText().toString());
-                params.put("cardno",cardno.getText().toString());
-                params.put("datecard",expdate.getText().toString());
-              /*  params.put("customername","gg");
-                params.put("customerid","55" );
-                params.put("CVV","33");
-                params.put("cardno","333");
-                params.put("datecard","23\3");     **/
+                Map<String, String>  params = new HashMap<String, String> ();
+                params.put("cardNo", "222");
+                params.put("balance", "2322");
 
                 return params;
             }
-        };
-        queue.add(postRequest);
 
-        }}
+        };
+
+        queue.add(putRequest);}
+
+
+
+
+}
+/**if (getIntent().getExtras().containsKey("view")){
+ dataget(geturl);
+
+ customerName.setEnabled(false);
+ customerName.setTextColor(Color.BLACK);
+
+ expdate.setEnabled(false);
+ expdate.setTextColor(Color.BLACK);
+ cvv.setEnabled(false);
+ cvv.setTextColor(Color.BLACK);
+ cardno.setEnabled(false);
+ cardno.setTextColor(Color.BLACK);
+
+
+ }
+ else{
+
+ customerName.setEnabled(true);
+ customerName.setTextColor(Color.BLACK);
+
+ expdate.setEnabled(true);
+ expdate.setTextColor(Color.BLACK);
+ cvv.setEnabled(true);
+ cvv.setTextColor(Color.BLACK);
+ cardno.setEnabled(true);
+ cardno.setTextColor(Color.BLACK);
+
+ dataSaving(urlinsert);
+
+
+ }**/
+
+
+

@@ -15,10 +15,10 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="431dp"
+        android:layout_height="485dp"
         android:layout_marginLeft="10dp"
 
-        android:layout_weight="5"
+        android:layout_weight="7"
         android:orientation="vertical">
 
         <LinearLayout
@@ -60,7 +60,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-black"
                 android:text="Credit Card "
-                android:textColor="#110"
+                android:textColor="#000"
                 android:textSize="20dp"
                 android:typeface="serif" />
 
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <EditText
                     android:id="@+id/cardNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
 
             </LinearLayout>
 
-            <TextView
+            <EditText
                 android:id="@+id/customerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,14 +134,14 @@
             android:orientation="horizontal">
 
 
-            <TextView
+            <EditText
                 android:id="@+id/expireDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="7"
                 android:hint="MM / YY" />
 
-            <TextView
+            <EditText
                 android:id="@+id/cvv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
 
-        android:layout_height="73dp"
+        android:layout_height="188dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_weight="2"
