@@ -52,13 +52,15 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class questions extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener,, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class questions extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     protected LocationManager locationManager;
     private Button btnRequestDirection;
     private GoogleMap googleMap;
@@ -415,7 +417,7 @@ startActivity(i);
 
 
 
-}
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void checkPermissions() {
         final List<String> missingPermissions = new ArrayList<String>();
