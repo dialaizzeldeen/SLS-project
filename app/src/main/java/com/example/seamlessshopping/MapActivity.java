@@ -64,7 +64,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 // This will be displayed on taping the marker
                 markerOptions.title(latLng.latitude + " : " + latLng.longitude);
 
-                Log.d("myLatitudeeeeeemap", "d" + latLng.latitude + " : " + latLng.longitude);
+              //  Log.d("myLatitudeeeeeemap", "d" + latLng.latitude + " : " + latLng.longitude);
                 //   Coordinates.FirstlatCoordinates=location.getLatitude();
                 // Coordinates.FirstlongCoordinates=location.getLongitude();
                 //Log.d("dddddd",""+Coordinates.FirstAddressCoordinates);
@@ -74,13 +74,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 try {
                     addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
 
-//                        String address = addresses.get(0).getAddressLine(0);
-
-                    //   String city = addresses.get(0).getLocality();
+        String address = addresses.get(0).getAddressLine(0);
+String area =addresses.get(0).getSubAdminArea();
+                     String city = addresses.get(0).getLocality();
                     String add = addresses.get(0) + "";
                     Log.d("city", "d" + "addresses" + add);
-                    Coordinates.AddressCoordinates = add;
-                    Coordinates.distance = distance(Coordinates.FirstlatCoordinates, Coordinates.FirstlongCoordinates, latLng.latitude, latLng.longitude);
+                    Coordinates.AddressCoordinates = "City"+ city+"address"+address +area;
+                    Coordinates.distance = distance(Coordinates.FirstlatCoordinates, Coordinates.FirstlongCoordinates,32.111, 33.123);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -104,6 +104,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     public void onsave(View v) {
         Intent i = new Intent(this, questions.class);
+       Toast.makeText(this,"Coordinates.distance"+"d" +Coordinates.distance,Toast.LENGTH_LONG).show();
+
         startActivity(i);
 
 

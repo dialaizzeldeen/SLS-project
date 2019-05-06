@@ -132,7 +132,7 @@ private LocationRequest locationRequest;
         showDate(year, month + 1, day);
 
 
-
+locQ.setText(Coordinates.AddressCoordinates);
 
 
 
