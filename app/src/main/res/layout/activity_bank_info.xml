@@ -107,6 +107,7 @@
                     android:hint="Card number"
                     android:inputType="number" />
 
+
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -114,6 +115,14 @@
                     android:src="@drawable/lock" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/cardnoerror"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="Enter your card no "
+                android:textColor="#FF1100"
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/customerName"
@@ -123,32 +132,73 @@
                 android:ems="15"
                 android:hint="Name on card"
                 android:inputType="text" />
+
+            <TextView
+                android:id="@+id/namecarderror"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Enter your name "
+                android:textColor="#FF1100"
+                android:textSize="18dp" />
+
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="368dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/expireDate"
+                <EditText
+                    android:id="@+id/expireDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:hint="MM / YY" />
+
+                <TextView
+                    android:id="@+id/dateerror"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:text="Enter date "
+                    android:inputType="text"
+                    android:textColor="#FF1100"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="7"
-                android:hint="MM / YY" />
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/cvv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:ems="7"
-                android:hint="CVV"
-                android:inputType="numberPassword" />
+                <EditText
+                    android:id="@+id/cvv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:ems="6"
+                    android:hint="CVV"
+                    android:inputType="numberPassword" />
+
+                <TextView
+                    android:id="@+id/cvverror"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter CVV "
+                    android:textColor="#FF1100"
+                    android:textSize="18dp" />
+
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="40dp"

@@ -48,6 +48,8 @@ public class questions extends AppCompatActivity implements BottomNavigationView
     private String id="0";
    public static int balances;
     String url="http://"+ippage.ip+":8978/";
+
+
 BottomNavigationView navigation;
     private int year, month, day;
     private DatePicker datePicker;

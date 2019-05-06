@@ -104,6 +104,10 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                                         .append(quantity.toString()).append(NEW_LINE);
                                 textViewData.append("Name: ").append(name).append(NEW_LINE);
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
+                                textViewData.append("marketfoodname: ").append(marketName).append(NEW_LINE);
+                                textViewData.append("id: ").append(productId).append(NEW_LINE);
+                                textViewData.append("idmarket: ").append(marketID).append(NEW_LINE);
+
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
                                 newllyAddedObject2= new productsObject(productId,name,quantity,imageurl,price,marketName,marketID);
@@ -205,7 +209,6 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                finish();
 
                 Intent home =new Intent(NewllyAdded.this,NewllyAdded.class);
                 startActivity(home) ;

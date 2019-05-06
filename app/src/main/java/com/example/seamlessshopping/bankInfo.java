@@ -19,12 +19,15 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -58,6 +61,7 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
     String idddd;
     String usernameshared;
     String passwordshared;
+    TextView cvverror,nameerror,dateerror,cardnoerror;
 
     String urlinsert="http://"+ippage.ip+"/bankInfo.php";
     public static final String ChannelID = "Services_Channel_ID_9";
@@ -88,6 +92,14 @@ public int totalbalance;
         navigation.setOnNavigationItemSelectedListener(this);
         submitbutton = findViewById(R.id.submit);
 
+        cvverror =findViewById(R.id.cvverror);
+        nameerror=findViewById(R.id.namecarderror);
+        dateerror=findViewById(R.id.dateerror);
+        cardnoerror=findViewById(R.id.cardnoerror);
+        cvverror.setVisibility(View.INVISIBLE);
+nameerror.setVisibility(View.INVISIBLE);
+cardnoerror.setVisibility(View.INVISIBLE);
+dateerror.setVisibility(View.INVISIBLE);
         String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
 
 
@@ -96,41 +108,83 @@ public int totalbalance;
 
     }
 public void onviewws(View v) {
-    String url2="http://"+ippage.ip+"/updatebank.php";
-    int totalsum= getIntent().getIntExtra("totalsum",0);
+    boolean isValidate = true;
 
-    int totalvalue=totalbalance-totalsum;
-   // Toast.makeText(this,"ffffft"+totalbalance+""+cardsno+"nffff"+totalsum,Toast.LENGTH_LONG).show();
+    if (expdate.getText().toString().equals("")) {
 
 
-    createNotificationChannel(getBaseContext());
+        isValidate = false;
+      dateerror.setVisibility(View.VISIBLE);}
+        //Fname.setError("Error");
 
-    notify = new NotificationCompat.Builder(getBaseContext(), ChannelID);
+        if (cardno.getText().toString().equals("")) {
+            isValidate = false;
+            cardnoerror.setVisibility(View.VISIBLE);
+        }            //Fname.setError("Error");
 
-    notify.setAutoCancel(true);
-    //    notify.setOngoing ( true );
-    notify.setSubText("Personal");
-    notify.setContentTitle("Seamless shopping app");
-    notify.setContentText("Your order is ready");
-    notify.setSmallIcon(R.drawable.heey);
-    notify.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.heey));
-    notify.setColor(Color.YELLOW);
-    notify.setColorized(true);
-    Intent i = new Intent(this, NewllyAdded.class);
-    PendingIntent h = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-    notify.setContentIntent(h);
-    notify.setPriority(NotificationManagerCompat.IMPORTANCE_HIGH);
+            if (customerName.getText().toString().equals("")) {
+                isValidate = false;
+                nameerror.setVisibility(View.VISIBLE);}
+                //Fname.setError("Error");
 
+                if (cvv.getText().toString().equals("")) {
+                    isValidate = false;
+                    cvverror.setVisibility(View.VISIBLE);}
+                    //Fname.setError("Error");
 
-    notify.setUsesChronometer(true);
+    int cardnoId = 1;
+    int cvvId = 2;
+    int nameId = 3;
 
-
-    mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-    mNotificationManager.notify(NotificationID++, notify.build());
-    setBalance(url2,String.valueOf(totalvalue) , cardsno);
+    int dateId = 4;
 
 
+
+    cardno.addTextChangedListener(new bankInfo.textwatcher(cardnoId));
+    cvv.addTextChangedListener(new bankInfo.textwatcher(cvvId));
+    customerName.addTextChangedListener(new bankInfo.textwatcher(nameId));
+    expdate.addTextChangedListener(new bankInfo.textwatcher(dateId));
+
+
+
+                    if (isValidate == true) {
+
+
+                        String url2 = "http://" + ippage.ip + "/updatebank.php";
+                        int totalsum = getIntent().getIntExtra("totalsum", 0);
+
+                        int totalvalue = totalbalance - totalsum;
+                        // Toast.makeText(this,"ffffft"+totalbalance+""+cardsno+"nffff"+totalsum,Toast.LENGTH_LONG).show();
+
+
+                        createNotificationChannel(getBaseContext());
+
+                        notify = new NotificationCompat.Builder(getBaseContext(), ChannelID);
+
+                        notify.setAutoCancel(true);
+                        //    notify.setOngoing ( true );
+                        notify.setSubText("Personal");
+                        notify.setContentTitle("Seamless shopping app");
+                        notify.setContentText("Your order is ready");
+                        notify.setSmallIcon(R.drawable.heey);
+                        notify.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.heey));
+                        notify.setColor(Color.YELLOW);
+                        notify.setColorized(true);
+                        Intent i = new Intent(this, NewllyAdded.class);
+                        PendingIntent h = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                        notify.setContentIntent(h);
+                        notify.setPriority(NotificationManagerCompat.IMPORTANCE_HIGH);
+
+
+                        notify.setUsesChronometer(true);
+
+
+                        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+                        mNotificationManager.notify(NotificationID++, notify.build());
+                        setBalance(url2, String.valueOf(totalvalue), cardsno);
+
+                    }
     }
 
 
@@ -330,6 +384,43 @@ public void onviewws(View v) {
 
         queue.add(putRequest);}
 
+    class textwatcher implements TextWatcher {
+        int id;
+
+        public textwatcher(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            if (id == 1) {
+                cardnoerror.setVisibility(View.INVISIBLE);
+            }
+
+            if (id == 2) {
+                cvverror.setVisibility(View.INVISIBLE);
+            }
+            if (id == 3) {
+                nameerror.setVisibility(View.INVISIBLE);
+            }
+            if (id == 4) {
+               dateerror.setVisibility(View.INVISIBLE);
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+
+    }
 
 
 
