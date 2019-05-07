@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class questions extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
 protected LocationManager locationManager;
 private Button btnRequestDirection;
 private GoogleMap googleMap;
@@ -226,7 +227,7 @@ locQ.setText(Coordinates.AddressCoordinates);
             JSONObject js = new JSONObject();
             JSONObject js2 = new JSONObject();
             String day          = (String) DateFormat.format("dd", Long.parseLong(dateQ.getText().toString())); // 20
-Toast.makeText(getApplicationContext(),"daat"+day,Toast.LENGTH_LONG).show();
+Toast.makeText(getApplicationContext(),"daayyyyyyy"+day,Toast.LENGTH_LONG).show();
 
             try {
                 js.put("locQ", Coordinates.distance);
@@ -507,6 +508,7 @@ Toast.makeText(getApplicationContext(),"daat"+day,Toast.LENGTH_LONG).show();
                 else if(item.getItemId()==R.id.range2){ timeQ.setText(item.getTitle());
                 timeval1="10";
                 timeval2="13";
+
                 }
                 else if (item.getItemId()==   R.id.range3){
                     timeQ.setText(item.getTitle());
