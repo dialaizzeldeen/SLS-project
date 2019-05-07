@@ -105,7 +105,7 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
         String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
 
         datasaving(urlinsert);
-        dataget(geturl);
+      //  dataget(geturl);
 
 
     }

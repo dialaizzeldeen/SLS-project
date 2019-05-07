@@ -50,6 +50,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -79,7 +80,7 @@ private LocationRequest locationRequest;
          Double myLatitude ,,myLongitude;
          */
         Double myLatitude ,myLongitude;
-TextView  timeQ;
+TextView timeQ;
     TextView locQ;
     TextView dateQ;
     Button sumbitQ;
