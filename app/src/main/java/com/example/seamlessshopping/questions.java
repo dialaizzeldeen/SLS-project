@@ -55,9 +55,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -89,7 +92,7 @@ private LocationRequest locationRequest;
     private int year, month, day;
     private DatePicker datePicker;
     private Calendar calendar;
-
+public String getday;
 
     //Double myLatitude ,myLongitude;
 
@@ -170,6 +173,7 @@ locQ.setText(Coordinates.AddressCoordinates);
         sumbitQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"daayyyyyyy"+getday,Toast.LENGTH_LONG).show();
                 Intent i = new Intent(questions.this, bankInfo.class);
                 int totalsum = getIntent().getIntExtra("totalsum", 0);
                 Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
@@ -213,7 +217,18 @@ locQ.setText(Coordinates.AddressCoordinates);
         String monthName = (String) android.text.format.DateFormat.format("MMMM", month);
         dateQ.setText(new StringBuilder().append(day)
                 .append(monthName).append(year));
-    }
+        String h= String.valueOf(day+"/"+month+"/"+year);
+        SimpleDateFormat format1=new SimpleDateFormat("dd/MM/yyyy");
+        Date dt1= null;
+        try {
+            dt1 = format1.parse(h);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat format2=new SimpleDateFormat("EEEE");
+        String finalDay=format2.format(dt1);
+        getday=finalDay;
+                }
 
 
     public void sendDataToServer() {
@@ -225,13 +240,12 @@ locQ.setText(Coordinates.AddressCoordinates);
 
             JSONObject js = new JSONObject();
             JSONObject js2 = new JSONObject();
-            String day          = (String) DateFormat.format("dd", Long.parseLong(dateQ.getText().toString())); // 20
-Toast.makeText(getApplicationContext(),"daayyyyyyy"+day,Toast.LENGTH_LONG).show();
+
 
             try {
                 js.put("locQ", Coordinates.distance);
                 js.put("timeval1", timeval1);//timeQ.getText().toString()
-                js.put("dateQ",day);
+                js.put("dateQ",getday);
                 js.put("timeval2",timeval2);
                 jsonArray.put(js);
 
