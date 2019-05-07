@@ -60,14 +60,14 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class questions extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    protected LocationManager locationManager;
-    private Button btnRequestDirection;
-    private GoogleMap googleMap;
-    private String serverKey = "AIzaSyA6yPhzcOM3ho3F39trzG-1bXFp1t29R6U";
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private Location lastLocation;
-    private LocationRequest locationRequest;
+public class questions extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+protected LocationManager locationManager;
+private Button btnRequestDirection;
+private GoogleMap googleMap;
+private String serverKey = "AIzaSyA6yPhzcOM3ho3F39trzG-1bXFp1t29R6U";
+public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+private Location lastLocation;
+private LocationRequest locationRequest;
 
     Double myLatitude ,myLongitude;
     EditText  timeQ;
@@ -124,7 +124,6 @@ public class questions extends AppCompatActivity implements  View.OnClickListene
         sumbitQ = findViewById(R.id.submitQuestion);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
-        timeQ.setOnClickListener(this);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -165,11 +164,11 @@ locQ.setText(Coordinates.AddressCoordinates);
         sumbitQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-Intent i = new Intent(questions.this,bankInfo.class);
+                Intent i = new Intent(questions.this, bankInfo.class);
                 int totalsum = getIntent().getIntExtra("totalsum", 0);
-Toast.makeText(getApplicationContext(),"eee"+totalsum,Toast.LENGTH_LONG).show();
-i.putExtra("totalsum",totalsum);
-startActivity(i);
+                Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
+                i.putExtra("totalsum", totalsum);
+                startActivity(i);
                 sendDataToServer();
             }
         });
@@ -206,17 +205,12 @@ startActivity(i);
     private void showDate(int year, int month, int day) {
 
         String monthName = (String) android.text.format.DateFormat.format("MMMM", month);
-     dateQ.setText(new StringBuilder().append(day)
+        dateQ.setText(new StringBuilder().append(day)
                 .append(monthName).append(year));
     }
 
 
-
-
-
-
-
-    public void sendDataToServer(){
+    public void sendDataToServer() {
         RequestQueue queue = Volley.newRequestQueue(this);  //
 
         try {
@@ -227,13 +221,13 @@ startActivity(i);
             JSONObject js2 = new JSONObject();
 
             try {
-                js.put("locQ",locQ.getText().toString());
+                js.put("locQ", Coordinates.distance);
+                js.put("dateQ", dateQ.getText().toString());
                 js.put("timeval1",timeval1);
                 js.put("timeval2",timeval2);
-
-                js.put("dateQ",dateQ.getText().toString());
                 jsonArray.put(js);
-                js2.put("information",jsonArray);
+
+                js2.put("information", jsonArray);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -253,8 +247,7 @@ startActivity(i);
                     Toast.makeText(questions.this, error.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
-            })
-                    ;
+            });
 
             queue.add(jsonObjectRequest);
         } catch (Exception e) {
@@ -262,44 +255,44 @@ startActivity(i);
 
         }
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
 
-                Intent home =new Intent(questions.this,NewllyAdded.class);
-                startActivity(home) ;
+                Intent home = new Intent(questions.this, NewllyAdded.class);
+                startActivity(home);
                 break;
 
             case R.id.navigation_Categories:
 
-                Intent categorie=new Intent(questions.this,Categories_Activity.class);
-                startActivity(categorie) ;
+                Intent categorie = new Intent(questions.this, Categories_Activity.class);
+                startActivity(categorie);
 
 
                 break;
             case R.id.navigation_cart:
 
-                Intent Cart=new Intent(questions.this,cart.class);
-                startActivity(Cart) ;
+                Intent Cart = new Intent(questions.this, cart.class);
+                startActivity(Cart);
 
                 break;
             case R.id.navigation_profile:
 
-                Intent profile=new Intent(questions.this,profilecategory.class);
-                startActivity(profile) ;
+                Intent profile = new Intent(questions.this, profilecategory.class);
+                startActivity(profile);
                 break;
             case R.id.navigation_search:
 
-                Intent search=new Intent(questions.this,searching.class);
-                startActivity(search) ;
+                Intent search = new Intent(questions.this, searching.class);
+                startActivity(search);
 
                 break;
         }
-        return false;    }
-
-
+        return false;
+    }
 
 
     public void onBackPressed() {
@@ -312,7 +305,7 @@ startActivity(i);
             Intent categorie = new Intent(questions.this, Categories_Activity.class);
             startActivity(categorie);
         } else if (3 == seletedItemId) {
-            Intent profile = new Intent(questions.this,profilecategory.class);
+            Intent profile = new Intent(questions.this, profilecategory.class);
             startActivity(profile);
         } else if (1 == seletedItemId) {
             Intent Cart = new Intent(questions.this, cart.class);
@@ -323,10 +316,11 @@ startActivity(i);
             super.onBackPressed();
         }
     }
-    public void getData(){
-        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
-        id=sharedPreferences.getString(iduser,"0");
-        Log.d("response  ",id);
+
+    public void getData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(shared_pres, MODE_PRIVATE);
+        id = sharedPreferences.getString(iduser, "0");
+        Log.d("response  ", id);
     }
     public void onClick(View v) {
 
