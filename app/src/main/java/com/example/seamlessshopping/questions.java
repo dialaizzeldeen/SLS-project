@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,13 +53,15 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class questions extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class questions extends AppCompatActivity implements View.OnClickListener,BottomNavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 protected LocationManager locationManager;
 private Button btnRequestDirection;
 private GoogleMap googleMap;
@@ -126,6 +129,7 @@ private LocationRequest locationRequest;
         sumbitQ = findViewById(R.id.submitQuestion);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+        timeQ.setOnClickListener(this);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -222,7 +226,7 @@ locQ.setText(Coordinates.AddressCoordinates);
             JSONObject js = new JSONObject();
             JSONObject js2 = new JSONObject();
             String day          = (String) DateFormat.format("dd", Long.parseLong(dateQ.getText().toString())); // 20
-Toast.makeText(getApplicationContext(),"daat"+day,Toast.LENGTH_LONG).show();
+Toast.makeText(getApplicationContext(),"daayyyyyyy"+day,Toast.LENGTH_LONG).show();
 
             try {
                 js.put("locQ", Coordinates.distance);
@@ -465,6 +469,75 @@ Toast.makeText(getApplicationContext(),"daat"+day,Toast.LENGTH_LONG).show();
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        showPopupWindow(v);
+
+
+    }
+    void showPopupWindow(View view) {
+        PopupMenu popup = new PopupMenu(questions.this, view);
+        try {
+            Field[] fields = popup.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if ("mPopup".equals(field.getName())) {
+                    field.setAccessible(true);
+                    Object menuPopupHelper = field.get(popup);
+                    Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+                    Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
+                    setForceIcons.invoke(menuPopupHelper, true);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        popup.getMenuInflater().inflate(R.menu.timepopup, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.range1){
+                    timeQ.setText(item.getTitle());
+                    timeval1="9";
+                    timeval2="12";
+                }
+                else if(item.getItemId()==R.id.range2){ timeQ.setText(item.getTitle());
+                    timeval1="10";
+                    timeval2="13";
+                }
+                else if (item.getItemId()==   R.id.range3){
+                    timeQ.setText(item.getTitle());
+                    timeval1="11";
+                    timeval2="14";
+                }
+                else if(item.getItemId() == R.id.range4) {
+                    timeQ.setText(item.getTitle());
+                    timeval1="15";
+                    timeval2="18";
+                }
+                else if(item.getItemId()==R.id.range5){
+                    timeQ.setText(item.getTitle());
+                    timeval1="16";
+                    timeval2="19";
+                    ;}
+                else if(item.getItemId()==R.id.range6){
+                    timeQ.setText(item.getTitle());
+                    timeval1="18";
+                    timeval2="21";
+                    ;}
+                else if(item.getItemId()==R.id.range7){
+                    timeQ.setText(item.getTitle());
+                    timeval1="21";
+                    timeval2="23";
+                    ;}
+                return true;
+            }
+
+        });
+        popup.show();
     }
 }
 
