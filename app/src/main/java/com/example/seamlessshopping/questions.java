@@ -77,6 +77,7 @@ private LocationRequest locationRequest;
     TextView locQ;
     TextView dateQ;
     Button sumbitQ;
+    String timeval1,timeval2;
     public static final String shared_pres = "sharedPres";
     public static final String iduser = "iduesr";
     private String id = "0";
@@ -221,13 +222,13 @@ locQ.setText(Coordinates.AddressCoordinates);
             JSONObject js = new JSONObject();
             JSONObject js2 = new JSONObject();
             String day          = (String) DateFormat.format("dd", Long.parseLong(dateQ.getText().toString())); // 20
-
+Toast.makeText(getApplicationContext(),"daat"+day,Toast.LENGTH_LONG).show();
 
             try {
                 js.put("locQ", Coordinates.distance);
-                js.put("timeval1", "23");//timeQ.getText().toString()
+                js.put("timeval1", timeval1);//timeQ.getText().toString()
                 js.put("dateQ",day);
-                js.put("timeval2","22");
+                js.put("timeval2",timeval2);
                 jsonArray.put(js);
 
                 js2.put("information", jsonArray);
