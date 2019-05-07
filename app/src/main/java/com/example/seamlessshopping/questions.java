@@ -79,7 +79,7 @@ private LocationRequest locationRequest;
          Double myLatitude ,,myLongitude;
          */
         Double myLatitude ,myLongitude;
-    EditText  timeQ;
+TextView  timeQ;
     TextView locQ;
     TextView dateQ;
     Button sumbitQ;
@@ -457,13 +457,7 @@ locQ.setText(Coordinates.AddressCoordinates);
 
                                     Intent myIntent = new Intent(getApplicationContext(), MapActivity.class);
                                     getApplicationContext().startActivity(myIntent);
-                                    // LocationAddress locationAddress = new LocationAddress();
 
-                                    //Toast.makeText(getAppl  LocationAddress locationAddress = new LocationAddress();
-                                    //                    locationAddress.getAddressFromLocation(latitude, longitude,
-                                    //                            getApplicationContext(), new GeocoderHandler());icationContext(),location.+"" , Toast.LENGTH_SHORT).show();
-
-                                    // Logic to handle location object
                                 }
                             }
                         });
