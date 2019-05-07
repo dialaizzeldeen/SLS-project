@@ -20,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -221,9 +222,12 @@ locQ.setText(Coordinates.AddressCoordinates);
             JSONObject js2 = new JSONObject();
 
             try {
+
+                String day          = (String) DateFormat.format("dd", Long.parseLong(dateQ.getText().toString())); // 20
+
                 js.put("locQ", Coordinates.distance);
                 js.put("timeval1", "23");//timeQ.getText().toString()
-                js.put("dateQ", dateQ.getText().toString());
+                js.put("dateQ",day);
                 js.put("timeval2","22");
                 jsonArray.put(js);
 
