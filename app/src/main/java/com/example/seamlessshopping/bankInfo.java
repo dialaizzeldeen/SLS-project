@@ -63,7 +63,6 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
     String passwordshared;
     TextView cvverror, nameerror, dateerror, cardnoerror;
 
-    String urlinsert = "http://" + ippage.ip + "/bankInfo.php";
     public static final String ChannelID = "Services_Channel_ID_9";
     public static final String ChannelID2 = "Services_Channel_ID_999";
 
@@ -104,7 +103,6 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
         dateerror.setVisibility(View.INVISIBLE);
         String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
 
-        datasaving(urlinsert);
       //  dataget(geturl);
 
 
@@ -152,6 +150,9 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
 
 
         if (isValidate == true) {
+            String urlinsert = "http://"+ippage.ip+"/bankInfo.php";
+
+            datasaving(urlinsert);
 
 
             String url2 = "http://" + ippage.ip + "/updatebank.php";
