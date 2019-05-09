@@ -66,7 +66,7 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
     String search;
     ArrayList<productsObject> searchObjectArrayList = new ArrayList<productsObject>();
     ImageView imagecategories;
-    String categories="";
+    public String categories="";
     BottomNavigationView navigation;
     TextView filter;
     public static final String shared_pres="sharedPres";
@@ -352,7 +352,6 @@ navigation.setOnNavigationItemSelectedListener(this);
                     searchAdapter.notifyDataSetChanged();
                     categories = "market";
                     imagecategories.setVisibility(View.VISIBLE);
-
                     imagecategories.setImageResource(R.drawable.markets);
                 }
                 else if(item.getItemId()==R.id.allcategories){
