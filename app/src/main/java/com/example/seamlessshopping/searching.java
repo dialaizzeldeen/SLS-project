@@ -54,11 +54,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 
-public class searching extends AppCompatActivity implements  View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
-  ListView gridView;
+public class searching extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+    ListView gridView;
     private static final String NEW_LINE = "\n\n";
-
-
     TextView textView;
     productsObject productObject;
     String url;
@@ -66,29 +64,22 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
     String search;
     ArrayList<productsObject> searchObjectArrayList = new ArrayList<productsObject>();
     ImageView imagecategories;
-    public String categories="";
+    public String categories = "";
     BottomNavigationView navigation;
     TextView filter;
-    public static final String shared_pres="sharedPres";
-    public static final String iduser="iduesr";
-    private String id="0";
+    public static final String shared_pres = "sharedPres";
+    public static final String iduser = "iduesr";
+    private String id = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searching);
         getData();
-
-
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
         final EditText textsearch = findViewById(R.id.search);
-
-        imagecategories=findViewById(R.id.imagecate);
-
-        filter=findViewById(R.id.filterprice);
-
-
+        imagecategories = findViewById(R.id.imagecate);
+        filter = findViewById(R.id.filterprice);
 
 
         imagecategories.setVisibility(View.INVISIBLE);
@@ -97,7 +88,8 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
         textsearch.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -108,21 +100,22 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
 
-                if(s.length() != 0)
-                {imagecategories.setVisibility(View.INVISIBLE);
+                if (s.length() != 0) {
+                    imagecategories.setVisibility(View.INVISIBLE);
                     searchObjectArrayList.clear();
-                    String  search=textsearch.getText().toString();
-                    if(categories.equals("")){   url = "http://"+ippage.ip+"/searchactivity2.php?namesearch=" + search;
-                        Log.d("hhh","pleeeeeeee"+url);
-                        dataSaving(url);   }
-                    else
-                    {   imagecategories.setVisibility(View.INVISIBLE);
-                        url = "http://"+ippage.ip+"/searchactivity.php?namesearch=" + search+"&categories="+categories;
-                        Log.d("hhh","j"+url);
-                        dataSaving(url);  }
+                    String search = textsearch.getText().toString();
+                    if (categories.equals("")) {
+                        url = "http://" + ippage.ip + "/searchactivity2.php?namesearch=" + search;
+                        Log.d("hhh", "pleeeeeeee" + url);
+                        dataSaving(url);
+                    } else {
+                        imagecategories.setVisibility(View.INVISIBLE);
+                        url = "http://" + ippage.ip + "/searchactivity.php?namesearch=" + search + "&categories=" + categories;
+                        Log.d("hhh", "j" + url);
+                        dataSaving(url);
+                    }
 
-                }
-                else {
+                } else {
                     imagecategories.setVisibility(View.INVISIBLE);
                     searchObjectArrayList.clear();
                     searchAdapter.notifyDataSetChanged();
@@ -135,8 +128,7 @@ public class searching extends AppCompatActivity implements  View.OnClickListene
         textsearch.setOnClickListener(this);
 
 
-navigation.setOnNavigationItemSelectedListener(this);
-
+        navigation.setOnNavigationItemSelectedListener(this);
 
 
         gridView = (ListView) findViewById(R.id.gridView);
@@ -166,11 +158,11 @@ navigation.setOnNavigationItemSelectedListener(this);
                             //Parse the JSON response array by iterating over it
                             searchObjectArrayList.clear();
                             for (int i = 0; i < responseArray.length(); i++) {
-                                JSONObject   response = responseArray.getJSONObject(i);
-                                Integer productId=response.getInt("id");
+                                JSONObject response = responseArray.getJSONObject(i);
+                                Integer productId = response.getInt("id");
                                 String productname = response.getString("productname");
-                                String marketName=response.getString("marketname");
-                                Integer marketID=response.getInt("idmarket");
+                                String marketName = response.getString("marketname");
+                                Integer marketID = response.getInt("idmarket");
                                 Integer quantity = response.getInt("quantity");
                                 String imageurl = response.getString("imageurl");
                                 String price = response.getString("price");
@@ -180,35 +172,29 @@ navigation.setOnNavigationItemSelectedListener(this);
                                 textViewData.append("imageurl: ").append(imageurl).append(NEW_LINE);
                                 textViewData.append("price: ").append(price).append(NEW_LINE);
 
-                                productObject = new productsObject(productId,productname,quantity,imageurl,price,marketName,marketID);
+                                productObject = new productsObject(productId, productname, quantity, imageurl, price, marketName, marketID);
                                 searchObjectArrayList.add(productObject);
-                                    searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
+                                searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
                                 searchAdapter.notifyDataSetChanged();
                                 gridView.setAdapter(searchAdapter);
 
 
-
-
-
-
-
-                         /**       String name = response.getString("productname");
-                                Integer quantity = response.getInt("quantity");
-                                String imageurl = response.getString("imageurl");
-                                String price = response.getString("price");
-                                String marketfoodname = response.getString("marketname");
-                                productObject = new productsObject(name, quantity, imageurl, price, marketfoodname);**/
-                               // searchObjectArrayList.add(productObject);
+                                /**       String name = response.getString("productname");
+                                 Integer quantity = response.getInt("quantity");
+                                 String imageurl = response.getString("imageurl");
+                                 String price = response.getString("price");
+                                 String marketfoodname = response.getString("marketname");
+                                 productObject = new productsObject(name, quantity, imageurl, price, marketfoodname);**/
+                                // searchObjectArrayList.add(productObject);
 
                             }
 
-                    /**        searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
-                            searchAdapter.notifyDataSetChanged();
-                            gridView.setAdapter(searchAdapter);
-***/
+                            /**        searchAdapter = new searchAdapter(searching.this, searchObjectArrayList);
+                             searchAdapter.notifyDataSetChanged();
+                             gridView.setAdapter(searchAdapter);
+                             ***/
                             //   textView.setText(textViewData.toString());
                             Log.d("response", "j" + textViewData);
-
 
 
                         } catch (JSONException e) {
@@ -249,9 +235,7 @@ navigation.setOnNavigationItemSelectedListener(this);
         //gridView.setAdapter(searchAdapter);
 
 
-
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -270,12 +254,10 @@ navigation.setOnNavigationItemSelectedListener(this);
         //gridView.setAdapter(searchAdapter);
 
 
-
     }
 
 
-    public void showmenu(final View view)
-    {
+    public void showmenu(final View view) {
         PopupMenu popup = new PopupMenu(searching.this, view);
 
 
@@ -284,15 +266,17 @@ navigation.setOnNavigationItemSelectedListener(this);
 
             @RequiresApi(api = Build.VERSION_CODES.N)
             public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId()==R.id.lowtohigh){
+                if (item.getItemId() == R.id.lowtohigh) {
                     pricelowest(view);
+                } else if (item.getItemId() == R.id.hightolow) {
+                    pricehighest(view);
                 }
-                else if(item.getItemId()==R.id.hightolow){pricehighest(view);}
 
                 return true;
             }
         });
-        popup.show();}
+        popup.show();
+    }
 
     @Override
     public void onClick(View v) {
@@ -302,6 +286,7 @@ navigation.setOnNavigationItemSelectedListener(this);
 
 
     }
+
     void showPopupWindow(View view) {
         PopupMenu popup = new PopupMenu(searching.this, view);
         try {
@@ -323,44 +308,43 @@ navigation.setOnNavigationItemSelectedListener(this);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
             public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId()==R.id.restaurant){categories="restaurants";
+                if (item.getItemId() == R.id.restaurant) {
+                    categories = "restaurants";
                     imagecategories.setVisibility(View.VISIBLE);
                     searchObjectArrayList.clear();
                     searchAdapter.notifyDataSetChanged();
 
                     imagecategories.setImageResource(R.drawable.restuarant);
 
-                }
-                else if(item.getItemId()==R.id.Boutique){categories="boutieque";
+                } else if (item.getItemId() == R.id.Boutique) {
+                    categories = "boutieque";
                     imagecategories.setVisibility(View.VISIBLE);
                     searchObjectArrayList.clear();
 
                     searchAdapter.notifyDataSetChanged();
                     imagecategories.setImageResource(R.drawable.boutiquelogo);
-                }
-                else if (item.getItemId()==   R.id.Bank){
-                    categories="bank";
+                } else if (item.getItemId() == R.id.Bank) {
+                    categories = "bank";
                     searchObjectArrayList.clear();
                     searchAdapter.notifyDataSetChanged();
                     imagecategories.setVisibility(View.VISIBLE);
 
                     imagecategories.setImageResource(R.drawable.bank);
 
-                }
-                else if(item.getItemId() == R.id.marketfood) {
+                } else if (item.getItemId() == R.id.marketfood) {
                     searchObjectArrayList.clear();
                     searchAdapter.notifyDataSetChanged();
                     categories = "market";
                     imagecategories.setVisibility(View.VISIBLE);
                     imagecategories.setImageResource(R.drawable.markets);
-                }
-                else if(item.getItemId()==R.id.allcategories){
+                } else if (item.getItemId() == R.id.allcategories) {
                     imagecategories.setVisibility(View.VISIBLE);
                     searchObjectArrayList.clear();
                     searchAdapter.notifyDataSetChanged();
                     imagecategories.setImageResource(R.drawable.search);
-                    categories="";
-                    ;}
+                    categories = "";
+                    ;
+                }
                 return true;
             }
 
@@ -369,38 +353,35 @@ navigation.setOnNavigationItemSelectedListener(this);
     }
 
 
-
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
 
-                Intent home =new Intent(searching.this,NewllyAdded.class);
-                startActivity(home) ;
+                Intent home = new Intent(searching.this, NewllyAdded.class);
+                startActivity(home);
                 break;
 
             case R.id.navigation_Categories:
 
-                Intent categorie=new Intent(searching.this,Categories_Activity.class);
-                startActivity(categorie) ;
+                Intent categorie = new Intent(searching.this, Categories_Activity.class);
+                startActivity(categorie);
 
 
                 break;
             case R.id.navigation_cart:
 
-                Intent Cart=new Intent(searching.this,cart.class);
-                startActivity(Cart) ;
+                Intent Cart = new Intent(searching.this, cart.class);
+                startActivity(Cart);
 
                 break;
             case R.id.navigation_profile:
-                if(id.equals("0")){
-                    Intent login=new Intent(searching.this,loginvolley.class);
+                if (id.equals("0")) {
+                    Intent login = new Intent(searching.this, loginvolley.class);
                     startActivity(login);
 
-                }else {
+                } else {
                     Intent profile = new Intent(searching.this, profilecategory.class);
                     startActivity(profile);
                 }
@@ -409,8 +390,8 @@ navigation.setOnNavigationItemSelectedListener(this);
 
                 break;
         }
-        return false;    }
-
+        return false;
+    }
 
 
     public void onBackPressed() {
@@ -434,10 +415,11 @@ navigation.setOnNavigationItemSelectedListener(this);
             super.onBackPressed();
         }
     }
-    public void getData(){
-        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
-        id=sharedPreferences.getString(iduser,"0");
-        Log.d("response  ",id);
+
+    public void getData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(shared_pres, MODE_PRIVATE);
+        id = sharedPreferences.getString(iduser, "0");
+        Log.d("response  ", id);
     }
-    }
+}
 
