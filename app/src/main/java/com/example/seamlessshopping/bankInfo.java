@@ -46,24 +46,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class bankInfo extends AppCompatActivity  implements  BottomNavigationView.OnNavigationItemSelectedListener {
- EditText cardno,customerName,expdate,cvv;
- Button submitbutton;
-    public static final String usersum="usersum";
+    EditText cardno, customerName, expdate, cvv;
+    Button submitbutton;
+    public static final String usersum = "usersum";
 
     public int NotificationID = 0;
     public String cardsno;
     public int NotificationID2 = 2;
-    public static final String shared_pres="sharedPres";
-    public static final String iduser="iduesr";
+    public static final String shared_pres = "sharedPres";
+    public static final String iduser = "iduesr";
     private String id;
-    public static final String usernamedb="idusername";
-    public static final String userpassworddb="iduserpassword";
+    public static final String usernamedb = "idusername";
+    public static final String userpassworddb = "iduserpassword";
     String idddd;
     String usernameshared;
     String passwordshared;
-    TextView cvverror,nameerror,dateerror,cardnoerror;
+    TextView cvverror, nameerror, dateerror, cardnoerror;
 
-    String urlinsert="http://"+ippage.ip+"/bankInfo.php";
     public static final String ChannelID = "Services_Channel_ID_9";
     public static final String ChannelID2 = "Services_Channel_ID_999";
 
@@ -75,9 +74,11 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
 
     NotificationManager mNotificationManager = null;
     Bitmap largeIcon = null;
-public int totalbalance;
-    Bitmap Picture = null; BottomNavigationView navigation;
+    public int totalbalance;
+    Bitmap Picture = null;
+    BottomNavigationView navigation;
     PendingIntent pending = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,29 +93,30 @@ public int totalbalance;
         navigation.setOnNavigationItemSelectedListener(this);
         submitbutton = findViewById(R.id.submit);
 
-        cvverror =findViewById(R.id.cvverror);
-        nameerror=findViewById(R.id.namecarderror);
-        dateerror=findViewById(R.id.dateerror);
-        cardnoerror=findViewById(R.id.cardnoerror);
+        cvverror = findViewById(R.id.cvverror);
+        nameerror = findViewById(R.id.namecarderror);
+        dateerror = findViewById(R.id.dateerror);
+        cardnoerror = findViewById(R.id.cardnoerror);
         cvverror.setVisibility(View.INVISIBLE);
-nameerror.setVisibility(View.INVISIBLE);
-cardnoerror.setVisibility(View.INVISIBLE);
-dateerror.setVisibility(View.INVISIBLE);
+        nameerror.setVisibility(View.INVISIBLE);
+        cardnoerror.setVisibility(View.INVISIBLE);
+        dateerror.setVisibility(View.INVISIBLE);
         String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
 
-
-        dataget(geturl);
+      //  dataget(geturl);
 
 
     }
-public void onviewws(View v) {
-    boolean isValidate = true;
 
-    if (expdate.getText().toString().equals("")) {
+    public void onviewws(View v) {
+        boolean isValidate = true;
+
+        if (expdate.getText().toString().equals("")) {
 
 
-        isValidate = false;
-      dateerror.setVisibility(View.VISIBLE);}
+            isValidate = false;
+            dateerror.setVisibility(View.VISIBLE);
+        }
         //Fname.setError("Error");
 
         if (cardno.getText().toString().equals("")) {
@@ -122,71 +124,73 @@ public void onviewws(View v) {
             cardnoerror.setVisibility(View.VISIBLE);
         }            //Fname.setError("Error");
 
-            if (customerName.getText().toString().equals("")) {
-                isValidate = false;
-                nameerror.setVisibility(View.VISIBLE);}
-                //Fname.setError("Error");
+        if (customerName.getText().toString().equals("")) {
+            isValidate = false;
+            nameerror.setVisibility(View.VISIBLE);
+        }
+        //Fname.setError("Error");
 
-                if (cvv.getText().toString().equals("")) {
-                    isValidate = false;
-                    cvverror.setVisibility(View.VISIBLE);}
-                    //Fname.setError("Error");
+        if (cvv.getText().toString().equals("")) {
+            isValidate = false;
+            cvverror.setVisibility(View.VISIBLE);
+        }
+        //Fname.setError("Error");
 
-    int cardnoId = 1;
-    int cvvId = 2;
-    int nameId = 3;
+        int cardnoId = 1;
+        int cvvId = 2;
+        int nameId = 3;
 
-    int dateId = 4;
-
-
-
-    cardno.addTextChangedListener(new bankInfo.textwatcher(cardnoId));
-    cvv.addTextChangedListener(new bankInfo.textwatcher(cvvId));
-    customerName.addTextChangedListener(new bankInfo.textwatcher(nameId));
-    expdate.addTextChangedListener(new bankInfo.textwatcher(dateId));
+        int dateId = 4;
 
 
-
-                    if (isValidate == true) {
-
-
-                        String url2 = "http://" + ippage.ip + "/updatebank.php";
-                        int totalsum = getIntent().getIntExtra("totalsum", 0);
-
-                        int totalvalue = totalbalance - totalsum;
-                        Toast.makeText(this,"ffffft"+totalvalue+""+cardsno+"nffff"+totalsum,Toast.LENGTH_LONG).show();
+        cardno.addTextChangedListener(new bankInfo.textwatcher(cardnoId));
+        cvv.addTextChangedListener(new bankInfo.textwatcher(cvvId));
+        customerName.addTextChangedListener(new bankInfo.textwatcher(nameId));
+        expdate.addTextChangedListener(new bankInfo.textwatcher(dateId));
 
 
-                        createNotificationChannel(getBaseContext());
+        if (isValidate == true) {
+            String urlinsert = "http://"+ippage.ip+"/bankInfo.php";
 
-                        notify = new NotificationCompat.Builder(getBaseContext(), ChannelID);
-
-                        notify.setAutoCancel(true);
-                        //    notify.setOngoing ( true );
-                        notify.setSubText("Personal");
-                        notify.setContentTitle("Seamless shopping app");
-                        notify.setContentText("Your order is ready");
-                        notify.setSmallIcon(R.drawable.heey);
-                        notify.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.heey));
-                        notify.setColor(Color.YELLOW);
-                        notify.setColorized(true);
-                        Intent i = new Intent(this, NewllyAdded.class);
-                        PendingIntent h = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-                        notify.setContentIntent(h);
-                        notify.setPriority(NotificationManagerCompat.IMPORTANCE_HIGH);
+            datasaving(urlinsert);
 
 
-                        notify.setUsesChronometer(true);
+            String url2 = "http://" + ippage.ip + "/updatebank.php";
+            int totalsum = getIntent().getIntExtra("totalsum", 0);
+
+            int totalvalue = totalbalance - totalsum;
+            Toast.makeText(this, "ffffft" + totalvalue + "" + cardsno + "nffff" + totalsum, Toast.LENGTH_LONG).show();
 
 
-                        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            createNotificationChannel(getBaseContext());
 
-                        mNotificationManager.notify(NotificationID++, notify.build());
-                        setBalance(url2, String.valueOf(totalvalue), cardsno);
+            notify = new NotificationCompat.Builder(getBaseContext(), ChannelID);
 
-                    }
+            notify.setAutoCancel(true);
+            //    notify.setOngoing ( true );
+            notify.setSubText("Personal");
+            notify.setContentTitle("Seamless shopping app");
+            notify.setContentText("Your order is ready");
+            notify.setSmallIcon(R.drawable.heey);
+            notify.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.heey));
+            notify.setColor(Color.YELLOW);
+            notify.setColorized(true);
+            Intent i = new Intent(this, NewllyAdded.class);
+            PendingIntent h = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+            notify.setContentIntent(h);
+            notify.setPriority(NotificationManagerCompat.IMPORTANCE_HIGH);
+
+
+            notify.setUsesChronometer(true);
+
+
+            mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            mNotificationManager.notify(NotificationID++, notify.build());
+            setBalance(url2, String.valueOf(totalvalue), cardsno);
+
+        }
     }
-
 
 
     private void createNotificationChannel(Context context) {
@@ -212,54 +216,47 @@ public void onviewws(View v) {
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
 
-                Intent home =new Intent(bankInfo.this,NewllyAdded.class);
-                startActivity(home) ;
+                Intent home = new Intent(bankInfo.this, NewllyAdded.class);
+                startActivity(home);
                 break;
 
             case R.id.navigation_Categories:
 
-                Intent categorie=new Intent(bankInfo.this,Categories_Activity.class);
-                startActivity(categorie) ;
+                Intent categorie = new Intent(bankInfo.this, Categories_Activity.class);
+                startActivity(categorie);
 
 
                 break;
             case R.id.navigation_cart:
 
-                Intent Cart=new Intent(bankInfo.this,cart.class);
-                startActivity(Cart) ;
+                Intent Cart = new Intent(bankInfo.this, cart.class);
+                startActivity(Cart);
 
                 break;
             case R.id.navigation_profile:
 
-                Intent profile=new Intent(bankInfo.this,profilecategory.class);
-                startActivity(profile) ;
+                Intent profile = new Intent(bankInfo.this, profilecategory.class);
+                startActivity(profile);
                 break;
             case R.id.navigation_search:
 
-                Intent search=new Intent(bankInfo.this,searching.class);
-                startActivity(search) ;
+                Intent search = new Intent(bankInfo.this, searching.class);
+                startActivity(search);
 
                 break;
         }
-        return false;    }
-
-
-
-
-
-
-    public void getData(){
-        SharedPreferences sharedPreferences=getSharedPreferences(shared_pres,MODE_PRIVATE);
-        idddd=sharedPreferences.getString(iduser,"0");
-        usernameshared=sharedPreferences.getString(usernamedb,"0");
-        passwordshared=sharedPreferences.getString(userpassworddb,"0");
-
-
+        return false;
     }
 
 
+    public void getData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(shared_pres, MODE_PRIVATE);
+        idddd = sharedPreferences.getString(iduser, "0");
+        usernameshared = sharedPreferences.getString(usernamedb, "0");
+        passwordshared = sharedPreferences.getString(userpassworddb, "0");
 
 
+    }
 
 
     public void onBackPressed() {
@@ -295,21 +292,21 @@ public void onviewws(View v) {
                     public void onResponse(JSONObject jsonObject) {
                         int balance = 0;
                         try {
-                             String cardNos = "";
+                            String cardNos = "";
 
-                            JSONArray responseArray= jsonObject.getJSONArray("cardaccount");
-                            Log.i("Response",responseArray+"");
-                            Log.i("Response",jsonObject+"");
+                            JSONArray responseArray = jsonObject.getJSONArray("cardaccount");
+                            Log.i("Response", responseArray + "");
+                            Log.i("Response", jsonObject + "");
                             StringBuilder textViewData = new StringBuilder();
                             //Parse the JSON response array by iterating over it
 
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject response = responseArray.getJSONObject(i);
-                           cardsno = response.getString("cardNo");
-                                String customernames=response.getString("customername");
+                                cardsno = response.getString("cardNo");
+                                String customernames = response.getString("customername");
                                 String cvvs = response.getString("cvv");
-                                String datecard= response.getString("datecard");
-                               totalbalance=response.getInt("balance");
+                                String datecard = response.getString("datecard");
+                                totalbalance = response.getInt("balance");
                                 cardno.setText(cardsno);
                                 customerName.setText(customernames);
                                 cvv.setText(cvvs);
@@ -318,7 +315,7 @@ public void onviewws(View v) {
 
                             }
                             //   textView.setText(textViewData.toString());
-                          //  Log.d("responseeeeeeeeeeeeeeee","j"+balance);
+                            //  Log.d("responseeeeeeeeeeeeeeee","j"+balance);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -331,7 +328,7 @@ public void onviewws(View v) {
                         //Display error message whenever an error occurs
                         Toast.makeText(getApplicationContext(),
                                 error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("Error",  error.getMessage());
+                        Log.e("Error", error.getMessage());
 
                     }
                 });
@@ -342,26 +339,18 @@ public void onviewws(View v) {
     }
 
 
-
-
-
-
-
-
-    public void setBalance(String url, final String totalvalues, final String cardno){
+    public void setBalance(String url, final String totalvalues, final String cardno) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest putRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // response
-                  Toast.makeText(getApplicationContext(),"Response",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Response", Toast.LENGTH_LONG).show();
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
@@ -371,9 +360,8 @@ public void onviewws(View v) {
         ) {
 
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String> ();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("cardNo", cardno);
                 params.put("balance", totalvalues);
 
@@ -382,7 +370,8 @@ public void onviewws(View v) {
 
         };
 
-        queue.add(putRequest);}
+        queue.add(putRequest);
+    }
 
     class textwatcher implements TextWatcher {
         int id;
@@ -410,7 +399,7 @@ public void onviewws(View v) {
                 nameerror.setVisibility(View.INVISIBLE);
             }
             if (id == 4) {
-               dateerror.setVisibility(View.INVISIBLE);
+                dateerror.setVisibility(View.INVISIBLE);
             }
 
         }
@@ -422,9 +411,52 @@ public void onviewws(View v) {
 
     }
 
+    public void datasaving(String url) {
+
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        if (response == "true")
+                            Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(getApplicationContext(), "data updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("customername", customerName.getText().toString());
+                params.put("customerid", idddd);
+                params.put("cardno", cardno.getText().toString());
+                params.put("CVV", cvv.getText().toString());
+                params.put("datecard", expdate.getText().toString());
+
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+
+    }
 
 
 }
+
 /**if (getIntent().getExtras().containsKey("view")){
  dataget(geturl);
 
@@ -452,7 +484,6 @@ public void onviewws(View v) {
  cardno.setEnabled(true);
  cardno.setTextColor(Color.BLACK);
 
- dataSaving(urlinsert);
 
 
  }**/
