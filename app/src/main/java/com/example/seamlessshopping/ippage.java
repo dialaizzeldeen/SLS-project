@@ -1,7 +1,7 @@
 package com.example.seamlessshopping;
 
 public class ippage {
- public static final String ip= "192.168.1.8";
+ public static final String ip= "192.168.1.11";
    // public static final String ip= "172.19.31.73";
 //  public static final String ip="192.168.43.128";
   // public static final String ip="192.168.43.128";
