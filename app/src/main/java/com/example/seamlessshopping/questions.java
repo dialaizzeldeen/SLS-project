@@ -1,9 +1,11 @@
 package com.example.seamlessshopping;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -176,11 +178,11 @@ locQ.setText(Coordinates.AddressCoordinates);
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"daayyyyyyy"+getday,Toast.LENGTH_LONG).show();
-                Intent i = new Intent(questions.this, bankInfo.class);
+                /*Intent i = new Intent(questions.this, bankInfo.class);
                 int totalsum = getIntent().getIntExtra("totalsum", 0);
                 Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
                 i.putExtra("totalsum", totalsum);
-                startActivity(i);
+                startActivity(i);*/
                 sendDataToServer();
             }
         });
@@ -249,6 +251,7 @@ locQ.setText(Coordinates.AddressCoordinates);
                 js.put("timeval1", timeval1);//timeQ.getText().toString()
                 js.put("dateQ",getday);
                 js.put("timeval2",timeval2);
+                js.put("orderno",10);
                 jsonArray.put(js);
 
                 js2.put("information", jsonArray);
@@ -261,6 +264,28 @@ locQ.setText(Coordinates.AddressCoordinates);
                         @Override
                         public void onResponse(JSONObject response) {
                             Toast.makeText(questions.this, response.toString(), Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(questions.this);
+                            builder.setTitle("Best Time");
+                            builder.setMessage("your best time is \n:"+response.toString());
+                            builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(getApplicationContext(),"daayyyyyyy"+getday,Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(questions.this, bankInfo.class);
+                                    int totalsum = getIntent().getIntExtra("totalsum", 0);
+                                    Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
+                                    i.putExtra("totalsum", totalsum);
+                                    startActivity(i);
+
+                                }
+
+                                });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                            builder.show();
+
 
                         }
                     }, new Response.ErrorListener() {
