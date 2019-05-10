@@ -67,7 +67,7 @@ totalorders =totalorders+ cartObjectArrayList.get(value).getQuantityCart();
                 Intent intent=new Intent(v.getContext(),questions.class);
                 intent.putExtra("totalsum",sum);
                 Log.d("response","totalsum"+ sum);
-                intent.putExtra("totalorders",cartObject1.getQuantityCart());
+                intent.putExtra("totalorders",totalorders);
 
                 startActivity(intent);
 
