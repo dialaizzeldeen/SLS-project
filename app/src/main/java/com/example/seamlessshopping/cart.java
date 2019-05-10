@@ -53,20 +53,21 @@ public class cart extends AppCompatActivity  implements BottomNavigationView.OnN
         fab=(FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+ int totalorders=0;
                 for(int value=0;value< cartObjectArrayList.size();value++){
-
+totalorders =totalorders+ cartObjectArrayList.get(value).getQuantityCart();
                     int q=  cartObjectArrayList.get(value).getQuantityCart()*
                             Integer.parseInt(cartObjectArrayList.get(value).getPriceCart());
                     sum= sum+q;}
 
                 //   textView.setText(textViewData.toString());
 
-                Toast.makeText(getApplicationContext(), "heeeelo"+sum, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "heeeelo"+sum + totalorders, Toast.LENGTH_SHORT).show();
 
                 Intent intent=new Intent(v.getContext(),questions.class);
                 intent.putExtra("totalsum",sum);
                 Log.d("response","totalsum"+ sum);
+                intent.putExtra("totalorders",cartObject1.getQuantityCart());
 
                 startActivity(intent);
 

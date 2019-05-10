@@ -72,7 +72,7 @@
         <activity android:name=".bankInfo" />
         <activity android:name=".productMain"></activity>
         <activity android:name=".NewllyAdded" >
-     
+
         </activity>
     </application>
 

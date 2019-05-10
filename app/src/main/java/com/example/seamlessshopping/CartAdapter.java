@@ -112,10 +112,13 @@ public class CartAdapter extends BaseAdapter {
 
 
                                       Toast.makeText(mContext,"total"+total,Toast.LENGTH_LONG).show();
+                                   Toast.makeText(mContext,"totalorders"+cartObject1.getQuantityCart(),Toast.LENGTH_LONG).show();
 
 
                                    Intent i= new Intent(mContext,questions.class);
                                    i.putExtra("totalsum",total);
+                                   i.putExtra("totalorders",cartObject1.getQuantityCart());
+
                                    mContext.startActivity(i);
 
 
