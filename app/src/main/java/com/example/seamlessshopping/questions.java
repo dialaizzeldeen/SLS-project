@@ -153,7 +153,7 @@ locQ.setText(Coordinates.AddressCoordinates);
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     checkPermissions();
                 }
@@ -180,7 +180,9 @@ locQ.setText(Coordinates.AddressCoordinates);
                 Toast.makeText(getApplicationContext(),"daayyyyyyy"+getday,Toast.LENGTH_LONG).show();
                 /*Intent i = new Intent(questions.this, bankInfo.class);
                 int totalsum = getIntent().getIntExtra("totalsum", 0);
-                Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
+                int totalorders = getIntent().getIntExtra("totalorders", 0);
+
+                Toast.makeText(getApplicationContext(), "eee" + totalsum + "order"+totalorders, Toast.LENGTH_LONG).show();
                 i.putExtra("totalsum", totalsum);
                 startActivity(i);*/
                 sendDataToServer();
