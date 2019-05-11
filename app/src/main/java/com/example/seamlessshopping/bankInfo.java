@@ -474,43 +474,37 @@ delete.setVisibility(View.VISIBLE);
 
     }
 
-public void ondelete(View v){
-        String url="";
-    RequestQueue queue = Volley.newRequestQueue(this);
-    StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-            new Response.Listener<String>() {
+public void ondelete(View v) {
+   // String url = "http://" + ippage.ip + "/deletebank.php?id=" + idddd + "&cardNo=" + cardno.getText().toString();
+    String url = "http://" + ippage.ip + "/deletebank.php?id=" + "88" + "&cardNo=" + "11";
+
+
+    RequestQueue queue = Volley.newRequestQueue(this);  //
+    final JsonObjectRequest jsObjRequest = new JsonObjectRequest
+            (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
                 @Override
-                public void onResponse(String response) {
-                    // response
-                    Log.d(response ,response);
+                public void onResponse(JSONObject jsonObject) {
+                    int balance = 0;
+
                 }
             }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.d("Error.Response", error.toString());
 
-        }
-    }
-    ) {
-        @Override
-        protected Map<String, String> getParams()
-        {
-            Map<String, String>  params = new HashMap<String, String>();
-            //params.put("actionKey","deleteItem");
-            params.put("cardNo",cardno.getText().toString());
-            params.put("id",idddd);
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
+                    //Display error message whenever an error occurs
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("Error", error.getMessage());
 
+                }
+            });
 
-            return params;
-        }
-    };
-    queue.add(postRequest);
+    // Access the RequestQueue through your singleton class.
+    queue.add(jsObjRequest);
 
-
-
-}
-}
+}}
 
 /**if (getIntent().getExtras().containsKey("view")){
  dataget(geturl);
