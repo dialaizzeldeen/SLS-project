@@ -240,11 +240,12 @@ android:layout_gravity="center"
 </LinearLayout>
 
     </LinearLayout>
-<android.support.design.widget.BottomNavigationView
+
+    <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
 
-        android:layout_height="91dp"
+        android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_weight="1"

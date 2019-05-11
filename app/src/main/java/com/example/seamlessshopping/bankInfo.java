@@ -475,34 +475,42 @@ delete.setVisibility(View.VISIBLE);
     }
 
 public void ondelete(View v) {
-   // String url = "http://" + ippage.ip + "/deletebank.php?id=" + idddd + "&cardNo=" + cardno.getText().toString();
-    String url = "http://" + ippage.ip + "/deletebank.php?id=" + "88" + "&cardNo=" + "11";
 
-
-    RequestQueue queue = Volley.newRequestQueue(this);  //
-    final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-            (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+    RequestQueue queue = Volley.newRequestQueue(this);
+String url="http://" + ippage.ip + "/deletebank.php";
+    StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+            new Response.Listener<String>() {
                 @Override
-                public void onResponse(JSONObject jsonObject) {
-                    int balance = 0;
-
+                public void onResponse(String response) {
+                    // response
+                    Log.d("Response", response);
+                    if (response == "true")
+                        Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(getApplicationContext(), "data updated", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }, new Response.ErrorListener() {
-
+            },
+            new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
-                    //Display error message whenever an error occurs
-                    Toast.makeText(getApplicationContext(),
-                            error.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e("Error", error.getMessage());
-
+                    // error
+                    Log.d("Error.Response", error.toString());
                 }
-            });
+            }
+    ) {
+        @Override
+        protected Map<String, String> getParams() {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("id", idddd);
+            params.put("cardNo", cardno.getText().toString());
 
-    // Access the RequestQueue through your singleton class.
-    queue.add(jsObjRequest);
+
+
+            return params;
+        }
+    };
+    queue.add(postRequest);
 
 }}
 
