@@ -71,7 +71,7 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
     NotificationCompat.Builder notify = null;
     NotificationCompat.Builder notify2 = null;
 
-
+Button delete;
     NotificationManager mNotificationManager = null;
     Bitmap largeIcon = null;
     public int totalbalance;
@@ -92,8 +92,9 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
         submitbutton = findViewById(R.id.submit);
-
+delete=findViewById(R.id.delete);
         cvverror = findViewById(R.id.cvverror);
+        delete.setVisibility(View.INVISIBLE);
         nameerror = findViewById(R.id.namecarderror);
         dateerror = findViewById(R.id.dateerror);
         cardnoerror = findViewById(R.id.cardnoerror);
@@ -101,9 +102,10 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
         nameerror.setVisibility(View.INVISIBLE);
         cardnoerror.setVisibility(View.INVISIBLE);
         dateerror.setVisibility(View.INVISIBLE);
-        String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
+      String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
+     //    String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + 55;
 
-      //  dataget(geturl);
+   dataget(geturl);
 
 
     }
@@ -316,6 +318,24 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
                             }
                             //   textView.setText(textViewData.toString());
                             //  Log.d("responseeeeeeeeeeeeeeee","j"+balance);
+                            if(!cardno.getText().toString().equals("")){
+
+                                customerName.setEnabled(false);
+                                customerName.setTextColor(Color.BLACK);
+
+                                expdate.setEnabled(false);
+                                expdate.setTextColor(Color.BLACK);
+                                cvv.setEnabled(false);
+                                cvv.setTextColor(Color.BLACK);
+                                cardno.setEnabled(false);
+                                cardno.setTextColor(Color.BLACK);
+submitbutton.setVisibility(View.INVISIBLE);
+delete.setVisibility(View.VISIBLE);
+
+
+
+
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -454,8 +474,45 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
 
     }
 
+public void ondelete(View v) {
 
-}
+    RequestQueue queue = Volley.newRequestQueue(this);
+String url="http://" + ippage.ip + "/deletebank.php";
+    StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    // response
+                    Log.d("Response", response);
+                    if (response == "true")
+                        Toast.makeText(getApplicationContext(), "connection problem", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(getApplicationContext(), "data updated", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // error
+                    Log.d("Error.Response", error.toString());
+                }
+            }
+    ) {
+        @Override
+        protected Map<String, String> getParams() {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("id", idddd);
+            params.put("cardNo", cardno.getText().toString());
+
+
+
+            return params;
+        }
+    };
+    queue.add(postRequest);
+
+}}
 
 /**if (getIntent().getExtras().containsKey("view")){
  dataget(geturl);
@@ -490,3 +547,4 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
 
 
 
+/****/
