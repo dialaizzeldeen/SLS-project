@@ -97,7 +97,6 @@ public class questions extends AppCompatActivity implements View.OnClickListener
     BottomNavigationView navigation;
     private int year, month, day;
     private DatePicker datePicker;
-    TextView lowtime,hightime,peaktime;
     private Calendar calendar;
     public String getday;
 
@@ -137,16 +136,9 @@ public class questions extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_questions);
         locQ = findViewById(R.id.LocId);
         timeQ = findViewById(R.id.timeID);
-        lowtime=dialogView.findViewById(R.id.lowtime);
-        hightime=dialogView.findViewById(R.id.hightime);
-        peaktime=dialogView.findViewById(R.id.peaktime);
         dateQ = findViewById(R.id.dateID);
         sumbitQ = findViewById(R.id.submitQuestion);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        LayoutInflater inflater = this.getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.dialog_input, null);
-
-        setDialog();
 
 
         navigation.setOnNavigationItemSelectedListener(this);
@@ -588,5 +580,4 @@ public class questions extends AppCompatActivity implements View.OnClickListener
     }
 
 
-    
 }
