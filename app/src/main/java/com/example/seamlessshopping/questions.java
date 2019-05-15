@@ -24,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -69,25 +70,26 @@ import java.util.Locale;
 
 public class questions extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-protected LocationManager locationManager;
-private Button btnRequestDirection;
-private GoogleMap googleMap;
-private String serverKey = "AIzaSyA6yPhzcOM3ho3F39trzG-1bXFp1t29R6U";
-public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-private Location lastLocation;
-private LocationRequest locationRequest;
+    protected LocationManager locationManager;
+    private Button btnRequestDirection;
+    private GoogleMap googleMap;
+    private String serverKey = "AIzaSyA6yPhzcOM3ho3F39trzG-1bXFp1t29R6U";
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private Location lastLocation;
+    private LocationRequest locationRequest;
+    View dialogView;
 
-        /**
-         * permissions request code
-         Double myLongitude = loc.getLongitude();
-         Double myLatitude ,,myLongitude;
-         */
-        Double myLatitude ,myLongitude;
-TextView timeQ;
+    /**
+     * permissions request code
+     * Double myLongitude = loc.getLongitude();
+     * Double myLatitude ,,myLongitude;
+     */
+    Double myLatitude, myLongitude;
+    TextView timeQ;
     TextView locQ;
     TextView dateQ;
     Button sumbitQ;
-    String timeval1,timeval2;
+    String timeval1, timeval2;
     public static final String shared_pres = "sharedPres";
     public static final String iduser = "iduesr";
     private String id = "0";
@@ -95,8 +97,9 @@ TextView timeQ;
     BottomNavigationView navigation;
     private int year, month, day;
     private DatePicker datePicker;
+    TextView lowtime,hightime,peaktime;
     private Calendar calendar;
-public String getday;
+    public String getday;
 
     //Double myLatitude ,myLongitude;
 
@@ -107,18 +110,19 @@ public String getday;
      * Permissions that need to be explicitly requested from end user.
      */
 
-    private static final String[] REQUIRED_SDK_PERMISSIONS = new String[] {
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CALL_PHONE
+    private static final String[] REQUIRED_SDK_PERMISSIONS = new String[]{
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE
     };
 
 
-    private LatLng origin ;//32.22111 35.25444
+    private LatLng origin;//32.22111 35.25444
     private LatLng destination;// = new LatLng(32.22111 , 35.25444);////32.22111 35.25444
 
-    private String Latitude,Longitude;
-    double dLatitude,dLongitude;
+    private String Latitude, Longitude;
+    double dLatitude, dLongitude;
     private GoogleApiClient mGoogleApiClient;
-    private GoogleApiClient getGoogleApiClient(){
+
+    private GoogleApiClient getGoogleApiClient() {
 
         return new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -126,15 +130,25 @@ public String getday;
                 .addApi(LocationServices.API)
                 .build();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
         locQ = findViewById(R.id.LocId);
         timeQ = findViewById(R.id.timeID);
+        lowtime=dialogView.findViewById(R.id.lowtime);
+        hightime=dialogView.findViewById(R.id.hightime);
+        peaktime=dialogView.findViewById(R.id.peaktime);
         dateQ = findViewById(R.id.dateID);
         sumbitQ = findViewById(R.id.submitQuestion);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialogView = inflater.inflate(R.layout.dialog_input, null);
+
+        setDialog();
+
+
         navigation.setOnNavigationItemSelectedListener(this);
         timeQ.setOnClickListener(this);
 
@@ -145,19 +159,18 @@ public String getday;
         showDate(year, month + 1, day);
 
 
-locQ.setText(Coordinates.AddressCoordinates);
-
+        locQ.setText(Coordinates.AddressCoordinates);
 
 
         locQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               // Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     checkPermissions();
                 }
-                if (mGoogleApiClient != null){
+                if (mGoogleApiClient != null) {
 
                     mGoogleApiClient.connect();
 
@@ -170,14 +183,10 @@ locQ.setText(Coordinates.AddressCoordinates);
         });
 
 
-
-
-
-
         sumbitQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"daayyyyyyy"+getday,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "daayyyyyyy" + getday, Toast.LENGTH_LONG).show();
                 /*Intent i = new Intent(questions.this, bankInfo.class);
                 int totalsum = getIntent().getIntExtra("totalsum", 0);
                 int totalorders = getIntent().getIntExtra("totalorders", 0);
@@ -223,18 +232,18 @@ locQ.setText(Coordinates.AddressCoordinates);
         String monthName = (String) android.text.format.DateFormat.format("MMMM", month);
         dateQ.setText(new StringBuilder().append(day)
                 .append(monthName).append(year));
-        String h= String.valueOf(day+"/"+month+"/"+year);
-        SimpleDateFormat format1=new SimpleDateFormat("dd/MM/yyyy");
-        Date dt1= null;
+        String h = String.valueOf(day + "/" + month + "/" + year);
+        SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date dt1 = null;
         try {
             dt1 = format1.parse(h);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat format2=new SimpleDateFormat("EEEE");
-        String finalDay=format2.format(dt1);
-        getday=finalDay;
-                }
+        SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
+        String finalDay = format2.format(dt1);
+        getday = finalDay;
+    }
 
 
     public void sendDataToServer() {
@@ -251,9 +260,9 @@ locQ.setText(Coordinates.AddressCoordinates);
             try {
                 js.put("locQ", Coordinates.distance);
                 js.put("timeval1", timeval1);//timeQ.getText().toString()
-                js.put("dateQ",getday);
-                js.put("timeval2",timeval2);
-                js.put("orderno",10);
+                js.put("dateQ", getday);
+                js.put("timeval2", timeval2);
+                js.put("orderno", 10);
                 jsonArray.put(js);
 
                 js2.put("information", jsonArray);
@@ -268,10 +277,10 @@ locQ.setText(Coordinates.AddressCoordinates);
                             Toast.makeText(questions.this, response.toString(), Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder builder = new AlertDialog.Builder(questions.this);
                             builder.setTitle("Best Time");
-                            builder.setMessage("your best time is \n:"+response.toString());
+                            builder.setMessage("your best time is \n:" + response.toString());
                             builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(getApplicationContext(),"daayyyyyyy"+getday,Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "daayyyyyyy" + getday, Toast.LENGTH_LONG).show();
                                     Intent i = new Intent(questions.this, bankInfo.class);
                                     int totalsum = getIntent().getIntExtra("totalsum", 0);
                                     Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
@@ -280,7 +289,7 @@ locQ.setText(Coordinates.AddressCoordinates);
 
                                 }
 
-                                });
+                            });
                             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.cancel();
@@ -373,6 +382,7 @@ locQ.setText(Coordinates.AddressCoordinates);
         id = sharedPreferences.getString(iduser, "0");
         Log.d("response  ", id);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void checkPermissions() {
         final List<String> missingPermissions = new ArrayList<String>();
@@ -395,6 +405,7 @@ locQ.setText(Coordinates.AddressCoordinates);
                     grantResults);
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
@@ -418,8 +429,6 @@ locQ.setText(Coordinates.AddressCoordinates);
     }
 
 
-
-
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
@@ -432,7 +441,7 @@ locQ.setText(Coordinates.AddressCoordinates);
         } else {
             Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
             try {
-                Toast.makeText(this, "onConnected"+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "onConnected" + "", Toast.LENGTH_SHORT).show();
 
                 Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
                 double lat, lng;
@@ -463,11 +472,11 @@ locQ.setText(Coordinates.AddressCoordinates);
                             public void onSuccess(Location location) {
                                 // Got last known location. In some rare situations, this can be null.
                                 if (location != null) {
-                                    Toast.makeText(getApplicationContext(),location+"" , Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), location + "", Toast.LENGTH_SHORT).show();
                                     Log.d("myLatitude", "d" + location.getLatitude() + location.getLongitude());
-                                    Coordinates.FirstlatCoordinates=location.getLatitude();
-                                    Coordinates.FirstlongCoordinates=location.getLongitude();
-                                    Log.d("dddddd",""+Coordinates.FirstAddressCoordinates);
+                                    Coordinates.FirstlatCoordinates = location.getLatitude();
+                                    Coordinates.FirstlongCoordinates = location.getLongitude();
+                                    Log.d("dddddd", "" + Coordinates.FirstAddressCoordinates);
                                     Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                                     List<Address> addresses;
 
@@ -477,7 +486,7 @@ locQ.setText(Coordinates.AddressCoordinates);
                                         String address = addresses.get(0).getAddressLine(0);
 
                                         String city = addresses.get(0).getLocality();
-                                        String add=addresses.get(0)+"";
+                                        String add = addresses.get(0) + "";
                                         // Log.d("city", "d" + city +"addresses" +add);
                                     } catch (IOException e) {
                                         e.printStackTrace();
@@ -498,6 +507,7 @@ locQ.setText(Coordinates.AddressCoordinates);
         }
 
     }
+
     @Override
     public void onConnectionSuspended(int i) {
 
@@ -515,6 +525,7 @@ locQ.setText(Coordinates.AddressCoordinates);
 
 
     }
+
     void showPopupWindow(View view) {
         PopupMenu popup = new PopupMenu(questions.this, view);
         try {
@@ -536,41 +547,39 @@ locQ.setText(Coordinates.AddressCoordinates);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
             public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId()==R.id.range1){
+                if (item.getItemId() == R.id.range1) {
                     timeQ.setText(item.getTitle());
-                    timeval1="9";
-                    timeval2="12";
-                }
-                else if(item.getItemId()==R.id.range2){ timeQ.setText(item.getTitle());
-                timeval1="10";
-                timeval2="13";
+                    timeval1 = "9";
+                    timeval2 = "12";
+                } else if (item.getItemId() == R.id.range2) {
+                    timeQ.setText(item.getTitle());
+                    timeval1 = "10";
+                    timeval2 = "13";
 
+                } else if (item.getItemId() == R.id.range3) {
+                    timeQ.setText(item.getTitle());
+                    timeval1 = "11";
+                    timeval2 = "14";
+                } else if (item.getItemId() == R.id.range4) {
+                    timeQ.setText(item.getTitle());
+                    timeval1 = "15";
+                    timeval2 = "18";
+                } else if (item.getItemId() == R.id.range5) {
+                    timeQ.setText(item.getTitle());
+                    timeval1 = "16";
+                    timeval2 = "19";
+                    ;
+                } else if (item.getItemId() == R.id.range6) {
+                    timeQ.setText(item.getTitle());
+                    timeval1 = "18";
+                    timeval2 = "21";
+                    ;
+                } else if (item.getItemId() == R.id.range7) {
+                    timeQ.setText(item.getTitle());
+                    timeval1 = "21";
+                    timeval2 = "23";
+                    ;
                 }
-                else if (item.getItemId()==   R.id.range3){
-                    timeQ.setText(item.getTitle());
-                    timeval1="11";
-                    timeval2="14";
-                }
-                else if(item.getItemId() == R.id.range4) {
-                    timeQ.setText(item.getTitle());
-                    timeval1="15";
-                    timeval2="18";
-                }
-                else if(item.getItemId()==R.id.range5){
-                    timeQ.setText(item.getTitle());
-                    timeval1="16";
-                    timeval2="19";
-                    ;}
-                else if(item.getItemId()==R.id.range6){
-                    timeQ.setText(item.getTitle());
-                    timeval1="18";
-                    timeval2="21";
-                    ;}
-                else if(item.getItemId()==R.id.range7){
-                    timeQ.setText(item.getTitle());
-                    timeval1="21";
-                    timeval2="23";
-                    ;}
                 return true;
             }
 
@@ -578,5 +587,6 @@ locQ.setText(Coordinates.AddressCoordinates);
         popup.show();
     }
 
-}
 
+    
+}
