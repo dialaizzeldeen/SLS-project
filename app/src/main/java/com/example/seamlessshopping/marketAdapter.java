@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,8 @@ public class marketAdapter extends BaseAdapter {
     public static final String iduser="iduesr";
     String url = "http://" + ippage.ip + ":8887/";
     private String id="0";
+    View dialogView;
+TextView lowtimeview,hightimeview,peaktimeview;
     Context mContext;
     int positionitem;
     public String getday;
@@ -105,11 +108,18 @@ public class marketAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
          marketObject1 = marketObjectArrayList.get(position);
         convertView = LayoutInflater.from(mContext).inflate(R.layout.market_rows, null);
+
+        dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_input, null);
+
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
+        lowtimeview=(TextView)dialogView.findViewById(R.id.lowtime);
+        hightimeview=(TextView)dialogView.findViewById(R.id.hightime);
+
+        peaktimeview=(TextView)dialogView.findViewById(R.id.peaktime);
 
         ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
         ImageView daytime =(ImageView)convertView.findViewById(R.id.daytime);
@@ -192,16 +202,19 @@ public class marketAdapter extends BaseAdapter {
 
                                 String highvalue = "high Hours : "+responseArray.get(1).toString();
                                 String lowvalue ="low Hours : "+ responseArray.get(2).toString();
-                                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                                builder.setTitle("day");
-                                builder.setMessage(peakvalue +"\n"+highvalue+"\n"+lowvalue);
 
-                                builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                                builder.show();
+                                setDialog(lowvalue,highvalue,peakvalue);
+
+                               // AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                                //builder.setTitle("day");
+                                //builder.setMessage(peakvalue +"\n"+highvalue+"\n"+lowvalue);
+
+                                //builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                  //  public void onClick(DialogInterface dialog, int id) {
+                                  ///      dialog.cancel();
+                                 //   }
+                               // });
+                               // builder.show();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -228,4 +241,48 @@ public class marketAdapter extends BaseAdapter {
         }
     }
 
+
+    public void setDialog(final String lowtime, final String hightime, final String peaktime) {
+        final AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setView(dialogView)
+                .setTitle("Best Time ")
+                .setPositiveButton("OK", null)
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.setCancelable(false);
+
+
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(final DialogInterface dialogInterface) {
+                final Button yesButton = (dialog).getButton(android.app.AlertDialog.BUTTON_POSITIVE);
+                final Button noButton = (dialog).getButton(android.app.AlertDialog.BUTTON_NEGATIVE);
+                yesButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        lowtimeview.setText(lowtime);
+                        hightimeview.setText(hightime);
+                        peaktimeview.setText(peaktime);
+
+
+                    }
+                });
+                noButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+
+        });
+        dialog.show();
+    }
+
 }
+
+
+
