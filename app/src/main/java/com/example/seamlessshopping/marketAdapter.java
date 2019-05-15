@@ -52,6 +52,7 @@ public class marketAdapter extends BaseAdapter {
     String url = "http://" + ippage.ip + ":8887/";
     private String id="0";
     View dialogView;
+    public String lowvalue , highvalue,peakvalue;
 TextView lowtimeview,hightimeview,peaktimeview;
     Context mContext;
     int positionitem;
@@ -116,10 +117,10 @@ TextView lowtimeview,hightimeview,peaktimeview;
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
-        lowtimeview=(TextView)dialogView.findViewById(R.id.lowtime);
-        hightimeview=(TextView)dialogView.findViewById(R.id.hightime);
+        lowtimeview=dialogView.findViewById(R.id.lowtime);
+        hightimeview=dialogView.findViewById(R.id.hightime);
 
-        peaktimeview=(TextView)dialogView.findViewById(R.id.peaktime);
+        peaktimeview=dialogView.findViewById(R.id.peaktime);
 
         ImageView imageUrls = (ImageView) convertView.findViewById(R.id.imageurl);
         ImageView daytime =(ImageView)convertView.findViewById(R.id.daytime);
@@ -198,11 +199,16 @@ TextView lowtimeview,hightimeview,peaktimeview;
                             try {
                                 JSONArray responseArray = response.getJSONArray("Result");
                                 Log.i("Response", responseArray + "");
-                                String peakvalue ="peak Hours : "+ responseArray.get(0).toString();
+                               // String peakvalue ="peak Hours : "+ responseArray.get(0).toString();
 
-                                String highvalue = "high Hours : "+responseArray.get(1).toString();
-                                String lowvalue ="low Hours : "+ responseArray.get(2).toString();
+                                //String highvalue = "high Hours : "+responseArray.get(1).toString();
+                                //String lowvalue ="low Hours : "+ responseArray.get(2).toString();
 
+ peakvalue ="peak Hours : "+ responseArray.get(0).toString();
+
+                               highvalue = "high Hours : "+responseArray.get(1).toString();
+                             lowvalue ="low Hours : "+ responseArray.get(2).toString();
+Log.d("ffff",""+lowvalue+highvalue+peakvalue);
                                 setDialog(lowvalue,highvalue,peakvalue);
 
                                // AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -246,30 +252,20 @@ TextView lowtimeview,hightimeview,peaktimeview;
         final AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setView(dialogView)
                 .setTitle("Best Time ")
-                .setPositiveButton("OK", null)
                 .setNegativeButton("Cancel", null)
                 .create();
         dialog.setCancelable(false);
 
 
-
+        Log.d("llllllo",""+lowtime+hightime+peaktime);
+        lowtimeview.setText(lowtime);
+        hightimeview.setText(hightime);
+        peaktimeview.setText(peaktime);
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
 
             @Override
             public void onShow(final DialogInterface dialogInterface) {
-                final Button yesButton = (dialog).getButton(android.app.AlertDialog.BUTTON_POSITIVE);
                 final Button noButton = (dialog).getButton(android.app.AlertDialog.BUTTON_NEGATIVE);
-                yesButton.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        lowtimeview.setText(lowtime);
-                        hightimeview.setText(hightime);
-                        peaktimeview.setText(peaktime);
-
-
-                    }
-                });
                 noButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
