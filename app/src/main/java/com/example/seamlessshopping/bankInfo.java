@@ -65,7 +65,6 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
     Button buybutton;
     String passwordshared;
     TextView cvverror, nameerror, dateerror, cardnoerror;
-    String url2 = "http://" + ippage.ip + "/updatebank.php";
 
     public static final String ChannelID = "Services_Channel_ID_9";
     public static final String ChannelID2 = "Services_Channel_ID_999";
@@ -534,13 +533,14 @@ String url="http://" + ippage.ip + "/deletebank.php";
 
 public void onbuy(View v){
     int totalsum = getIntent().getIntExtra("totalsum", 0);
+    String url2 = "http://" + ippage.ip + "/updatebank.php";
 
     int totalvalue = totalbalance - totalsum;
-    Toast.makeText(this, "ffffft" + totalvalue + "" + cardsno + "nffff" + totalsum, Toast.LENGTH_LONG).show();
+    Toast.makeText(this, "totalvalue" + totalvalue + "" + "nffff" + totalsum, Toast.LENGTH_LONG).show();
     setBalance(url2, String.valueOf(totalvalue), cardsno);
 AlertDialog.Builder builder = new AlertDialog.Builder(bankInfo.this);
-     builder.setTitle("purchase done");
-    builder.setMessage("your purchase is done " +"\n"+ "total purshase :"+totalsum);
+     builder.setTitle("Purchase done");
+    builder.setMessage("Thank you for your purchase ");
     builder.setCancelable(false);
     builder.setIcon(R.drawable.face);
     builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {

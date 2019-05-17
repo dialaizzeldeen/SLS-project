@@ -121,7 +121,7 @@ public class newllyAddedAdapter extends BaseAdapter {
                                     if(response=="true")
                                         Toast.makeText(mContext, "connection problem", Toast.LENGTH_SHORT).show();
                                     else{
-                                        Toast.makeText(mContext, "Done", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }, new Response.ErrorListener() {

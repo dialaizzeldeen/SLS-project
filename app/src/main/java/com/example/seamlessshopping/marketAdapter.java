@@ -80,7 +80,8 @@ TextView lowtimeview,hightimeview,peaktimeview;
         }
         SimpleDateFormat format2=new SimpleDateFormat("EEEE");
         String finalDay=format2.format(dt1);
-        getday=finalDay;
+    //    getday=finalDay;
+        getday="Sunday";
     }
 
     public marketAdapter(ArrayList<marketObject> marketObjectArrayList, Context mContext) {
