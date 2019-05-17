@@ -49,6 +49,7 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
         pymentPage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i= new Intent(getApplicationContext(),bankInfo.class);
+                i.putExtra("viewkey","ee");
                 startActivity(i);
             }});
         historyPage.setOnClickListener(new View.OnClickListener() {

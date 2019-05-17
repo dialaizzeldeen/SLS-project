@@ -1,9 +1,11 @@
 package com.example.seamlessshopping;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -60,8 +62,10 @@ public class bankInfo extends AppCompatActivity  implements  BottomNavigationVie
     public static final String userpassworddb = "iduserpassword";
     String idddd;
     String usernameshared;
+    Button buybutton;
     String passwordshared;
     TextView cvverror, nameerror, dateerror, cardnoerror;
+    String url2 = "http://" + ippage.ip + "/updatebank.php";
 
     public static final String ChannelID = "Services_Channel_ID_9";
     public static final String ChannelID2 = "Services_Channel_ID_999";
@@ -92,6 +96,7 @@ Button delete;
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
         submitbutton = findViewById(R.id.submit);
+        buybutton=     findViewById(R.id.buynow);
 delete=findViewById(R.id.delete);
         cvverror = findViewById(R.id.cvverror);
         delete.setVisibility(View.INVISIBLE);
@@ -102,10 +107,27 @@ delete=findViewById(R.id.delete);
         nameerror.setVisibility(View.INVISIBLE);
         cardnoerror.setVisibility(View.INVISIBLE);
         dateerror.setVisibility(View.INVISIBLE);
+
       String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + idddd;
      //    String geturl = "http://" + ippage.ip + "/bankaccount.php?userid=" + 55;
 
    dataget(geturl);
+   if(getIntent().getExtras().containsKey("Bankkey"))
+
+        {
+            buybutton.setVisibility(View.VISIBLE);
+            submitbutton.setVisibility(View.INVISIBLE);
+            delete.setVisibility(View.VISIBLE);
+
+
+        }
+   else if (getIntent().getExtras().containsKey("viewkey")){
+       buybutton.setVisibility(View.INVISIBLE);
+       submitbutton.setVisibility(View.INVISIBLE);
+       delete.setVisibility(View.VISIBLE);
+
+   }
+
 
 
     }
@@ -157,11 +179,7 @@ delete=findViewById(R.id.delete);
             datasaving(urlinsert);
 
 
-            String url2 = "http://" + ippage.ip + "/updatebank.php";
-            int totalsum = getIntent().getIntExtra("totalsum", 0);
 
-            int totalvalue = totalbalance - totalsum;
-            Toast.makeText(this, "ffffft" + totalvalue + "" + cardsno + "nffff" + totalsum, Toast.LENGTH_LONG).show();
 
 
             createNotificationChannel(getBaseContext());
@@ -189,7 +207,7 @@ delete=findViewById(R.id.delete);
             mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
             mNotificationManager.notify(NotificationID++, notify.build());
-            setBalance(url2, String.valueOf(totalvalue), cardsno);
+          //  setBalance(url2, String.valueOf(totalvalue), cardsno);
 
         }
     }
@@ -512,7 +530,32 @@ String url="http://" + ippage.ip + "/deletebank.php";
     };
     queue.add(postRequest);
 
-}}
+}
+
+public void onbuy(View v){
+    int totalsum = getIntent().getIntExtra("totalsum", 0);
+
+    int totalvalue = totalbalance - totalsum;
+    Toast.makeText(this, "ffffft" + totalvalue + "" + cardsno + "nffff" + totalsum, Toast.LENGTH_LONG).show();
+    setBalance(url2, String.valueOf(totalvalue), cardsno);
+AlertDialog.Builder builder = new AlertDialog.Builder(bankInfo.this);
+     builder.setTitle("purchase done");
+    builder.setMessage("your purchase is done " +"\n"+ "total purshase :"+totalsum);
+    builder.setCancelable(false);
+    builder.setIcon(R.drawable.face);
+    builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int which) {
+Intent i =new Intent(bankInfo.this,NewllyAdded.class);
+startActivity(i);
+
+     }
+
+                             });
+
+                      builder.show();
+
+}
+}
 
 /**if (getIntent().getExtras().containsKey("view")){
  dataget(geturl);

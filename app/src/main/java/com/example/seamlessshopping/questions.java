@@ -605,6 +605,7 @@ besttimeview.setText(lowtime);
                         int totalsum = getIntent().getIntExtra("totalsum", 0);
                         Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
                         i.putExtra("totalsum", totalsum);
+                        i.putExtra("Bankkey","buy");
                         startActivity(i);
                     }
                 });

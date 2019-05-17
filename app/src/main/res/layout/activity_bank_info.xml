@@ -6,7 +6,7 @@
 
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="40dp"
     android:layout_weight="8"
 android:layout_marginLeft="5dp"
     android:background="#00000000"
@@ -15,7 +15,7 @@ android:layout_marginLeft="5dp"
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="485dp"
+        android:layout_height="543dp"
         android:layout_marginLeft="10dp"
 
         android:layout_weight="7"
@@ -169,8 +169,8 @@ android:layout_marginLeft="5dp"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:text="Enter date "
                     android:inputType="text"
+                    android:text="Enter date "
                     android:textColor="#FF1100"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -207,37 +207,52 @@ android:layout_marginLeft="5dp"
                 android:src="@drawable/question_mark" />
         </LinearLayout>
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_marginTop="20dp"
-android:layout_gravity="center"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content">
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:background="@drawable/garbage"
-        android:onClick="ondelete"
-
-        android:textColor="#000000"
-        android:textSize="15dp" />
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="120dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/button"
-            android:onClick="onviewws"
-            android:text="Submit"
-            android:textColor="#000000"
-            android:textSize="15dp" />
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/garbage"
+                android:onClick="ondelete"
+
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/buynow"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/button"
+                android:onClick="onbuy"
+
+                android:text="Buy now"
+
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button"
+                android:onClick="onviewws"
+                android:text="Submit"
+                android:textColor="#000000"
+                android:textSize="15dp" />
 
 
-
-</LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -245,7 +260,7 @@ android:layout_gravity="center"
         android:id="@+id/navigation"
         android:layout_width="match_parent"
 
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_weight="1"
