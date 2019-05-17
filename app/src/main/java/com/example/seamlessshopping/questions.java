@@ -78,7 +78,7 @@ public class questions extends AppCompatActivity implements View.OnClickListener
     private Location lastLocation;
     private LocationRequest locationRequest;
     View dialogView;
-
+  public  int totalorders;
     /**
      * permissions request code
      * Double myLongitude = loc.getLongitude();
@@ -99,7 +99,7 @@ public class questions extends AppCompatActivity implements View.OnClickListener
     private DatePicker datePicker;
     private Calendar calendar;
     public String getday;
-
+    TextView besttimeview;
     //Double myLatitude ,myLongitude;
 
 
@@ -140,6 +140,8 @@ public class questions extends AppCompatActivity implements View.OnClickListener
         sumbitQ = findViewById(R.id.submitQuestion);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
+        dialogView = LayoutInflater.from(this).inflate(R.layout.dialogbesttime, null);
+        besttimeview=dialogView.findViewById(R.id.besttime);
 
         navigation.setOnNavigationItemSelectedListener(this);
         timeQ.setOnClickListener(this);
@@ -150,6 +152,7 @@ public class questions extends AppCompatActivity implements View.OnClickListener
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
 
+totalorders = getIntent().getIntExtra("totalorders", 0);
 
         locQ.setText(Coordinates.AddressCoordinates);
 
@@ -181,7 +184,6 @@ public class questions extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(getApplicationContext(), "daayyyyyyy" + getday, Toast.LENGTH_LONG).show();
                 /*Intent i = new Intent(questions.this, bankInfo.class);
                 int totalsum = getIntent().getIntExtra("totalsum", 0);
-                int totalorders = getIntent().getIntExtra("totalorders", 0);
 
                 Toast.makeText(getApplicationContext(), "eee" + totalsum + "order"+totalorders, Toast.LENGTH_LONG).show();
                 i.putExtra("totalsum", totalsum);
@@ -267,27 +269,23 @@ public class questions extends AppCompatActivity implements View.OnClickListener
                         @Override
                         public void onResponse(JSONObject response) {
                             Toast.makeText(questions.this, response.toString(), Toast.LENGTH_SHORT).show();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(questions.this);
-                            builder.setTitle("Best Time");
-                            builder.setMessage("your best time is \n:" + response.toString());
-                            builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(getApplicationContext(), "daayyyyyyy" + getday, Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(questions.this, bankInfo.class);
-                                    int totalsum = getIntent().getIntExtra("totalsum", 0);
-                                    Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
-                                    i.putExtra("totalsum", totalsum);
-                                    startActivity(i);
+                            setDialog(response.toString());
+                           // AlertDialog.Builder builder = new AlertDialog.Builder(questions.this);
+                           // builder.setTitle("Best Time");
+                           // builder.setMessage("your best time is \n:" + response.toString());
+                            //builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                              //  public void onClick(DialogInterface dialog, int which) {
+                                //    Toast.makeText(getApplicationContext(), "daayyyyyyy" + getday, Toast.LENGTH_LONG).show();
 
-                                }
-
-                            });
-                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-                            builder.show();
+                               // }
+//
+  //                          });
+    //                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        //        public void onClick(DialogInterface dialog, int id) {
+      //                              dialog.cancel();
+             //                   }
+          //                  });
+        //                    builder.show();
 
 
                         }
@@ -577,6 +575,49 @@ public class questions extends AppCompatActivity implements View.OnClickListener
 
         });
         popup.show();
+    }
+
+
+
+
+    public void setDialog(final String lowtime) {
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setTitle("Best Time :")
+                .setIcon(R.drawable.daytime)
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("OK",null)
+                .create();
+        dialog.setCancelable(false);
+
+besttimeview.setText(lowtime);
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(final DialogInterface dialogInterface) {
+                final Button noButton = (dialog).getButton(android.app.AlertDialog.BUTTON_NEGATIVE);
+                final Button yesButton = (dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                yesButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(questions.this, bankInfo.class);
+                        int totalsum = getIntent().getIntExtra("totalsum", 0);
+                        Toast.makeText(getApplicationContext(), "eee" + totalsum, Toast.LENGTH_LONG).show();
+                        i.putExtra("totalsum", totalsum);
+                        startActivity(i);
+                    }
+                });
+                noButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+
+        });
+        dialog.show();
     }
 
 

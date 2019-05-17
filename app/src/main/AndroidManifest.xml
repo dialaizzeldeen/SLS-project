@@ -41,7 +41,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".questions">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <meta-data
@@ -55,11 +59,7 @@
         <activity android:name=".marketsActivity" />
         <activity android:name=".resturanatActivity" />
         <activity android:name=".Categories_Activity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
 
         <activity android:name=".searching" >
