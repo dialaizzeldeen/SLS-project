@@ -230,7 +230,7 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
                 break;
             case R.id.navigation_profile:
-                if(id.equals("0")) {
+                if(idddd.equals("0")) {
                     AlertDialog.Builder builder= new AlertDialog.Builder(getApplicationContext());
                     builder.setMessage("please sign in");
                     builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
