@@ -36,6 +36,7 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
 
         openProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent i= new Intent(getApplicationContext(), profile.class);
                 i.putExtra("view",0);
                 startActivity(i);
