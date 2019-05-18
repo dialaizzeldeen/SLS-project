@@ -43,6 +43,7 @@ public class profilecategory extends AppCompatActivity implements  BottomNavigat
                   }});
         carticon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent i= new Intent(getApplicationContext(), cart.class);
                 startActivity(i);
             }});

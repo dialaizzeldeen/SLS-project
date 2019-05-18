@@ -1,5 +1,7 @@
 package com.example.seamlessshopping;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -228,9 +230,21 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
 
                 break;
             case R.id.navigation_profile:
+                if(id.equals("0")) {
+                    AlertDialog.Builder builder= new AlertDialog.Builder(getApplicationContext());
+                    builder.setMessage("please sign in");
+                    builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent i=new Intent(getApplicationContext(),loginvolley.class);
+                            getApplicationContext().startActivity(i);}
+                    });
 
+                    builder.setNegativeButton("Cancel", null);
+                    builder.show();
+
+                }else {
                     Intent profile = new Intent(NewllyAdded.this, profilecategory.class);
-                    startActivity(profile);
+                    startActivity(profile);}
 
                 break;
             case R.id.navigation_search:
