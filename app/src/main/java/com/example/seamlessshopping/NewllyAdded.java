@@ -231,12 +231,12 @@ public class NewllyAdded extends AppCompatActivity implements BottomNavigationVi
                 break;
             case R.id.navigation_profile:
                 if(idddd.equals("0")) {
-                    AlertDialog.Builder builder= new AlertDialog.Builder(getApplicationContext());
+                    AlertDialog.Builder builder= new AlertDialog.Builder(this);
                     builder.setMessage("please sign in");
                     builder.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Intent i=new Intent(getApplicationContext(),loginvolley.class);
-                            getApplicationContext().startActivity(i);}
+                            Intent i=new Intent(NewllyAdded.this,loginvolley.class);
+                         startActivity(i);}
                     });
 
                     builder.setNegativeButton("Cancel", null);
